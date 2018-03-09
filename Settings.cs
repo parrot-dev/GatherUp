@@ -7,19 +7,26 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Media;
 using System.Xml.Serialization;
+using ff14bot.Managers;
 
 namespace GatherUp
 {
     public class Settings
     {
-        public static Profile current = new Profile();
-        public static bool save()
+        public static Profile Current = new Profile();
+
+        public static bool Save()
+        {
+            return Save(Current);
+        }
+
+        public static bool Save(Profile profile)
         {
             try
             {
                 XmlSerializer serializer = new XmlSerializer(typeof(Profile));
-                TextWriter textWriter = new StreamWriter(Application.StartupPath + @"\Plugins\GatherUp\Settings.xml");
-                serializer.Serialize(textWriter, current);
+                TextWriter textWriter = new StreamWriter(PluginManager.PluginDirectory + @"\GatherUp\Settings.xml");
+                serializer.Serialize(textWriter, profile);
                 textWriter.Close();
             }
             catch (Exception e)
@@ -31,25 +38,34 @@ namespace GatherUp
             return true;
         }
 
-        public static bool load()
+        public static bool Load()
         {
             try
             {
                 XmlSerializer deserializer = new XmlSerializer(typeof(Profile));
-                TextReader textReader = new StreamReader(System.Windows.Forms.Application.StartupPath + @"\Plugins\GatherUp\Settings.xml");
-                current = (Profile)deserializer.Deserialize(textReader);
+                TextReader textReader = new StreamReader(PluginManager.PluginDirectory + @"\GatherUp\Settings.xml");
+                Current = (Profile)deserializer.Deserialize(textReader);
                 textReader.Close();
             }
             catch (Exception)
             {
                 Log.Bot.print("Failed to load settings");
-                current = new Profile();                
+                Current = new Profile();                
                 return false;
             }
 
             Log.Bot.print("Settings loaded", Colors.White);
             return true;
 
+        }
+
+        public static void CreateSettingsFile()
+        {
+            if (!File.Exists(PluginManager.PluginDirectory + @"\GatherUp\Settings.xml"))
+            {
+                Log.Bot.print("Settings.xml is missing, creating a new file.", Colors.White);
+                Save(new Profile());
+            }
         }
 
         public class Profile
@@ -60,7 +76,7 @@ namespace GatherUp
             public Profile()
             {
                 DisableBotbaseWarning = false;
-                SavePath = Application.StartupPath +@"\Plugins\GatherUp\Profiles";
+                SavePath = PluginManager.PluginDirectory + @"\GatherUp\Profiles";
             }
         }
     }

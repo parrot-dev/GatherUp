@@ -27,12 +27,8 @@ namespace GatherUp
         }
         public override void OnButtonPress()
         {
-            if(!Settings.load())
-            {
-                Log.Bot.print("Creating new savefile.");
-                Settings.current = new Settings.Profile();
-                Settings.save();
-            }
+            Settings.CreateSettingsFile();
+            Settings.Load();
             if (_gatherUpForm == null || _gatherUpForm.IsDisposed || _gatherUpForm.Disposing)
             {
                 _gatherUpForm = new GatherUpForm();
@@ -41,6 +37,8 @@ namespace GatherUp
             
 
         }
+
+
         public override void OnEnabled()
         {
 

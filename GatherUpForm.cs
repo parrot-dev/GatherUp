@@ -22,7 +22,7 @@ namespace GatherUp
             this.Text = "GatherUp - " + GatherUp.version.ToString();
             numRadius.Value = new Order.HotSpot(new Clio.Utilities.Vector3()).Radius;
             numRadiusBlackSpot.Value = 10;
-            lblPath.Text = Settings.current.SavePath;
+            lblPath.Text = Settings.Current.SavePath;
 
             //Gatheringskills 
             foreach (var spell in DataManager.SpellCache.Values.Where(o => o.Job == ff14bot.Enums.ClassJobType.Miner || o.Job == ff14bot.Enums.ClassJobType.Botanist))
@@ -171,7 +171,7 @@ namespace GatherUp
             {
                 MessageBox.Show("Warning: All blackspots will be omitted.");
             }            
-            string fullSavePath = Settings.current.SavePath + string.Format("\\{0}.xml", _order.name);
+            string fullSavePath = Settings.Current.SavePath + string.Format("\\{0}.xml", _order.name);
             if (System.IO.File.Exists(fullSavePath))
             {
                 var confirmResult = MessageBox.Show("A file with this name already exists.\r\nDo you want to overwrite it?",
@@ -484,16 +484,16 @@ namespace GatherUp
             var fd = new FolderBrowserDialog();
             if (fd.ShowDialog() == DialogResult.OK)
             {
-                Settings.current.SavePath = fd.SelectedPath;
-                Settings.save();
+                Settings.Current.SavePath = fd.SelectedPath;
+                Settings.Save();
             }
-            lblPath.Text = Settings.current.SavePath;
+            lblPath.Text = Settings.Current.SavePath;
 
         }
 
         private void GatherUpForm_Load(object sender, EventArgs e)
         {
-            if (Settings.current.DisableBotbaseWarning)
+            if (Settings.Current.DisableBotbaseWarning)
                 return;
 
             if (!ff14bot.TreeRoot.IsRunning)
