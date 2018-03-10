@@ -15,7 +15,7 @@ namespace GatherUp
         public override Version Version { get { return GatherUp.version; } }
         public override string Name
         {
-            get { return "GatherUp - dev"; }
+            get { return "GatherUp"; }
         }
         public override bool WantButton
         {
