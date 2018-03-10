@@ -2,4 +2,4 @@ Rebornbuddy plugin for generating orderbot profiles.
 
 Install:
 
-put GatherUp folder in the plugins directory. 
+Clone directly in plugins directory or put files in plugins/GatherUp/ 
