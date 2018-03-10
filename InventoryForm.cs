@@ -28,9 +28,9 @@ namespace GatherUp
             }
             public bool Equals(Item other)
             {
-                if (Object.ReferenceEquals(other, null)) 
+                if (ReferenceEquals(other, null)) 
                     return false;
-                if (Object.ReferenceEquals(this, other)) 
+                if (ReferenceEquals(this, other)) 
                     return true;
                 return name.Equals(other.name) && id.Equals(other.id);
             }
