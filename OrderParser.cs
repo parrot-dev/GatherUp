@@ -72,7 +72,7 @@ namespace GatherUp
             if (xComments.Any())
             {
                 string comment = xComments.First().ToString();
-                var match = new Regex(@"(\d\.\d\.\d|\d\.\d)").Match(comment);
+                var match = new Regex(@"([\d\.]+\d)").Match(comment);
                 if (match.Success)
                 {
                     try
