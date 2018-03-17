@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
+using Clio.Utilities;
 
 
-namespace GatherUp
+namespace GatherUp.Order
 {
-    class Order
+    class Profile
     {
         public enum CordialType { None, Cordial, HiCordial, Auto }
         public string name;
@@ -30,6 +31,11 @@ namespace GatherUp
             public int GearSet = 0;
         }
 
+        public class FlyTo
+        {
+            public List<Vector3> Positions { get; set; } 
+        }
+
        public class Gather {
             
             public bool Infinite = true; //gather forever.
@@ -50,20 +56,20 @@ namespace GatherUp
 
        public class HotSpot
        {
-           public Clio.Utilities.Vector3 Coord;
+           public Vector3 Coord;
            public int Radius;
 
-           public HotSpot(Clio.Utilities.Vector3 coord, int radius)
+           public HotSpot(Vector3 coord, int radius)
            {
-               this.Coord = coord;
-               this.Radius = radius;
+               Coord = coord;
+               Radius = radius;
            }
-           public HotSpot(Clio.Utilities.Vector3 coord)
+           public HotSpot(Vector3 coord)
            {
-               this.Coord = coord;
-               this.Radius = 100;
+               Coord = coord;
+               Radius = 100;
            }
-            public string getXYZ()
+            public string GetXYZ()
             {
                 return string.Format("{0}, {1}, {2}",
                     Coord.X.ToString(System.Globalization.CultureInfo.InvariantCulture),
@@ -82,7 +88,7 @@ namespace GatherUp
         }
         
 
-        public Order()
+        public Profile()
         {
             Hotspots = new List<HotSpot>();
             Blackspots = new List<HotSpot>();
@@ -115,7 +121,7 @@ namespace GatherUp
             xmlProfile.AppendChild(XmlHelpers.GetTextElement("KillRadius", this.Killradius, doc));
 
             //order
-            var xmlOrder = doc.CreateElement("Order");
+            var xmlOrder = doc.CreateElement("Profile");
             
             //gearset
             if (gear.Enabled)
@@ -234,7 +240,7 @@ namespace GatherUp
             return xmlIf;
         }
 
-        internal static XmlElement GetGatherElement(Order.Gather gather, XmlDocument doc)
+        internal static XmlElement GetGatherElement(Profile.Gather gather, XmlDocument doc)
         {
 
             XmlElement xmlGather = gather.exGather.Enabled ? doc.CreateElement("ExGather") : doc.CreateElement("Gather");  
@@ -272,26 +278,26 @@ namespace GatherUp
             return xmlElement;
         }
 
-        internal static XmlElement GetHotSpotsElement(List<Order.HotSpot> hotspots, XmlDocument doc)
+        internal static XmlElement GetHotSpotsElement(List<Profile.HotSpot> hotspots, XmlDocument doc)
         {
             var xmlHotSpots = doc.CreateElement("HotSpots");
             foreach (var hotspot in hotspots)
             {
                 var xmlHotSpot = doc.CreateElement("HotSpot");
-                xmlHotSpot.SetAttribute("XYZ", hotspot.getXYZ());
+                xmlHotSpot.SetAttribute("XYZ", hotspot.GetXYZ());
                 xmlHotSpot.SetAttribute("Radius", hotspot.Radius.ToString());
                 xmlHotSpots.AppendChild(xmlHotSpot);
             }
             return xmlHotSpots;
         }
 
-        internal static XmlElement GetBlacSpotsElement(List<Order.HotSpot> blacspots, XmlDocument doc)
+        internal static XmlElement GetBlacSpotsElement(List<Profile.HotSpot> blacspots, XmlDocument doc)
         {
             var xmlBlackSpots = doc.CreateElement("BlackSpots");
             foreach (var blackspot in blacspots)
             {
                 var xmlBlackSpot = doc.CreateElement("BlackSpot");
-                xmlBlackSpot.SetAttribute("XYZ", blackspot.getXYZ());
+                xmlBlackSpot.SetAttribute("XYZ", blackspot.GetXYZ());
                 xmlBlackSpot.SetAttribute("Radius", blackspot.Radius.ToString());
                 xmlBlackSpots.AppendChild(xmlBlackSpot);
             }

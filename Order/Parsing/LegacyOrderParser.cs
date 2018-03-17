@@ -3,28 +3,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
 
-namespace GatherUp
+
+namespace GatherUp.Order.Parsing
 {
-    class OrderParser
+    class LegacyOrderParser : IOrderParser
     {
         /// <summary>
-        /// Parse orderbot xml into an Order object.
+        /// Parse orderbot xml into an Profile object.
         /// </summary>
         /// <param name="Path">File path to orderbot profile</param>
-        public OrderParser(string path)
+        public LegacyOrderParser(string path)
         {
             try
             {
-                this._xRoot = XDocument.Load(path);
+                _xRoot = XDocument.Load(path);
             }
-            catch (Exception e) {
-                System.Windows.Forms.MessageBox.Show(e.Message);
-                this._xRoot = new XDocument(); }
-            this.version = this.getVersion();
+            catch (Exception) {
+                _xRoot = new XDocument(); }
+            version = getVersion();
         }
 
         private readonly XDocument _xRoot;
@@ -33,31 +32,29 @@ namespace GatherUp
         /// Version of gatherup the profile was generated with. 0.0.0 for unknown.
         /// </summary>
         public readonly Version version;
-        public bool IsValidVersion
-        {
-            get {return (this.version.CompareTo(new Version(0, 0, 0)) > 0 && this.version.CompareTo(GatherUp.version) <= 0); }
-        }
+        public bool IsValidVersion => version.CompareTo(new Version(0, 0, 0)) > 0 && version.CompareTo(new Version(1,4,2,1)) <= 0;
 
         /// <summary>
-        /// Tries to parse the profile xml into an Order object.
+        /// Tries to parse the profile xml into an Profile object.
         /// </summary>
         /// <param name="order"></param>
         /// <param name="errorMessage"></param>
         /// <param name="ignoreVersion"></param>
         /// <returns>Returns false on errors and warnings.</returns>
-        public bool ToOrder(out Order order, out string errMsg, bool ignoreVersion = false)
+        public Profile ToProfile()
         {
-            this._errorMessages = new ErrorMessages();   
-            if (this.IsValidVersion || ignoreVersion)
+            _errorMessages = new ErrorMessages();   
+            if (IsValidVersion)
             {
-                order = this.ParseGatherUpXml();
-                errMsg = this._errorMessages.ToString();
-                return this._errorMessages.isEmpty;
+                var profile = ParseGatherUpXml();
+                var errorMsg = _errorMessages.ToString();
+                if (_errorMessages.isEmpty)
+                {
+                    return profile;
+                }
+                throw new ParsingException(errorMsg);
             }
-
-            order = new Order();
-            errMsg = "Invalid version.";
-            return false;
+            throw new ParsingException("Invalid version");
         }
 
         /// <summary>
@@ -89,20 +86,20 @@ namespace GatherUp
             }
             return new Version(0, 0, 0);
         }
-        private Order ParseGatherUpXml()
+        private Profile ParseGatherUpXml()
         {
-            var order = new Order();
-            order.name = this.getName();
-            order.Killradius = this.getKillRadius();
-            order.gear = this.GetGearSetChange();
-            order.TeleportOnStart = this.getTeleportOnStart();
-            order.TeleportOnComplete = this.getTeleportOnComplete();
-            order.gather = this.getGather();
-            order.Hotspots = this.GetHotSpots();
-            order.Blackspots = this.GetBlackSpots();
-            order.Gatherskills = this.getGatheringSkills();
-            order.Items = this.getItemNames();         
-            return order;
+            var profile = new Profile();
+            profile.name = this.getName();
+            profile.Killradius = this.getKillRadius();
+            profile.gear = GetGearSetChange();
+            profile.TeleportOnStart = this.getTeleportOnStart();
+            profile.TeleportOnComplete = this.getTeleportOnComplete();
+            profile.gather = this.getGather();
+            profile.Hotspots = this.GetHotSpots();
+            profile.Blackspots = this.GetBlackSpots();
+            profile.Gatherskills = this.getGatheringSkills();
+            profile.Items = this.getItemNames();         
+            return profile;
         }
 
         private string getName()
@@ -171,7 +168,7 @@ namespace GatherUp
             return itemNames;
         }
 
-        private Order.Teleport getTeleportOnStart()
+        private Profile.Teleport getTeleportOnStart()
         {
             foreach (var xElement in this._xRoot.Descendants("TeleportTo"))
             {
@@ -179,9 +176,9 @@ namespace GatherUp
                     || xElement.Parent.ElementsAfterSelf("ExGather").Any())                
                     return getTeleport(xElement);
             }
-            return new Order.Teleport();
+            return new Profile.Teleport();
         }
-        private Order.Teleport getTeleportOnComplete()
+        private Profile.Teleport getTeleportOnComplete()
         {
             foreach (var xElement in this._xRoot.Descendants("TeleportTo"))
             {
@@ -189,10 +186,10 @@ namespace GatherUp
                     || xElement.Parent.ElementsBeforeSelf("ExGather").Any())
                     return getTeleport(xElement);
             }
-            return new Order.Teleport();
+            return new Profile.Teleport();
         }
 
-        private Order.Teleport getTeleport(XElement xElement)
+        private Profile.Teleport getTeleport(XElement xElement)
         {
             if (xElement.Parent.Name.LocalName == "If" && xElement.Parent.FirstAttribute.Name.LocalName == "Condition")
             {
@@ -208,7 +205,7 @@ namespace GatherUp
                 catch (Exception)
                 {
                     this._errorMessages.add("TeleportTag Parse failed. Skipping the tag. Line: " + xElement.ToString());
-                    return new Order.Teleport();
+                    return new Profile.Teleport();
                 }
 
                 //name
@@ -220,10 +217,10 @@ namespace GatherUp
                 if (!match.Success || !ushort.TryParse(match.Groups[1].Value, out zoneId))
                 {
                     this._errorMessages.add("Failed parsing zoneId for teleport. Skipping the tag. Line: " + xElement.ToString());
-                    return new Order.Teleport();
+                    return new Profile.Teleport();
                 }
 
-                var teleport = new Order.Teleport();
+                var teleport = new Profile.Teleport();
                 teleport.AetheryteId = aetheryteId;
                 teleport.Enabled = true;
                 teleport.ZoneId = zoneId;
@@ -234,14 +231,14 @@ namespace GatherUp
             else
             {
                 this._errorMessages.add("Expected If condition before TeleportTo tag wasnt found. Skipping the tag. Line: " + xElement.ToString());
-                return new Order.Teleport();
+                return new Profile.Teleport();
             }
          
         }
 
-        private Order.Gather getGather()
+        private Profile.Gather getGather()
         {
-            var gather = new Order.Gather();
+            var gather = new Profile.Gather();
             XElement xGather;
            
            try
@@ -251,7 +248,7 @@ namespace GatherUp
             catch (Exception)
             {
                 this._errorMessages.add("Multiple Gather tags are not supported. Gather tag and target set to default values");
-                return new Order.Gather();
+                return new Profile.Gather();
             }
             gather.exGather.Enabled = (xGather.Name == "ExGather");
             this.TryGetGatherWhileCondition(xGather, ref gather);
@@ -265,14 +262,14 @@ namespace GatherUp
             {
                 try
                 {
-                    gather.exGather.CordialType = (Order.CordialType)Enum.Parse(typeof(Order.CordialType), xGather.Attribute("CordialType").Value);
+                    gather.exGather.CordialType = (Profile.CordialType)Enum.Parse(typeof(Profile.CordialType), xGather.Attribute("CordialType").Value);
                 }
                 catch (Exception) { _errorMessages.add("Failed parsing CordialType. Disabling."); }
             }
             return gather;
         }
 
-        private bool tryGetGatherTarget(XElement xGather, ref Order.Gather gather)
+        private bool tryGetGatherTarget(XElement xGather, ref Profile.Gather gather)
         {
             var xGatherObjects = xGather.Descendants("GatherObject");
             if (xGatherObjects.Count() > 0)
@@ -291,7 +288,7 @@ namespace GatherUp
         /// sets gather: infinite, itemdId and quantity.
         /// </summary>
         /// <returns></returns>
-        private bool TryGetGatherWhileCondition(XElement xGather, ref Order.Gather gather)
+        private bool TryGetGatherWhileCondition(XElement xGather, ref Profile.Gather gather)
         {
             if ((string)xGather.Attribute("while") != null)
             {
@@ -330,13 +327,13 @@ namespace GatherUp
             return false;
         }
 
-        private List<Order.HotSpot> GetHotSpots()
+        private List<Profile.HotSpot> GetHotSpots()
         {
             var xHotSpots = this._xRoot.Descendants("HotSpot");
-            var hotSpots = new List<Order.HotSpot>();
+            var hotSpots = new List<Profile.HotSpot>();
             foreach(var xHotSpot in xHotSpots)
             {
-                Order.HotSpot hotSpot;
+                Profile.HotSpot hotSpot;
                 if(this.TryGetHotSpot(xHotSpot, out hotSpot))
                 {
                     hotSpots.Add(hotSpot);
@@ -344,7 +341,7 @@ namespace GatherUp
             }
             return hotSpots;
         }
-        private bool TryGetHotSpot(XElement xHotSpot, out Order.HotSpot hotSpot)
+        private bool TryGetHotSpot(XElement xHotSpot, out Profile.HotSpot hotSpot)
         {
             string xyz = string.Empty;
             if((string)xHotSpot.Attribute("XYZ") != null)
@@ -354,7 +351,7 @@ namespace GatherUp
             else
             {
                 this._errorMessages.add("Couldnt find XYZ attribute in hotspot tag. Skipping. line:" + xHotSpot.ToString());
-                hotSpot = new Order.HotSpot(new Clio.Utilities.Vector3());
+                hotSpot = new Profile.HotSpot(new Clio.Utilities.Vector3());
                 return false;
             }
             int radius = 0;
@@ -366,25 +363,25 @@ namespace GatherUp
                     this._errorMessages.add("Radius attribute parse failed. setting to 100. Line: "+xHotSpot.ToString());
                     radius = 100;
                 }   
-                hotSpot = new Order.HotSpot(new Clio.Utilities.Vector3(xyz), radius);
+                hotSpot = new Profile.HotSpot(new Clio.Utilities.Vector3(xyz), radius);
             }
             else
             {
                 this._errorMessages.add("Radius attribute not found in hotspot tag. Setting to 100. line: "+xHotSpot.ToString());
-                hotSpot = new Order.HotSpot(new Clio.Utilities.Vector3(xyz));
+                hotSpot = new Profile.HotSpot(new Clio.Utilities.Vector3(xyz));
             }            
             
             return true;
           
         }
 
-        private List<Order.HotSpot> GetBlackSpots()
+        private List<Profile.HotSpot> GetBlackSpots()
         {
             var xBlackSpots = this._xRoot.Descendants("BlackSpot");
-            var BlackSpots = new List<Order.HotSpot>();
+            var BlackSpots = new List<Profile.HotSpot>();
             foreach (var xBlackSpot in xBlackSpots)
             {
-                Order.HotSpot blackSpot;
+                Profile.HotSpot blackSpot;
                 if (this.TryGetBlackSpot(xBlackSpot, out blackSpot))
                 {
                     BlackSpots.Add(blackSpot);
@@ -393,7 +390,7 @@ namespace GatherUp
             return BlackSpots;
         }
 
-        private bool TryGetBlackSpot(XElement xBlackSpot, out Order.HotSpot blackSpot)
+        private bool TryGetBlackSpot(XElement xBlackSpot, out Profile.HotSpot blackSpot)
         {
             string xyz = string.Empty;
             if ((string)xBlackSpot.Attribute("XYZ") != null)
@@ -403,7 +400,7 @@ namespace GatherUp
             else
             {
                 this._errorMessages.add("Couldnt find XYZ attribute in blackspot tag. Skipping. line:" + xBlackSpot.ToString());
-                blackSpot = new Order.HotSpot(new Clio.Utilities.Vector3());
+                blackSpot = new Profile.HotSpot(new Clio.Utilities.Vector3());
                 return false;
             }
             int radius = 0;
@@ -418,27 +415,27 @@ namespace GatherUp
                     this._errorMessages.add("Radius attribute parse failed. setting to 10. Line: " + xBlackSpot.ToString());
                     radius = 10;
                 }
-                blackSpot = new Order.HotSpot(new Clio.Utilities.Vector3(xyz), radius);
+                blackSpot = new Profile.HotSpot(new Clio.Utilities.Vector3(xyz), radius);
             }
             else
             {
                 this._errorMessages.add("Radius attribute not found in Blackspot tag. Setting to 100. line: " + xBlackSpot.ToString());
-                blackSpot = new Order.HotSpot(new Clio.Utilities.Vector3(xyz));
+                blackSpot = new Profile.HotSpot(new Clio.Utilities.Vector3(xyz));
             }
 
             return true;
 
         }
         
-        private Order.Gear GetGearSetChange()
+        private Profile.Gear GetGearSetChange()
         {
             var xGearSetChangeElements = this._xRoot.DescendantNodes().Where(n =>
                 n.NodeType == XmlNodeType.CDATA &&
                 n.Parent.Name == "CodeChunk" &&
                 n.Parent.Attribute("Name").Value == "GearSetChange");
 
-            var gearSet = new Order.Gear();
-            if(xGearSetChangeElements.Count() > 0)
+            var gearSet = new Profile.Gear();
+            if(xGearSetChangeElements.Any())
             {
                 string cdata = xGearSetChangeElements.First().ToString();
                 var match = new Regex("ff14bot\\.Managers\\.ChatManager\\.SendChat\\(\"\\/gs change (\\d+)").Match(cdata);

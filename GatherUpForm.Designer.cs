@@ -69,6 +69,8 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.button12 = new System.Windows.Forms.Button();
+            this.button11 = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.numRadius = new System.Windows.Forms.NumericUpDown();
             this.tabPage4 = new System.Windows.Forms.TabPage();
@@ -461,9 +463,9 @@
             // listBoxHotSpots
             // 
             this.listBoxHotSpots.FormattingEnabled = true;
-            this.listBoxHotSpots.Location = new System.Drawing.Point(0, 43);
+            this.listBoxHotSpots.Location = new System.Drawing.Point(0, 69);
             this.listBoxHotSpots.Name = "listBoxHotSpots";
-            this.listBoxHotSpots.Size = new System.Drawing.Size(286, 160);
+            this.listBoxHotSpots.Size = new System.Drawing.Size(286, 134);
             this.listBoxHotSpots.TabIndex = 11;
             this.listBoxHotSpots.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listBox1_KeyDown);
             // 
@@ -524,6 +526,8 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.button12);
+            this.tabPage3.Controls.Add(this.button11);
             this.tabPage3.Controls.Add(this.label5);
             this.tabPage3.Controls.Add(this.listBoxHotSpots);
             this.tabPage3.Controls.Add(this.numRadius);
@@ -535,6 +539,24 @@
             this.tabPage3.TabIndex = 0;
             this.tabPage3.Text = "HotSpots";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // button12
+            // 
+            this.button12.Location = new System.Drawing.Point(155, 40);
+            this.button12.Name = "button12";
+            this.button12.Size = new System.Drawing.Size(128, 23);
+            this.button12.TabIndex = 26;
+            this.button12.Text = "Delete landing spot";
+            this.button12.UseVisualStyleBackColor = true;
+            // 
+            // button11
+            // 
+            this.button11.Location = new System.Drawing.Point(0, 40);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(149, 23);
+            this.button11.TabIndex = 25;
+            this.button11.Text = "Set landing spot";
+            this.button11.UseVisualStyleBackColor = true;
             // 
             // label5
             // 
@@ -710,7 +732,7 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(150, 52);
             this.button8.TabIndex = 23;
-            this.button8.Text = "Set file path";
+            this.button8.Text = "Set save location";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click_1);
             // 
@@ -856,5 +878,7 @@
         private System.Windows.Forms.ComboBox cbBoxCordialType;
         private System.Windows.Forms.CheckBox chkboxDiscoverUnknowns;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.Button button12;
+        private System.Windows.Forms.Button button11;
     }
 }
