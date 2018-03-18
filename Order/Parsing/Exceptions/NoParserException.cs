@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GatherUp.Order.Parsing
+namespace GatherUp.Order.Parsing.Exceptions
 {
     class NoParserException : Exception
     {

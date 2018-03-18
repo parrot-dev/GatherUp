@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Xml;
 using Clio.Utilities;
+using GatherUp.Order.Xml;
 
 
 namespace GatherUp.Order
@@ -33,7 +34,10 @@ namespace GatherUp.Order
 
         public class FlyTo
         {
-            public List<Vector3> Positions { get; set; } 
+            public List<Vector3> Positions { get; set; }
+            public double AllowedVariance { get; set; } = 0.0f;
+            public bool Land { get; set; } = true;
+            public string DestName { get; set; } = "HotSpot";
         }
 
        public class Gather {
@@ -102,6 +106,15 @@ namespace GatherUp.Order
 
         public XmlDocument ToXml()
         {
+            var xDoc = new ProfileTransformer().Transform(this, GatherUp.version);
+            var xmlDoc = new XmlDocument();
+            using (var xmlReader = xDoc.CreateReader())
+            {
+                xmlDoc.Load(xmlReader);
+            }
+
+            return xmlDoc;
+            /*
             XmlDocument doc = new XmlDocument();
                     
             XmlDeclaration xmlDeclaration = doc.CreateXmlDeclaration("1.0", "UTF-8", null);                      
@@ -206,8 +219,8 @@ namespace GatherUp.Order
             }
 
 
-            return doc;
-            
+            return doc;*/
+
         }
     }
 
