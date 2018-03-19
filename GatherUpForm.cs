@@ -62,7 +62,7 @@ namespace GatherUp
             cbBoxLocationNameOnComplete.Text = _profile.TeleportOnComplete.Name;
 
             //General
-            txtboxName.Text = _profile.name;
+            txtboxName.Text = _profile.Name;
             txtBoxTarget.Text = _profile.gather.Target;
             txtboxItemId.Text = _profile.gather.ItemId;
             chkBoxQuantity.Checked = !_profile.gather.Infinite;
@@ -141,9 +141,9 @@ namespace GatherUp
                 return true;
             }
 
-            if (string.IsNullOrEmpty(_profile.name))
+            if (string.IsNullOrEmpty(_profile.Name))
             {
-                errorMsg = "Profile hasn't got a name.";
+                errorMsg = "Profile hasn't got a Name.";
                 return true;
             }
 
@@ -182,11 +182,11 @@ namespace GatherUp
                 MessageBox.Show("Warning: All blackspots will be omitted.");
             }
 
-            string fullSavePath = Settings.Current.SavePath + string.Format("\\{0}.xml", _profile.name);
+            string fullSavePath = Settings.Current.SavePath + string.Format("\\{0}.xml", _profile.Name);
             if (System.IO.File.Exists(fullSavePath))
             {
                 var confirmResult = MessageBox.Show(
-                    "A file with this name already exists.\r\nDo you want to overwrite it?",
+                    "A file with this Name already exists.\r\nDo you want to overwrite it?",
                     "Overwrite?",
                     MessageBoxButtons.YesNo);
                 if (confirmResult == DialogResult.No)
@@ -199,7 +199,7 @@ namespace GatherUp
 
         private void txtboxName_TextChanged(object sender, EventArgs e)
         {
-            _profile.name = txtboxName.Text;
+            _profile.Name = txtboxName.Text;
         }
 
         private void txtBoxTarget_TextChanged(object sender, EventArgs e)
@@ -496,7 +496,7 @@ namespace GatherUp
 
         private void button7_Click(object sender, EventArgs e)
         {
-            string xml = System.Xml.Linq.XElement.Parse(_profile.ToXml().OuterXml).ToString();
+            string xml = _profile.ToXml().Root?.Value;
             var inspectForm = new InspectXmlForm(xml);
             inspectForm.Show();
         }
@@ -602,11 +602,11 @@ namespace GatherUp
             }
 
             ff14bot.NeoProfiles.NeoProfileManager.Load(savePath);
-            if (BotManager.Current.Name != "Profile Bot")
+            if (BotManager.Current.Name != "Order Bot")
             {
                 try
                 {
-                    BotManager.SetCurrent(BotManager.Bots.FirstOrDefault(r => r.Name == "Profile Bot"));
+                    BotManager.SetCurrent(BotManager.Bots.FirstOrDefault(r => r.Name == "Order Bot"));
                 }
                 catch (Exception err)
                 {
@@ -673,6 +673,15 @@ namespace GatherUp
                 _profile.gather.exGather.CordialType = (Profile.CordialType) cbBoxCordialType.SelectedItem;
                 refreshForm();
             }
+        }
+
+        private void button11_Click_1(object sender, EventArgs e)
+        {
+            //temp
+            _profile.Hotspots.ForEach(hs => hs.FlyTo.Destinations.Add(new Profile.FlyTo.Destination
+            {
+                Position = hs.Coord
+            }));
         }
     }
 }

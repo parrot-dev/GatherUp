@@ -10,7 +10,7 @@
         /// <summary>
         /// Clean up any resources being used.
         /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        /// <param Name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -555,8 +555,9 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(149, 23);
             this.button11.TabIndex = 25;
-            this.button11.Text = "Set landing spot";
+            this.button11.Text = "Use hotspots for flyto";
             this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click_1);
             // 
             // label5
             // 

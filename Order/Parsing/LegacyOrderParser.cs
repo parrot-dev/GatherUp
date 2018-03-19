@@ -15,7 +15,7 @@ namespace GatherUp.Order.Parsing
         /// <summary>
         /// Parse orderbot xml into an Profile object.
         /// </summary>
-        /// <param name="Path">File path to orderbot profile</param>
+        /// <param Name="Path">File path to orderbot profile</param>
         public LegacyOrderParser(string path)
         {
             try
@@ -38,9 +38,9 @@ namespace GatherUp.Order.Parsing
         /// <summary>
         /// Tries to parse the profile xml into an Profile object.
         /// </summary>
-        /// <param name="order"></param>
-        /// <param name="errorMessage"></param>
-        /// <param name="ignoreVersion"></param>
+        /// <param Name="order"></param>
+        /// <param Name="errorMessage"></param>
+        /// <param Name="ignoreVersion"></param>
         /// <returns>Returns false on errors and warnings.</returns>
         public Profile ToProfile()
         {
@@ -61,7 +61,7 @@ namespace GatherUp.Order.Parsing
         /// <summary>
         /// Get the version of gatherup the profile was generated with.
         /// </summary>
-        /// <param name="doc"></param>
+        /// <param Name="doc"></param>
         /// <returns>0.0.0 for unknown. </returns>
         private Version getVersion()
         {
@@ -90,23 +90,23 @@ namespace GatherUp.Order.Parsing
         private Profile ParseGatherUpXml()
         {
             var profile = new Profile();
-            profile.name = this.getName();
-            profile.Killradius = this.getKillRadius();
+            profile.Name = this.GetName();
+            profile.Killradius = this.GetKillRadius();
             profile.gear = GetGearSetChange();
-            profile.TeleportOnStart = this.getTeleportOnStart();
-            profile.TeleportOnComplete = this.getTeleportOnComplete();
-            profile.gather = this.getGather();
+            profile.TeleportOnStart = this.GetTeleportOnStart();
+            profile.TeleportOnComplete = this.GetTeleportOnComplete();
+            profile.gather = this.GetGather();
             profile.Hotspots = this.GetHotSpots();
             profile.Blackspots = this.GetBlackSpots();
-            profile.Gatherskills = this.getGatheringSkills();
-            profile.Items = this.getItemNames();         
+            profile.Gatherskills = this.GetGatheringSkills();
+            profile.Items = this.GetItemNames();         
             return profile;
         }
 
-        private string getName()
+        private string GetName()
         {
             var xNames = _xRoot.Descendants("Name");
-            if (xNames.Count() > 0)
+            if (xNames.Any())
                 return xNames.First().Value;
             else
             {
@@ -115,7 +115,7 @@ namespace GatherUp.Order.Parsing
             }
             
         }
-        private string getKillRadius()
+        private string GetKillRadius()
         {
             var xKillRadius = _xRoot.Descendants("KillRadius");
             if (xKillRadius.Count() > 0)
@@ -127,14 +127,14 @@ namespace GatherUp.Order.Parsing
             }            
         }
 
-        private List<string> getGatheringSkills()
+        private List<string> GetGatheringSkills()
         {
             var xGatheringSkills = this._xRoot.Descendants("GatheringSkill");
             var gatheringSkillList = new List<string>();
             foreach(XElement xGatheringSkill in xGatheringSkills)
             {
                 string gSkill;
-                if(this.tryGetGatheringSkill(xGatheringSkill, out gSkill))
+                if(this.TryGetGatheringSkill(xGatheringSkill, out gSkill))
                 {
                     gatheringSkillList.Add(gSkill);
                 }
@@ -144,7 +144,7 @@ namespace GatherUp.Order.Parsing
                 this._errorMessages.add("Warning: no gathering skills were found.");
             return gatheringSkillList;
         }
-        private bool tryGetGatheringSkill(XElement xGatheringSkill, out string gatheringSkill)
+        private bool TryGetGatheringSkill(XElement xGatheringSkill, out string gatheringSkill)
         {
             if((string)xGatheringSkill.Attribute("SpellName") != null)
             {
@@ -156,7 +156,7 @@ namespace GatherUp.Order.Parsing
             return false;
         }
 
-        private List<string> getItemNames()
+        private List<string> GetItemNames()
         {
             var xItemNames = this._xRoot.Descendants("ItemName");
             if (!xItemNames.Any())
@@ -169,28 +169,28 @@ namespace GatherUp.Order.Parsing
             return itemNames;
         }
 
-        private Profile.Teleport getTeleportOnStart()
+        private Profile.Teleport GetTeleportOnStart()
         {
             foreach (var xElement in this._xRoot.Descendants("TeleportTo"))
             {
                 if (xElement.Parent.ElementsAfterSelf("Gather").Any()
                     || xElement.Parent.ElementsAfterSelf("ExGather").Any())                
-                    return getTeleport(xElement);
+                    return GetTeleport(xElement);
             }
             return new Profile.Teleport();
         }
-        private Profile.Teleport getTeleportOnComplete()
+        private Profile.Teleport GetTeleportOnComplete()
         {
             foreach (var xElement in this._xRoot.Descendants("TeleportTo"))
             {
                 if (xElement.Parent.ElementsBeforeSelf("Gather").Any()
                     || xElement.Parent.ElementsBeforeSelf("ExGather").Any())
-                    return getTeleport(xElement);
+                    return GetTeleport(xElement);
             }
             return new Profile.Teleport();
         }
 
-        private Profile.Teleport getTeleport(XElement xElement)
+        private Profile.Teleport GetTeleport(XElement xElement)
         {
             if (xElement.Parent.Name.LocalName == "If" && xElement.Parent.FirstAttribute.Name.LocalName == "Condition")
             {
@@ -209,7 +209,7 @@ namespace GatherUp.Order.Parsing
                     return new Profile.Teleport();
                 }
 
-                //name
+                //Name
                 if ((string)xElement.Attribute("Name") != null)
                     name = xElement.Attribute("Name").Value;
 
@@ -237,7 +237,7 @@ namespace GatherUp.Order.Parsing
          
         }
 
-        private Profile.Gather getGather()
+        private Profile.Gather GetGather()
         {
             var gather = new Profile.Gather();
             XElement xGather;
@@ -253,7 +253,7 @@ namespace GatherUp.Order.Parsing
             }
             gather.exGather.Enabled = (xGather.Name == "ExGather");
             this.TryGetGatherWhileCondition(xGather, ref gather);
-            this.tryGetGatherTarget(xGather, ref gather);
+            this.TryGetGatherTarget(xGather, ref gather);
             if ((string)xGather.Attribute("DiscoverUnknowns") != null)
             {
                 gather.exGather.DiscoverUnknowns = (xGather.Attribute("DiscoverUnknowns").Value == "True");
@@ -270,7 +270,7 @@ namespace GatherUp.Order.Parsing
             return gather;
         }
 
-        private bool tryGetGatherTarget(XElement xGather, ref Profile.Gather gather)
+        private bool TryGetGatherTarget(XElement xGather, ref Profile.Gather gather)
         {
             var xGatherObjects = xGather.Descendants("GatherObject");
             if (xGatherObjects.Count() > 0)

@@ -1,8 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
+using System.Xml.Linq;
 using Clio.Utilities;
 using GatherUp.Order.Xml;
+using ICSharpCode.SharpZipLib.Zip;
+using static System.Globalization.CultureInfo;
 
 
 namespace GatherUp.Order
@@ -10,7 +13,9 @@ namespace GatherUp.Order
     class Profile
     {
         public enum CordialType { None, Cordial, HiCordial, Auto }
-        public string name;
+
+        public string Name { get; set; }
+        public bool DisableMount { get; set; } = true;
         public Teleport TeleportOnStart;
         public Teleport TeleportOnComplete;
         public List<HotSpot> Hotspots;
@@ -19,7 +24,7 @@ namespace GatherUp.Order
         public List<string> Gatherskills;
         public Gear gear;
         public Gather gather;
-        public string Killradius = "50"; //not sure if needed but its in every gathering profile ive seen.
+        public string Killradius = "50"; 
 
         public class Teleport {
            public bool Enabled = false;
@@ -34,10 +39,21 @@ namespace GatherUp.Order
 
         public class FlyTo
         {
-            public List<Vector3> Positions { get; set; }
-            public double AllowedVariance { get; set; } = 0.0f;
-            public bool Land { get; set; } = true;
-            public string DestName { get; set; } = "HotSpot";
+            public bool Enabled => Destinations != null && Destinations.Any();
+            public List<Destination> Destinations { get; set; } = new List<Destination>();
+            public class Destination
+            {
+                public Vector3 Position { get; set; }
+                public double AllowedVariance { get; set; } = 0.0f;
+                public bool Land { get; set; } = false;
+                public string GetXYZ()
+                {
+                    return string.Format("{0}, {1}, {2}",
+                        Position.X.ToString(InvariantCulture),
+                        Position.Y.ToString(InvariantCulture),
+                        Position.Z.ToString(InvariantCulture));
+                }
+            }
         }
 
        public class Gather {
@@ -60,34 +76,37 @@ namespace GatherUp.Order
 
        public class HotSpot
        {
-           public Vector3 Coord;
-           public int Radius;
+           public Vector3 Coord { get; set; }
+           public int Radius { get; set; }
+           public FlyTo FlyTo { get; set; }
 
-           public HotSpot(Vector3 coord, int radius)
+           public HotSpot(Vector3 coord, int radius) : this(coord, radius, new FlyTo())
+            {
+           }
+           public HotSpot(Vector3 coord, int radius, FlyTo flyTo)
            {
                Coord = coord;
                Radius = radius;
+                FlyTo = flyTo;
            }
-           public HotSpot(Vector3 coord)
+           public HotSpot(Vector3 coord) : this(coord, 100, new FlyTo())
            {
-               Coord = coord;
-               Radius = 100;
            }
             public string GetXYZ()
             {
                 return string.Format("{0}, {1}, {2}",
-                    Coord.X.ToString(System.Globalization.CultureInfo.InvariantCulture),
-                    Coord.Y.ToString(System.Globalization.CultureInfo.InvariantCulture),
-                    Coord.Z.ToString(System.Globalization.CultureInfo.InvariantCulture));
+                    Coord.X.ToString(InvariantCulture),
+                    Coord.Y.ToString(InvariantCulture),
+                    Coord.Z.ToString(InvariantCulture));
             }
 
             public override string ToString()
             {
                 return string.Format("{0}, {1}, {2} | {3}",
-                    Coord.X.ToString(System.Globalization.CultureInfo.InvariantCulture),
-                    Coord.Y.ToString(System.Globalization.CultureInfo.InvariantCulture),
-                    Coord.Z.ToString(System.Globalization.CultureInfo.InvariantCulture),
-                    Radius.ToString(System.Globalization.CultureInfo.InvariantCulture));
+                    Coord.X.ToString(InvariantCulture),
+                    Coord.Y.ToString(InvariantCulture),
+                    Coord.Z.ToString(InvariantCulture),
+                    Radius.ToString(InvariantCulture));
             }
         }
         
@@ -104,16 +123,10 @@ namespace GatherUp.Order
             gather = new Gather();
         }
 
-        public XmlDocument ToXml()
+        public XDocument ToXml()
         {
-            var xDoc = new ProfileTransformer().Transform(this, GatherUp.version);
-            var xmlDoc = new XmlDocument();
-            using (var xmlReader = xDoc.CreateReader())
-            {
-                xmlDoc.Load(xmlReader);
-            }
-
-            return xmlDoc;
+            return new ProfileTransformer().Transform(this, GatherUp.version);
+            
             /*
             XmlDocument doc = new XmlDocument();
                     
@@ -128,7 +141,7 @@ namespace GatherUp.Order
             doc.AppendChild(xmlProfile);            
 
             //Name
-            xmlProfile.AppendChild(XmlHelpers.GetTextElement("Name",this.name, doc));
+            xmlProfile.AppendChild(XmlHelpers.GetTextElement("Name",this.Name, doc));
 
             //killrad            
             xmlProfile.AppendChild(XmlHelpers.GetTextElement("KillRadius", this.Killradius, doc));
