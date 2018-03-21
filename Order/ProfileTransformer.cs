@@ -7,48 +7,58 @@ namespace GatherUp.Order
 {
     class ProfileTransformer
     {
-        public XDocument Transform(Profile profile, Version gatherUpVersion)
+        private readonly Profile _profile;
+        private readonly Version _version;
+        private Profile.Gear Gear => _profile.gear;
+        private Profile.Gather Gather => _profile.gather;
+
+        public ProfileTransformer(Profile profile, Version gatherupVersion)
+        {
+            _profile = profile;
+            _version = gatherupVersion;
+        }
+
+        public XDocument Transform(Version gatherUpVersion)
         {
             return new XDocument(
                 new XDeclaration("1.0", "utf-8", null),
-                GetProfileElement(profile, gatherUpVersion)
+                GetProfileElement()
             );
         }
 
-
-        private static XElement GetProfileElement(Profile profile, Version gatherUpVersion)
+        private XElement GetProfileElement()
         {
             var xProfile = new XElement("Profile");
-            xProfile.Add(new XComment($"Generated with GatherUp {gatherUpVersion}"));
-            xProfile.Add(new XElement("Name", new XText(profile.Name)));
-            xProfile.Add(new XElement("KillRadius", new XText(profile.Killradius)));
-            xProfile.Add(GetOrderPart(profile));
-            xProfile.Add(GetCodeChunks(profile));
+            xProfile.Add(new XComment($"Generated with GatherUp {_version}"));
+            xProfile.Add(new XElement("Name", new XText(_profile.Name)));
+            xProfile.Add(new XElement("KillRadius", new XText(_profile.Killradius)));
+            xProfile.Add(GetOrderPart());
+            xProfile.Add(GetCodeChunks());
             return xProfile;
         }
 
 
-        private static XElement GetOrderPart(Profile profile)
+        private XElement GetOrderPart()
         {
             var order = new XElement("Order");
-            AddGearChangeElement(profile.gear, ref order);
-            order.Add(GetTeleportElement(profile.TeleportOnStart));
-            var outerLoop = GetWhileElement(GetGatherCondition(profile.gather));
-            foreach (var hotspot in profile.Hotspots)
+            order.Add(GetGearChangeElement());
+            order.Add(GetTeleportElement(_profile.TeleportOnStart));
+            var outerLoop = GetWhileElement(GetGatherCondition());
+            foreach (var hotspot in _profile.Hotspots)
             {
                 var elements = new List<XElement>
                 {
                     GetFlyToElement(hotspot.FlyTo),
                     hotspot.DisableMount ? new XElement("RunCode", new XAttribute("Name", "DisableMount")) : null,
-                    hotspot.IsStealth ? new XElement("RunCode", new XAttribute("Name", "ApplyStealth")) : null, 
-                    GetGatherPart(profile, hotspot),
-                    hotspot.DisableMount ? new XElement("RunCode", new XAttribute("Name", "EnableMount")): null
-                    
+                    hotspot.IsStealth ? new XElement("Dismount") : null, 
+                    hotspot.IsStealth ? new XElement("RunCode", new XAttribute("Name", "ApplyStealth")) : null,
+                    GetGatherPart(hotspot),
+                    hotspot.DisableMount ? new XElement("RunCode", new XAttribute("Name", "EnableMount")) : null
                 };
-                
-                if (!profile.gather.Infinite)
+
+                if (!Gather.Infinite)
                 {
-                    var ifNotDone = GetIfElement(GetGatherCondition(profile.gather));
+                    var ifNotDone = GetIfElement(GetGatherCondition());
                     ifNotDone.Add(elements);
                     outerLoop.Add(ifNotDone);
                 }
@@ -57,14 +67,14 @@ namespace GatherUp.Order
                     outerLoop.Add(elements);
                 }
             }
-            
+
             order.Add(outerLoop);
-            order.Add(GetTeleportElement(profile.TeleportOnComplete));
+            order.Add(GetTeleportElement(_profile.TeleportOnComplete));
 
             return order;
         }
 
-        private static XElement GetFlyToElement(Profile.FlyTo flyTo)
+        private XElement GetFlyToElement(Profile.FlyTo flyTo)
         {
             if (!flyTo.Enabled) return null;
             //avoid bloat for simple flytos.
@@ -90,26 +100,26 @@ namespace GatherUp.Order
                     )));
         }
 
-        private static XElement GetGatherPart(Profile profile, Profile.HotSpot hotSpot)
+        private XElement GetGatherPart(Profile.HotSpot hotSpot)
         {
-            var xGather = GetGatherElement(profile.gather);
+            var xGather = GetGatherElement();
 
-            xGather.Add(new XElement("GatherObject", profile.gather.Target));
+            xGather.Add(new XElement("GatherObject", Gather.Target));
             xGather.Add(new XElement("HotSpots",
                 new XElement("HotSpot", new XAttribute("XYZ", hotSpot.GetXYZ()),
                     new XAttribute("Radius", hotSpot.Radius))));
-            if (!profile.gather.exGather.Enabled)
+            if (!Gather.exGather.Enabled)
             {
                 xGather.Add(new XElement("BlackSpots",
-                    profile.Blackspots.Select(bs => new XElement("BlackSpot",
+                    _profile.Blackspots.Select(bs => new XElement("BlackSpot",
                         new XAttribute("XYZ", bs.GetXYZ()),
                         new XAttribute("Radius", bs.Radius)
                     ))));
             }
 
             xGather.Add(new XElement("ItemNames",
-                profile.Items.Select(item => new XElement("ItemName", new XText(item)))));
-            xGather.Add(new XElement("GatheringSkillOrder", profile.Gatherskills.Select(gSkill =>
+                _profile.Items.Select(item => new XElement("ItemName", new XText(item)))));
+            xGather.Add(new XElement("GatheringSkillOrder", _profile.Gatherskills.Select(gSkill =>
                 new XElement("GatheringSkill", new XAttribute("TimesToCast", 1),
                     new XAttribute("SpellName", gSkill)))));
 
@@ -117,16 +127,16 @@ namespace GatherUp.Order
         }
 
 
-        private static XElement GetGatherElement(Profile.Gather gather)
+        private XElement GetGatherElement()
         {
-            if (gather.exGather.Enabled)
+            if (Gather.exGather.Enabled)
             {
                 object[] attributes =
                 {
                     new XAttribute("Loops", "1"),
-                    gather.exGather.UseCordial ? new XAttribute("CordialTime", gather.exGather.CordialTime) : null,
-                    gather.exGather.UseCordial ? new XAttribute("CordialType", gather.exGather.CordialType) : null,
-                    new XAttribute("DiscoverUnknowns", gather.exGather.DiscoverUnknowns)
+                    Gather.exGather.UseCordial ? new XAttribute("CordialTime", Gather.exGather.CordialTime) : null,
+                    Gather.exGather.UseCordial ? new XAttribute("CordialType", Gather.exGather.CordialType) : null,
+                    new XAttribute("DiscoverUnknowns", Gather.exGather.DiscoverUnknowns)
                 };
                 return new XElement("ExGather", attributes);
             }
@@ -134,14 +144,17 @@ namespace GatherUp.Order
             return new XElement("Gather", new XAttribute("Loops", "1"));
         }
 
-        private static void AddGearChangeElement(Profile.Gear gear, ref XElement parent)
+        private object[] GetGearChangeElement()
         {
-            if (!gear.Enabled) return;
-            parent.Add(GetLogMessageElement($"Using gearset: {gear.GearSet}"),
-                new XElement("RunCode", new XAttribute("Name", "GearSetChange")));
+            if (!Gear.Enabled) return null;
+            return new object[]
+            {
+                GetLogMessageElement($"Using gearset: {Gear.GearSet}"),
+                new XElement("RunCode", new XAttribute("Name", "GearSetChange"))
+            };
         }
 
-        private static XElement GetTeleportElement(Profile.Teleport teleport)
+        private XElement GetTeleportElement(Profile.Teleport teleport)
         {
             if (!teleport.Enabled) return null;
             var xIfElement = GetIfElement($"not IsOnMap({teleport.ZoneId})");
@@ -152,74 +165,83 @@ namespace GatherUp.Order
         }
 
 
-        private static string GetGatherCondition(Profile.Gather gather)
+        private string GetGatherCondition()
         {
-            if (gather.Infinite) return "True";
-            return $"ItemCount({gather.ItemId}) < {gather.Quantity}";
+            if (Gather.Infinite) return "True";
+            return $"ItemCount({Gather.ItemId}) < {Gather.Quantity}";
         }
 
-        private static XElement GetIfElement(string condition)
+        private XElement GetIfElement(string condition)
         {
             return new XElement("If", new XAttribute("Condition", condition));
         }
 
-        private static XElement GetLogMessageElement(string msg)
+        private XElement GetLogMessageElement(string msg)
         {
             return new XElement("LogMessage", new XAttribute("Message", msg));
         }
 
 
-        private static XElement GetCodeChunks(Profile profile)
+        private XElement GetCodeChunks()
         {
-            if (!profile.gear.Enabled) return null;
+            if (!Gear.Enabled) return null;
             var gearSetChangeCode = new[]
             {
                 "",
-                $"\tif (ff14bot.Managers.GearsetManager.ActiveGearset.Index != {profile.gear.GearSet})",
+                $"\tif (ff14bot.Managers.GearsetManager.ActiveGearset.Index != {Gear.GearSet})",
                 "\t{",
-                $"\t\tff14bot.Managers.GearsetManager.ChangeGearset({profile.gear.GearSet});",
+                $"\t\tff14bot.Managers.GearsetManager.ChangeGearset({Gear.GearSet});",
                 "\t\tawait Buddy.Coroutines.Coroutine.Sleep(3000);",
                 "\t}",
                 ""
             };
 
-            
 
             var stealthCode = new[]
             {
-
+                "",
                 "\tvar localPlayer = ff14bot.Managers.GameObjectManager.LocalPlayer;",
-                "\tff14bot.Managers.ActionManager.Dismount();",
-                "\tawait Buddy.Coroutines.Coroutine.Sleep(3000);",
-                "\tif (!localPlayer.HasAura(\"Stealth\") && ff14bot.Managers.ActionManager.CanCast(\"Stealth\", localPlayer))",
-                "\t{",
-                "\t\tff14bot.Managers.ActionManager.DoAction(\"Stealth\", localPlayer);",
+                "\tif (!localPlayer.HasAura(\"Stealth\")) {",
                 "\t\tawait Buddy.Coroutines.Coroutine.Sleep(3000);",
-                "\t}"
-        };
+                "\t\tif (ff14bot.Managers.ActionManager.CanCast(\"Stealth\", localPlayer)) {", 
+                "\t\t\tff14bot.Managers.ActionManager.DoAction(\"Stealth\", localPlayer);",
+                "\t\t}",
+                "\t}",
+                ""
+            };
 
             var disableMountCode = "ff14bot.Settings.CharacterSettings.Instance.UseMount = false;";
             var enableMountCode = "ff14bot.Settings.CharacterSettings.Instance.UseMount = true;";
 
             return new XElement("CodeChunks",
-               profile.gear.Enabled ? new XElement("CodeChunk", new XAttribute("Name", "GearSetChange"), new XCData(String.Join("\r\n", gearSetChangeCode))) : null,
-               ProfileDisablesMount(profile) ? new XElement("CodeChunk", new XAttribute("Name", "DisableMount"), new XCData(disableMountCode)) : null,
-               ProfileDisablesMount(profile) ? new XElement("CodeChunk", new XAttribute("Name", "EnableMount"), new XCData(enableMountCode)) : null,
-               ProfileUsesStealth(profile) ? new XElement("CodeChunk", new XAttribute("Name", "ApplyStealth"), new XCData(String.Join(Environment.NewLine, stealthCode))) : null);
+                Gear.Enabled
+                    ? new XElement("CodeChunk", new XAttribute("Name", "GearSetChange"),
+                        new XCData(String.Join("\r\n", gearSetChangeCode)))
+                    : null,
+                ProfileDisablesMount()
+                    ? new XElement("CodeChunk", new XAttribute("Name", "DisableMount"), new XCData(disableMountCode))
+                    : null,
+                ProfileDisablesMount()
+                    ? new XElement("CodeChunk", new XAttribute("Name", "EnableMount"), new XCData(enableMountCode))
+                    : null,
+                ProfileUsesStealth()
+                    ? new XElement("CodeChunk", new XAttribute("Name", "ApplyStealth"),
+                        new XCData(String.Join(Environment.NewLine, stealthCode)))
+                    : null);
         }
 
-        private static bool ProfileDisablesMount(Profile profile)
+        private bool ProfileDisablesMount()
         {
-            return profile.Hotspots.Any(hs => hs.DisableMount);
+            return _profile.Hotspots.Any(hs => hs.DisableMount);
         }
 
-        private static bool ProfileUsesStealth(Profile profile)
+        private bool ProfileUsesStealth()
         {
-            return profile.Hotspots.Any(hs => hs.IsStealth);
+            return _profile.Hotspots.Any(hs => hs.IsStealth);
         }
 
 
-        private static XElement GetWhileElement(string condition)
+        private XElement GetWhileElement(string condition)
         {
             return new XElement("While", new XAttribute("Condition", condition));
         }
