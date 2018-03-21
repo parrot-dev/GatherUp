@@ -3,19 +3,16 @@ using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
 using Clio.Utilities;
-using GatherUp.Order.Xml;
-using ICSharpCode.SharpZipLib.Zip;
 using static System.Globalization.CultureInfo;
 
 
 namespace GatherUp.Order
 {
-    class Profile
+    public class Profile
     {
         public enum CordialType { None, Cordial, HiCordial, Auto }
 
         public string Name { get; set; }
-        public bool DisableMount { get; set; } = true;
         public Teleport TeleportOnStart;
         public Teleport TeleportOnComplete;
         public List<HotSpot> Hotspots;
@@ -79,8 +76,10 @@ namespace GatherUp.Order
            public Vector3 Coord { get; set; }
            public int Radius { get; set; }
            public FlyTo FlyTo { get; set; }
+           public bool IsStealth { get; set; }
+           public bool DisableMount { get; set; }
 
-           public HotSpot(Vector3 coord, int radius) : this(coord, radius, new FlyTo())
+            public HotSpot(Vector3 coord, int radius) : this(coord, radius, new FlyTo())
             {
            }
            public HotSpot(Vector3 coord, int radius, FlyTo flyTo)

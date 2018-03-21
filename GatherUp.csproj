@@ -70,6 +70,12 @@
       <DependentUpon>GatherUpForm.cs</DependentUpon>
     </Compile>
     <Compile Include="GatherUp.cs" />
+    <Compile Include="HotSpotForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HotSpotForm.Designer.cs">
+      <DependentUpon>HotSpotForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="InspectXmlForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -95,13 +101,16 @@
     <Compile Include="Order\Parsing\ProfileParser.cs" />
     <Compile Include="Order\Profile.cs" />
     <Compile Include="Order\Parsing\LegacyOrderParser.cs" />
-    <Compile Include="Order\Xml\ProfileTransformer.cs" />
+    <Compile Include="Order\ProfileTransformer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="GatherUpForm.resx">
       <DependentUpon>GatherUpForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HotSpotForm.resx">
+      <DependentUpon>HotSpotForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InspectXmlForm.resx">
       <DependentUpon>InspectXmlForm.cs</DependentUpon>
@@ -113,9 +122,7 @@
       <DependentUpon>MultiAetheryteIdDialogue.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Order\Xml\Exceptions\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

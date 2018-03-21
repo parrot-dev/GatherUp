@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 
-namespace GatherUp.Order.Xml
+namespace GatherUp.Order
 {
     class ProfileTransformer
     {
@@ -33,19 +33,31 @@ namespace GatherUp.Order.Xml
             var order = new XElement("Order");
             AddGearChangeElement(profile.gear, ref order);
             order.Add(GetTeleportElement(profile.TeleportOnStart));
-            var outerLoop = GetOuterLoop(profile);
+            var outerLoop = GetWhileElement(GetGatherCondition(profile.gather));
             foreach (var hotspot in profile.Hotspots)
             {
-                outerLoop.Add(GetFlyToElement(hotspot.FlyTo));
-                outerLoop.Add(profile.DisableMount
-                    ? new XElement("RunCode", new XAttribute("Name", "DisableMount"))
-                    : null);
-                outerLoop.Add(GetGatherPart(profile, hotspot));
-                outerLoop.Add(profile.DisableMount
-                    ? new XElement("RunCode", new XAttribute("Name", "EnableMount"))
-                    : null);
+                var elements = new List<XElement>
+                {
+                    GetFlyToElement(hotspot.FlyTo),
+                    hotspot.DisableMount ? new XElement("RunCode", new XAttribute("Name", "DisableMount")) : null,
+                    hotspot.IsStealth ? new XElement("RunCode", new XAttribute("Name", "ApplyStealth")) : null, 
+                    GetGatherPart(profile, hotspot),
+                    hotspot.DisableMount ? new XElement("RunCode", new XAttribute("Name", "EnableMount")): null
+                    
+                };
+                
+                if (!profile.gather.Infinite)
+                {
+                    var ifNotDone = GetIfElement(GetGatherCondition(profile.gather));
+                    ifNotDone.Add(elements);
+                    outerLoop.Add(ifNotDone);
+                }
+                else
+                {
+                    outerLoop.Add(elements);
+                }
             }
-
+            
             order.Add(outerLoop);
             order.Add(GetTeleportElement(profile.TeleportOnComplete));
 
@@ -70,12 +82,12 @@ namespace GatherUp.Order.Xml
 
             return new XElement("FlyTo",
                 new XElement("DestinationChoices",
-                flyTo.Destinations.Select(dest =>
-                    new XElement("HotSpot",
-                        new XAttribute("Land", dest.Land),
-                        new XAttribute("AllowedVariance", dest.AllowedVariance),
-                        new XAttribute("XYZ", dest.GetXYZ()))
-                )));
+                    flyTo.Destinations.Select(dest =>
+                        new XElement("HotSpot",
+                            new XAttribute("Land", dest.Land),
+                            new XAttribute("AllowedVariance", dest.AllowedVariance),
+                            new XAttribute("XYZ", dest.GetXYZ()))
+                    )));
         }
 
         private static XElement GetGatherPart(Profile profile, Profile.HotSpot hotSpot)
@@ -140,14 +152,10 @@ namespace GatherUp.Order.Xml
         }
 
 
-        private static XElement GetOuterLoop(Profile profile)
+        private static string GetGatherCondition(Profile.Gather gather)
         {
-            if (profile.gather.Infinite)
-            {
-                return GetWhileElement("True");
-            }
-
-            return GetWhileElement($"ItemCount({profile.gather.ItemId}) < {profile.gather.Quantity}");
+            if (gather.Infinite) return "True";
+            return $"ItemCount({gather.ItemId}) < {gather.Quantity}";
         }
 
         private static XElement GetIfElement(string condition)
@@ -175,14 +183,39 @@ namespace GatherUp.Order.Xml
                 ""
             };
 
+            
+
+            var stealthCode = new[]
+            {
+
+                "\tvar localPlayer = ff14bot.Managers.GameObjectManager.LocalPlayer;",
+                "\tff14bot.Managers.ActionManager.Dismount();",
+                "\tawait Buddy.Coroutines.Coroutine.Sleep(3000);",
+                "\tif (!localPlayer.HasAura(\"Stealth\") && ff14bot.Managers.ActionManager.CanCast(\"Stealth\", localPlayer))",
+                "\t{",
+                "\t\tff14bot.Managers.ActionManager.DoAction(\"Stealth\", localPlayer);",
+                "\t\tawait Buddy.Coroutines.Coroutine.Sleep(3000);",
+                "\t}"
+        };
+
             var disableMountCode = "ff14bot.Settings.CharacterSettings.Instance.UseMount = false;";
             var enableMountCode = "ff14bot.Settings.CharacterSettings.Instance.UseMount = true;";
 
             return new XElement("CodeChunks",
-                new XElement("CodeChunk", new XAttribute("Name", "GearSetChange"),
-                    new XCData(String.Join("\r\n", gearSetChangeCode))),
-                new XElement("CodeChunk", new XAttribute("Name", "DisableMount"), new XCData(disableMountCode)),
-                new XElement("CodeChunk", new XAttribute("Name", "EnableMount"), new XCData(enableMountCode)));
+               profile.gear.Enabled ? new XElement("CodeChunk", new XAttribute("Name", "GearSetChange"), new XCData(String.Join("\r\n", gearSetChangeCode))) : null,
+               ProfileDisablesMount(profile) ? new XElement("CodeChunk", new XAttribute("Name", "DisableMount"), new XCData(disableMountCode)) : null,
+               ProfileDisablesMount(profile) ? new XElement("CodeChunk", new XAttribute("Name", "EnableMount"), new XCData(enableMountCode)) : null,
+               ProfileUsesStealth(profile) ? new XElement("CodeChunk", new XAttribute("Name", "ApplyStealth"), new XCData(String.Join(Environment.NewLine, stealthCode))) : null);
+        }
+
+        private static bool ProfileDisablesMount(Profile profile)
+        {
+            return profile.Hotspots.Any(hs => hs.DisableMount);
+        }
+
+        private static bool ProfileUsesStealth(Profile profile)
+        {
+            return profile.Hotspots.Any(hs => hs.IsStealth);
         }
 
 

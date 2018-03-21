@@ -496,7 +496,7 @@ namespace GatherUp
 
         private void button7_Click(object sender, EventArgs e)
         {
-            string xml = _profile.ToXml().Root?.Value;
+            string xml = _profile.ToXml().ToString();
             var inspectForm = new InspectXmlForm(xml);
             inspectForm.Show();
         }
@@ -682,6 +682,16 @@ namespace GatherUp
             {
                 Position = hs.Coord
             }));
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            var hotspot = listBoxHotSpots.SelectedItem as Profile.HotSpot;
+            if (hotspot == null) return;
+            using (var hotspotForm = new HotSpotForm(hotspot))
+            {
+                hotspotForm.ShowDialog();
+            }
         }
     }
 }
