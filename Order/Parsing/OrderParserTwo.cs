@@ -138,7 +138,7 @@ namespace GatherUp.Order.Parsing
             try
             {
                 var flyTo = new Profile.FlyTo();
-                var flyToElem = gatherElement.ElementsBeforeSelf().FirstOrDefault(elem => elem.Name == "FlyTo" || elem.Name == GatherTagName);
+                var flyToElem = gatherElement.ElementsBeforeSelf().LastOrDefault(elem => elem.Name == "FlyTo" || elem.Name == GatherTagName);
                 if (flyToElem?.Name != "FlyTo") return flyTo;
                 if (flyToElem.HasAttributes) //one line flyto.
                 {
