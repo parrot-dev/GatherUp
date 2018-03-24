@@ -223,8 +223,6 @@ namespace GatherUp.Order
                 "}"
             };
 
-
-
             var disableMountCode = "ff14bot.Settings.CharacterSettings.Instance.UseMount = false;";
             var enableMountCode = "ff14bot.Settings.CharacterSettings.Instance.UseMount = true;";
 
