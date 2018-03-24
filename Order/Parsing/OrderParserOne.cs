@@ -10,13 +10,13 @@ using GatherUp.Order.Parsing.Exceptions;
 
 namespace GatherUp.Order.Parsing
 {
-    class LegacyOrderParser : IOrderParser
+    class OrderParserOne : IOrderParser
     {
         /// <summary>
         /// Parse orderbot xml into an Profile object.
         /// </summary>
         /// <param Name="Path">File path to orderbot profile</param>
-        public LegacyOrderParser(string path)
+        public OrderParserOne(string path)
         {
             try
             {
@@ -33,7 +33,7 @@ namespace GatherUp.Order.Parsing
         /// Version of gatherup the profile was generated with. 0.0.0 for unknown.
         /// </summary>
         public readonly Version version;
-        public bool IsValidVersion => version.CompareTo(new Version(0, 0, 0)) > 0 && version.CompareTo(new Version(1,4,2,1)) <= 0;
+        public bool IsValidVersion => version.CompareTo(new Version(0, 0, 0)) > 0 && version.CompareTo(new Version(1,4,2)) <= 0;
 
         /// <summary>
         /// Tries to parse the profile xml into an Profile object.

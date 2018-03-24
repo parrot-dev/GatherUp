@@ -677,21 +677,41 @@ namespace GatherUp
 
         private void button11_Click_1(object sender, EventArgs e)
         {
-            //temp
-            _profile.Hotspots.ForEach(hs => hs.FlyTo.Destinations.Add(new Profile.FlyTo.Destination
-            {
-                Position = hs.Coord
-            }));
+          
+
         }
 
         private void button12_Click(object sender, EventArgs e)
         {
-            var hotspot = listBoxHotSpots.SelectedItem as Profile.HotSpot;
-            if (hotspot == null) return;
+            ShowHotSpotOptions();
+        }
+
+        private void ShowHotSpotOptions()
+        {
+            if (!(listBoxHotSpots.SelectedItem is Profile.HotSpot hotspot)) return;
             using (var hotspotForm = new HotSpotForm(hotspot))
             {
                 hotspotForm.ShowDialog();
             }
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            foreach (var hotspot in _profile.Hotspots)
+            {
+                if (!hotspot.FlyTo.Destinations.Any(dest => dest.Position.Equals(hotspot.Coord)))
+                {
+                    hotspot.FlyTo.Destinations.Add(new Profile.FlyTo.Destination
+                    {
+                        Position = hotspot.Coord
+                    });
+                }
+            }
+        }
+
+        private void listBoxHotSpots_DoubleClick(object sender, EventArgs e)
+        {
+            ShowHotSpotOptions();
         }
     }
 }

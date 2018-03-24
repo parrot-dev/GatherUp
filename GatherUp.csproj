@@ -70,6 +70,7 @@
       <DependentUpon>GatherUpForm.cs</DependentUpon>
     </Compile>
     <Compile Include="GatherUp.cs" />
+    <Compile Include="Helpers\CodeIndentor.cs" />
     <Compile Include="HotSpotForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -95,12 +96,13 @@
     <Compile Include="MultiAetheryteIdDialogue.Designer.cs">
       <DependentUpon>MultiAetheryteIdDialogue.cs</DependentUpon>
     </Compile>
+    <Compile Include="Order\Parsing\OrderParserTwo.cs" />
     <Compile Include="Order\Parsing\IOrderParser.cs" />
     <Compile Include="Order\Parsing\Exceptions\NoParserException.cs" />
     <Compile Include="Order\Parsing\Exceptions\ParsingException.cs" />
     <Compile Include="Order\Parsing\ProfileParser.cs" />
     <Compile Include="Order\Profile.cs" />
-    <Compile Include="Order\Parsing\LegacyOrderParser.cs" />
+    <Compile Include="Order\Parsing\OrderParserOne.cs" />
     <Compile Include="Order\ProfileTransformer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings.cs" />

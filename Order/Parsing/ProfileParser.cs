@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using GatherUp.Order.Parsing.Exceptions;
 
 namespace GatherUp.Order.Parsing
@@ -17,14 +15,21 @@ namespace GatherUp.Order.Parsing
             _parser = GetParser(profilePath);
         }
 
-        private static IOrderParser GetParser(string profielPath)
+        private static IOrderParser GetParser(string profilePath)
         {
-            IOrderParser parser = new LegacyOrderParser(profielPath);
-            if (parser.IsValidVersion)
+            try
             {
-                return parser;
+                var parsers = new List<IOrderParser>
+                {
+                    new OrderParserTwo(profilePath), 
+                    new OrderParserOne(profilePath) 
+                };
+                return parsers.First(parser => parser.IsValidVersion);
             }
-            throw new NoParserException();
+            catch (Exception)
+            {
+                throw new NoParserException();
+            }
         }
         
         ///<exception cref = "ParsingException" />

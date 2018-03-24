@@ -14,6 +14,10 @@ namespace GatherUp
             InitializeComponent();
             _hotspot = hotspot;
             RefreshForm();
+            if (_hotspot.FlyTo.Destinations.Any())
+            {
+                listboxFlyingDest.SelectedIndex = 0;
+            }
         }
 
         private void RefreshForm()
@@ -54,6 +58,11 @@ namespace GatherUp
             _hotspot.IsStealth = chkboxStealth.Checked;
         }
 
+        private bool AlwaysLands()
+        {
+            return _hotspot.FlyTo.Destinations.TrueForAll(dest => dest.Land);
+        }
+        
         private void chkboxLand_CheckedChanged(object sender, EventArgs e)
         {
             var destination = (FlyTo.Destination) listboxFlyingDest.SelectedItem;
@@ -84,6 +93,23 @@ namespace GatherUp
             var selectedDestination = listboxFlyingDest.SelectedItem as FlyTo.Destination;
             _hotspot.FlyTo.Destinations.Remove(selectedDestination);
             RefreshForm();
+        }
+
+        private void HotSpotForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (_hotspot.IsStealth)
+            {
+                if (!AlwaysLands())
+                {
+                    MessageBox.Show("To avoid problems with stealth, Landing has been enabled in this hotspot");
+                    _hotspot.FlyTo.Destinations.ForEach(dest => dest.Land = true);
+                }
+            }
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Disables/enables mounting when arriving/leaving a hotspot.\r\nUseful to avoid breaking stealth");
         }
     }
 }

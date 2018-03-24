@@ -33,6 +33,7 @@
             this.listboxFlyingDest = new System.Windows.Forms.ListBox();
             this.btnAddFlyingDest = new System.Windows.Forms.Button();
             this.chkboxLand = new System.Windows.Forms.CheckBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // chkboxStealth
@@ -88,11 +89,23 @@
             this.chkboxLand.UseVisualStyleBackColor = true;
             this.chkboxLand.CheckedChanged += new System.EventHandler(this.chkboxLand_CheckedChanged);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label1.Location = new System.Drawing.Point(200, 12);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(15, 15);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "?";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
+            // 
             // HotSpotForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(233, 169);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.chkboxLand);
             this.Controls.Add(this.btnAddFlyingDest);
             this.Controls.Add(this.listboxFlyingDest);
@@ -100,6 +113,7 @@
             this.Controls.Add(this.chkboxStealth);
             this.Name = "HotSpotForm";
             this.Text = "HotSpotForm";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.HotSpotForm_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -112,5 +126,6 @@
         private System.Windows.Forms.ListBox listboxFlyingDest;
         private System.Windows.Forms.Button btnAddFlyingDest;
         private System.Windows.Forms.CheckBox chkboxLand;
+        private System.Windows.Forms.Label label1;
     }
 }
