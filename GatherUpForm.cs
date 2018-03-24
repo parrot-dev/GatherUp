@@ -1,34 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using ff14bot.Managers;
+using GatherUp.Order.Parsing;
+using GatherUp.Order.Parsing.Exceptions;
+using Profile = GatherUp.Order.Profile;
 
 
 namespace GatherUp
 {
     public partial class GatherUpForm : Form
     {
+        private Profile _profile;
+
         public GatherUpForm()
         {
             InitializeComponent();
-            _order = new Order();
+            _profile = new Profile();
 
-            this.Text = "GatherUp - " + GatherUp.version.ToString();
-            numRadius.Value = new Order.HotSpot(new Clio.Utilities.Vector3()).Radius;
+            Text = "GatherUp - " + GatherUp.version.ToString();
+            numRadius.Value = new Profile.HotSpot(new Clio.Utilities.Vector3()).Radius;
             numRadiusBlackSpot.Value = 10;
             lblPath.Text = Settings.Current.SavePath;
 
             //Gatheringskills 
-            foreach (var spell in DataManager.SpellCache.Values.Where(o => o.Job == ff14bot.Enums.ClassJobType.Miner || o.Job == ff14bot.Enums.ClassJobType.Botanist))
+            foreach (var spell in DataManager.SpellCache.Values.Where(o =>
+                o.Job == ff14bot.Enums.ClassJobType.Miner || o.Job == ff14bot.Enums.ClassJobType.Botanist))
             {
                 cbBoxGatheringSkills.Items.Add(spell.Name);
             }
+
             cbBoxGatheringSkills.Sorted = true;
 
             //teleportLocations:
@@ -37,35 +39,36 @@ namespace GatherUp
                 cbBoxLocationNameOnStart.Items.Add(teleport);
                 cbBoxLocationNameOnComplete.Items.Add(teleport);
             }
+
             cbBoxLocationNameOnStart.DisplayMember = "Name";
             cbBoxLocationNameOnComplete.DisplayMember = "Name";
 
-            cbBoxCordialType.Items.Add(Order.CordialType.None);
-            cbBoxCordialType.Items.Add(Order.CordialType.Cordial);
-            cbBoxCordialType.Items.Add(Order.CordialType.HiCordial);
-            cbBoxCordialType.Items.Add(Order.CordialType.Auto);
+            cbBoxCordialType.Items.Add(Profile.CordialType.None);
+            cbBoxCordialType.Items.Add(Profile.CordialType.Cordial);
+            cbBoxCordialType.Items.Add(Profile.CordialType.HiCordial);
+            cbBoxCordialType.Items.Add(Profile.CordialType.Auto);
             cbBoxCordialType.SelectedIndex = 0;
 
             this.refreshForm();
         }
-        private Order _order;
+
 
         private void refreshForm()
         {
             //teleport
-            chkboxTeleportOnStart.Checked = _order.TeleportOnStart.Enabled;
-            cbBoxLocationNameOnStart.Text = _order.TeleportOnStart.Name;
-            chkBoxTeleportOnComplete.Checked = _order.TeleportOnComplete.Enabled;
-            cbBoxLocationNameOnComplete.Text = _order.TeleportOnComplete.Name;
+            chkboxTeleportOnStart.Checked = _profile.TeleportOnStart.Enabled;
+            cbBoxLocationNameOnStart.Text = _profile.TeleportOnStart.Name;
+            chkBoxTeleportOnComplete.Checked = _profile.TeleportOnComplete.Enabled;
+            cbBoxLocationNameOnComplete.Text = _profile.TeleportOnComplete.Name;
 
             //General
-            txtboxName.Text = _order.name;
-            txtBoxTarget.Text = _order.gather.Target;
-            txtboxItemId.Text = _order.gather.ItemId;
-            chkBoxQuantity.Checked = !_order.gather.Infinite;
-            numQuantity.Value = _order.gather.Quantity;
+            txtboxName.Text = _profile.Name;
+            txtBoxTarget.Text = _profile.gather.Target;
+            txtboxItemId.Text = _profile.gather.ItemId;
+            chkBoxQuantity.Checked = !_profile.gather.Infinite;
+            numQuantity.Value = _profile.gather.Quantity;
 
-            if (_order.gather.Infinite)
+            if (_profile.gather.Infinite)
             {
                 lblItemId.Hide();
                 txtboxItemId.Hide();
@@ -78,23 +81,23 @@ namespace GatherUp
                 btnListInventory.Show();
             }
 
-            chkBoxGearSet.Checked = _order.gear.Enabled;
-            numGearSet.Value = _order.gear.GearSet;
+            chkBoxGearSet.Checked = _profile.gear.Enabled;
+            numGearSet.Value = _profile.gear.GearSet;
 
             //items:
 
             txtboxItemNames.Text = string.Empty;
             listBox2Items.DataSource = null;
-            listBox2Items.DataSource = _order.Items;
+            listBox2Items.DataSource = _profile.Items;
 
 
             //hotspots
             listBoxHotSpots.DataSource = null;
-            listBoxHotSpots.DataSource = _order.Hotspots;
+            listBoxHotSpots.DataSource = _profile.Hotspots;
             //blackspots
             listBoxBlackSpots.DataSource = null;
-            listBoxBlackSpots.DataSource = _order.Blackspots;
-            if (_order.gather.exGather.Enabled)
+            listBoxBlackSpots.DataSource = _profile.Blackspots;
+            if (_profile.gather.exGather.Enabled)
             {
                 btnAddBlackspot.Enabled = false;
                 btnAddBlackspot.Text = "ExGather: not supported";
@@ -107,58 +110,64 @@ namespace GatherUp
 
             //gatheringskills            
             listBoxGatherSkills.DataSource = null;
-            listBoxGatherSkills.DataSource = _order.Gatherskills;
+            listBoxGatherSkills.DataSource = _profile.Gatherskills;
 
             //Exgather
-            chkboxExGather.Checked = _order.gather.exGather.Enabled;
-            chkboxDiscoverUnknowns.Enabled = _order.gather.exGather.Enabled;
-            chkboxDiscoverUnknowns.Checked = _order.gather.exGather.DiscoverUnknowns;
-            cbBoxCordialType.SelectedItem = _order.gather.exGather.CordialType;
-            cbBoxCordialType.Enabled = _order.gather.exGather.Enabled;
+            chkboxExGather.Checked = _profile.gather.exGather.Enabled;
+            chkboxDiscoverUnknowns.Enabled = _profile.gather.exGather.Enabled;
+            chkboxDiscoverUnknowns.Checked = _profile.gather.exGather.DiscoverUnknowns;
+            cbBoxCordialType.SelectedItem = _profile.gather.exGather.CordialType;
+            cbBoxCordialType.Enabled = _profile.gather.exGather.Enabled;
         }
+
         private void button2_Click(object sender, EventArgs e)
         {
-            _order.Items.Add(txtboxItemNames.Text);
+            _profile.Items.Add(txtboxItemNames.Text);
             listBox2Items.DataSource = null;
-            listBox2Items.DataSource = _order.Items;
-
+            listBox2Items.DataSource = _profile.Items;
         }
 
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
-            _order.gather.ItemId = txtboxItemId.Text;
+            _profile.gather.ItemId = txtboxItemId.Text;
         }
 
         private bool profileHasErrors(out string errorMsg)
         {
             errorMsg = string.Empty;
-            if (!_order.gather.Infinite && string.IsNullOrEmpty(_order.gather.ItemId))
+            if (!_profile.gather.Infinite && string.IsNullOrEmpty(_profile.gather.ItemId))
             {
                 errorMsg = "Item Id hasn't been specified";
                 return true;
             }
-            if (string.IsNullOrEmpty(_order.name))
+
+            if (string.IsNullOrEmpty(_profile.Name))
             {
-                errorMsg = "Profile hasn't got a name.";
+                errorMsg = "Profile hasn't got a Name.";
                 return true;
             }
-            if (string.IsNullOrEmpty(_order.gather.Target))
+
+            if (string.IsNullOrEmpty(_profile.gather.Target))
             {
                 errorMsg = "Target node hasn't been specified.";
                 return true;
             }
-            if (_order.Items.Count() == 0)
+
+            if (_profile.Items.Count() == 0)
             {
                 errorMsg = "No items to gather have been specified";
                 return true;
             }
-            if (_order.Hotspots.Count() == 0)
+
+            if (_profile.Hotspots.Count() == 0)
             {
                 errorMsg = "Profile hasn't got any hotspots";
                 return true;
             }
+
             return false;
         }
+
         private void button5_Click(object sender, EventArgs e)
         {
             string errorMsg = string.Empty;
@@ -167,32 +176,35 @@ namespace GatherUp
                 MessageBox.Show(errorMsg);
                 return;
             }
-            if (_order.gather.exGather.Enabled && _order.Blackspots.Count() > 0)
+
+            if (_profile.gather.exGather.Enabled && _profile.Blackspots.Count() > 0)
             {
                 MessageBox.Show("Warning: All blackspots will be omitted.");
-            }            
-            string fullSavePath = Settings.Current.SavePath + string.Format("\\{0}.xml", _order.name);
+            }
+
+            string fullSavePath = Settings.Current.SavePath + string.Format("\\{0}.xml", _profile.Name);
             if (System.IO.File.Exists(fullSavePath))
             {
-                var confirmResult = MessageBox.Show("A file with this name already exists.\r\nDo you want to overwrite it?",
+                var confirmResult = MessageBox.Show(
+                    "A file with this Name already exists.\r\nDo you want to overwrite it?",
                     "Overwrite?",
                     MessageBoxButtons.YesNo);
                 if (confirmResult == DialogResult.No)
                     return;
             }
 
-            var xmlOrder = _order.ToXml();
+            var xmlOrder = _profile.ToXml();
             xmlOrder.Save(fullSavePath);
         }
 
         private void txtboxName_TextChanged(object sender, EventArgs e)
         {
-            _order.name = txtboxName.Text;
+            _profile.Name = txtboxName.Text;
         }
 
         private void txtBoxTarget_TextChanged(object sender, EventArgs e)
         {
-            _order.gather.Target = txtBoxTarget.Text;
+            _profile.gather.Target = txtBoxTarget.Text;
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -204,9 +216,12 @@ namespace GatherUp
                 {
                     var target = GameObjectManager.LocalPlayer.CurrentTarget;
                     txtBoxTarget.Text = target.Name;
-                    _order.gather.Target = target.Name;
+                    _profile.gather.Target = target.Name;
                 }
-                catch (Exception err) { MessageBox.Show(err.Message); }
+                catch (Exception err)
+                {
+                    MessageBox.Show(err.Message);
+                }
             }
         }
 
@@ -219,13 +234,12 @@ namespace GatherUp
                 string itemName = iForm.itemName;
                 if (itemId != 0)
                 {
-                    _order.gather.ItemId = itemId.ToString();
-                    txtboxItemId.Text = _order.gather.ItemId;
-                    if (!_order.Items.Contains(itemName))
+                    _profile.gather.ItemId = itemId.ToString();
+                    txtboxItemId.Text = _profile.gather.ItemId;
+                    if (!_profile.Items.Contains(itemName))
                         txtboxItemNames.Text = itemName;
                 }
             }
-
         }
 
         private void chkBoxQuantity_CheckedChanged(object sender, EventArgs e)
@@ -243,23 +257,22 @@ namespace GatherUp
                 btnListInventory.Hide();
             }
 
-            _order.gather.Infinite = !chkBoxQuantity.Checked;
+            _profile.gather.Infinite = !chkBoxQuantity.Checked;
         }
 
         private void numQuantity_ValueChanged(object sender, EventArgs e)
         {
-            _order.gather.Quantity = (int)numQuantity.Value;
+            _profile.gather.Quantity = (int) numQuantity.Value;
         }
 
         private void chkBoxGearSet_CheckedChanged(object sender, EventArgs e)
         {
-            _order.gear.Enabled = chkBoxGearSet.Checked;
-
+            _profile.gear.Enabled = chkBoxGearSet.Checked;
         }
 
         private void numGearSet_ValueChanged(object sender, EventArgs e)
         {
-            _order.gear.GearSet = (int)numGearSet.Value;
+            _profile.gear.GearSet = (int) numGearSet.Value;
         }
 
         private void listBox2_KeyDown(object sender, KeyEventArgs e)
@@ -269,26 +282,28 @@ namespace GatherUp
             {
                 if (e.KeyCode == Keys.Delete)
                 {
-                    _order.Items.RemoveAt(listBox2Items.SelectedIndex);
+                    _profile.Items.RemoveAt(listBox2Items.SelectedIndex);
                     listBox2Items.DataSource = null;
-                    listBox2Items.DataSource = _order.Items;
+                    listBox2Items.DataSource = _profile.Items;
                     e.Handled = true;
                 }
+
                 if (e.KeyCode == Keys.Down)
                 {
-                    if (index != _order.Items.Count() - 1)
+                    if (index != _profile.Items.Count() - 1)
                     {
-                        _order.Items = swap(_order.Items, index, index + 1);
+                        _profile.Items = swap(_profile.Items, index, index + 1);
                         refreshForm();
                         listBox2Items.SelectedIndex = index + 1;
                         e.Handled = true;
                     }
                 }
+
                 if (e.KeyCode == Keys.Up)
                 {
                     if (index > 0)
                     {
-                        _order.Items = swap(_order.Items, index, index - 1);
+                        _profile.Items = swap(_profile.Items, index, index - 1);
                         refreshForm();
                         listBox2Items.SelectedIndex = index - 1;
                         e.Handled = true;
@@ -300,9 +315,9 @@ namespace GatherUp
         private void button3_Click(object sender, EventArgs e)
         {
             var hotspot = GameObjectManager.LocalPlayer.Location;
-            _order.Hotspots.Add(new Order.HotSpot(hotspot, (int)numRadius.Value));
+            _profile.Hotspots.Add(new Profile.HotSpot(hotspot, (int) numRadius.Value));
             listBoxHotSpots.DataSource = null;
-            listBoxHotSpots.DataSource = _order.Hotspots;
+            listBoxHotSpots.DataSource = _profile.Hotspots;
         }
 
         private void listBox1_KeyDown(object sender, KeyEventArgs e)
@@ -312,26 +327,28 @@ namespace GatherUp
             {
                 if (e.KeyCode == Keys.Delete)
                 {
-                    _order.Hotspots.RemoveAt(listBoxHotSpots.SelectedIndex);
+                    _profile.Hotspots.RemoveAt(listBoxHotSpots.SelectedIndex);
                     listBoxHotSpots.DataSource = null;
-                    listBoxHotSpots.DataSource = _order.Hotspots;
+                    listBoxHotSpots.DataSource = _profile.Hotspots;
                     e.Handled = true;
                 }
+
                 if (e.KeyCode == Keys.Down)
                 {
-                    if (index != _order.Hotspots.Count() - 1)
+                    if (index != _profile.Hotspots.Count() - 1)
                     {
-                        _order.Hotspots = swap(_order.Hotspots, index, index + 1);
+                        _profile.Hotspots = swap(_profile.Hotspots, index, index + 1);
                         refreshForm();
                         listBoxHotSpots.SelectedIndex = index + 1;
                         e.Handled = true;
                     }
                 }
+
                 if (e.KeyCode == Keys.Up)
                 {
                     if (index > 0)
                     {
-                        _order.Hotspots = swap(_order.Hotspots, index, index - 1);
+                        _profile.Hotspots = swap(_profile.Hotspots, index, index - 1);
                         refreshForm();
                         listBoxHotSpots.SelectedIndex = index - 1;
                         e.Handled = true;
@@ -344,9 +361,9 @@ namespace GatherUp
         {
             if (cbBoxGatheringSkills.SelectedIndex != -1)
             {
-                _order.Gatherskills.Add(cbBoxGatheringSkills.SelectedItem.ToString());
+                _profile.Gatherskills.Add(cbBoxGatheringSkills.SelectedItem.ToString());
                 listBoxGatherSkills.DataSource = null;
-                listBoxGatherSkills.DataSource = _order.Gatherskills;
+                listBoxGatherSkills.DataSource = _profile.Gatherskills;
             }
         }
 
@@ -357,26 +374,28 @@ namespace GatherUp
             {
                 if (e.KeyCode == Keys.Delete)
                 {
-                    _order.Gatherskills.RemoveAt(listBoxGatherSkills.SelectedIndex);
+                    _profile.Gatherskills.RemoveAt(listBoxGatherSkills.SelectedIndex);
                     listBoxGatherSkills.DataSource = null;
-                    listBoxGatherSkills.DataSource = _order.Gatherskills;
+                    listBoxGatherSkills.DataSource = _profile.Gatherskills;
                     e.Handled = true;
                 }
+
                 if (e.KeyCode == Keys.Down)
                 {
-                    if (index != _order.Gatherskills.Count() - 1)
+                    if (index != _profile.Gatherskills.Count() - 1)
                     {
-                        _order.Gatherskills = swap(_order.Gatherskills, index, index + 1);
+                        _profile.Gatherskills = swap(_profile.Gatherskills, index, index + 1);
                         refreshForm();
                         listBoxGatherSkills.SelectedIndex = index + 1;
                         e.Handled = true;
                     }
                 }
+
                 if (e.KeyCode == Keys.Up)
                 {
                     if (index > 0)
                     {
-                        _order.Gatherskills = swap(_order.Gatherskills, index, index - 1);
+                        _profile.Gatherskills = swap(_profile.Gatherskills, index, index - 1);
                         refreshForm();
                         listBoxGatherSkills.SelectedIndex = index - 1;
                         e.Handled = true;
@@ -387,14 +406,14 @@ namespace GatherUp
 
         private void chkboxTeleportOnStart_CheckedChanged(object sender, EventArgs e)
         {
-            _order.TeleportOnStart.Enabled = chkboxTeleportOnStart.Checked;
+            _profile.TeleportOnStart.Enabled = chkboxTeleportOnStart.Checked;
         }
 
-        private bool getTeleportCurrentZone(out Order.Teleport teleport, bool enabled)
+        private bool getTeleportCurrentZone(out Profile.Teleport teleport, bool enabled)
         {
             var zoneId = WorldManager.ZoneId;
             var aIds = WorldManager.AetheryteIdsForZone(zoneId);
-            teleport = new Order.Teleport();
+            teleport = new Profile.Teleport();
             uint aId;
 
             if (aIds.Count() == 0)
@@ -409,7 +428,7 @@ namespace GatherUp
             else
             {
                 //override id's for cities to avoid listing all mini aetherytes.
-                var tempAidCityList = aIds.Where(o => new uint[] { 2, 8, 9, 70 }.Contains(o.Item1));
+                var tempAidCityList = aIds.Where(o => new uint[] {2, 8, 9, 70}.Contains(o.Item1));
                 if (tempAidCityList.Count() > 0)
                 {
                     aId = tempAidCityList.First().Item1;
@@ -432,51 +451,54 @@ namespace GatherUp
                 locationName = WorldManager.AvailableLocations.Where(o =>
                     o.AetheryteId == aId).ElementAt(0).Name;
             }
-            catch (ArgumentOutOfRangeException) { locationName = string.Empty; }
+            catch (ArgumentOutOfRangeException)
+            {
+                locationName = string.Empty;
+            }
 
             teleport.Name = locationName;
             teleport.AetheryteId = aId;
             teleport.ZoneId = zoneId;
             teleport.Enabled = enabled;
             return true;
-
         }
+
         private void button1_Click(object sender, EventArgs e)
         {
-            Order.Teleport tele;
+            Profile.Teleport tele;
             if (this.getTeleportCurrentZone(out tele, chkboxTeleportOnStart.Checked))
             {
-                _order.TeleportOnStart = tele;
-                cbBoxLocationNameOnStart.Text = _order.TeleportOnStart.Name;
+                _profile.TeleportOnStart = tele;
+                cbBoxLocationNameOnStart.Text = _profile.TeleportOnStart.Name;
             }
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            Order.Teleport tele;
+            Profile.Teleport tele;
             if (this.getTeleportCurrentZone(out tele, chkBoxTeleportOnComplete.Checked))
             {
-                _order.TeleportOnComplete = tele;
-                cbBoxLocationNameOnComplete.Text = _order.TeleportOnComplete.Name;
+                _profile.TeleportOnComplete = tele;
+                cbBoxLocationNameOnComplete.Text = _profile.TeleportOnComplete.Name;
             }
         }
 
         private void chkBoxTeleportOnComplete_CheckedChanged(object sender, EventArgs e)
         {
-            if (_order.gather.Infinite && chkBoxTeleportOnComplete.Checked)
+            if (_profile.gather.Infinite && chkBoxTeleportOnComplete.Checked)
             {
                 MessageBox.Show("Gather quantity hasnt been set, in infinite mode the profile will never finish.");
             }
-            _order.TeleportOnComplete.Enabled = chkBoxTeleportOnComplete.Checked;
+
+            _profile.TeleportOnComplete.Enabled = chkBoxTeleportOnComplete.Checked;
         }
 
 
         private void button7_Click(object sender, EventArgs e)
         {
-            string xml = System.Xml.Linq.XElement.Parse(_order.ToXml().OuterXml).ToString();
+            string xml = _profile.ToXml().ToString();
             var inspectForm = new InspectXmlForm(xml);
             inspectForm.Show();
-
         }
 
         private void button8_Click_1(object sender, EventArgs e)
@@ -487,8 +509,8 @@ namespace GatherUp
                 Settings.Current.SavePath = fd.SelectedPath;
                 Settings.Save();
             }
-            lblPath.Text = Settings.Current.SavePath;
 
+            lblPath.Text = Settings.Current.SavePath;
         }
 
         private void GatherUpForm_Load(object sender, EventArgs e)
@@ -518,11 +540,10 @@ namespace GatherUp
             if (cbBoxLocationNameOnStart.SelectedIndex == -1)
                 return;
 
-            var teleport = (WorldManager.TeleportLocation)cbBoxLocationNameOnStart.SelectedItem;
-            _order.TeleportOnStart.Name = teleport.Name;
-            _order.TeleportOnStart.AetheryteId = teleport.AetheryteId;
-            _order.TeleportOnStart.ZoneId = teleport.ZoneId;
-
+            var teleport = (WorldManager.TeleportLocation) cbBoxLocationNameOnStart.SelectedItem;
+            _profile.TeleportOnStart.Name = teleport.Name;
+            _profile.TeleportOnStart.AetheryteId = teleport.AetheryteId;
+            _profile.TeleportOnStart.ZoneId = teleport.ZoneId;
         }
 
         private void cbBoxLocationNameOnComplete_SelectedIndexChanged(object sender, EventArgs e)
@@ -530,51 +551,54 @@ namespace GatherUp
             if (cbBoxLocationNameOnComplete.SelectedIndex == -1)
                 return;
 
-            var teleport = (WorldManager.TeleportLocation)cbBoxLocationNameOnComplete.SelectedItem;
-            _order.TeleportOnComplete.Name = teleport.Name;
-            _order.TeleportOnComplete.AetheryteId = teleport.AetheryteId;
-            _order.TeleportOnComplete.ZoneId = teleport.ZoneId;
+            var teleport = (WorldManager.TeleportLocation) cbBoxLocationNameOnComplete.SelectedItem;
+            _profile.TeleportOnComplete.Name = teleport.Name;
+            _profile.TeleportOnComplete.AetheryteId = teleport.AetheryteId;
+            _profile.TeleportOnComplete.ZoneId = teleport.ZoneId;
         }
 
         private void btnImportProfile_Click(object sender, EventArgs e)
         {
-            var fd = new OpenFileDialog();
-            fd.Filter = "Orderbot profile (.xml)|*.xml";
-            fd.FilterIndex = 1;
-            fd.Multiselect = false;
-
-            if (fd.ShowDialog() == DialogResult.OK)
+            var fd = new OpenFileDialog
             {
-                var orderParser = new OrderParser(fd.FileName);
+                Filter = "Orderbot profile (.xml)|*.xml",
+                FilterIndex = 1,
+                Multiselect = false
+            };
 
-                if (orderParser.IsValidVersion)
-                {
-                    string errorMessage;
-                    if (!orderParser.ToOrder(out this._order, out errorMessage))
-                        MessageBox.Show(errorMessage);
-                    this.refreshForm();
-                }
-                else
-                    MessageBox.Show("GatherUp can only import profiles generated with this tool from version: " + GatherUp.version.ToString() + " and below.");
+            if (fd.ShowDialog() != DialogResult.OK) return;
 
+            try
+            {
+                var profileParser = new ProfileParser(fd.FileName);
+                _profile = profileParser.ToProfile();
+                refreshForm();
+            }
+            catch (NoParserException)
+            {
+                MessageBox.Show($"GatherUp can only import profiles generated with this tool from version: {GatherUp.version} and below.");
+            }
+            catch (ParsingException err)
+            {
+                MessageBox.Show(err.Message);
             }
         }
 
         private async void btnActivate_Click(object sender, EventArgs e)
         {
-            string savePath = PluginManager.PluginDirectory + @"\GatherUp\tempProfile.xml";
-            string errorMsg = string.Empty;
+            var savePath = PluginManager.PluginDirectory + @"\GatherUp\tempProfile.xml";
+            var errorMsg = string.Empty;
             if (this.profileHasErrors(out errorMsg))
             {
                 MessageBox.Show(errorMsg);
                 return;
             }
 
-            _order.ToXml().Save(savePath);
+            _profile.ToXml().Save(savePath);
 
             if (ff14bot.TreeRoot.IsRunning)
             {
-                await ff14bot.TreeRoot.StopGently("[GatherUp] Preparing to load new profile.");                
+                await ff14bot.TreeRoot.StopGently("[GatherUp] Preparing to load new profile.");
             }
 
             ff14bot.NeoProfiles.NeoProfileManager.Load(savePath);
@@ -586,10 +610,11 @@ namespace GatherUp
                 }
                 catch (Exception err)
                 {
-                    Log.Bot.print("Error while switching botbase: " +err.Message);
+                    Log.Bot.print("Error while switching botbase: " + err.Message);
                     return;
                 }
             }
+
             ff14bot.TreeRoot.Start();
         }
 
@@ -605,7 +630,7 @@ namespace GatherUp
         private void button11_Click(object sender, EventArgs e)
         {
             var blackspot = GameObjectManager.LocalPlayer.Location;
-            _order.Blackspots.Add(new Order.HotSpot(blackspot, (int)numRadiusBlackSpot.Value));
+            _profile.Blackspots.Add(new Profile.HotSpot(blackspot, (int) numRadiusBlackSpot.Value));
             refreshForm();
         }
 
@@ -615,7 +640,7 @@ namespace GatherUp
             {
                 if (e.KeyCode == Keys.Delete)
                 {
-                    _order.Blackspots.RemoveAt(listBoxBlackSpots.SelectedIndex);
+                    _profile.Blackspots.RemoveAt(listBoxBlackSpots.SelectedIndex);
                     refreshForm();
                     e.Handled = true;
                 }
@@ -624,29 +649,69 @@ namespace GatherUp
 
         private void chkboxExGather_CheckedChanged(object sender, EventArgs e)
         {
-            _order.gather.exGather.Enabled = chkboxExGather.Checked;
-            if(_order.gather.exGather.Enabled)
+            _profile.gather.exGather.Enabled = chkboxExGather.Checked;
+            if (_profile.gather.exGather.Enabled)
             {
-                if (_order.Blackspots.Count() > 0)
+                if (_profile.Blackspots.Count() > 0)
                 {
                     MessageBox.Show("Warning: The ExGatherTag does not support blackspots.");
                 }
             }
+
             refreshForm();
         }
 
         private void chkboxDiscoverUnknowns_CheckedChanged(object sender, EventArgs e)
         {
-            _order.gather.exGather.DiscoverUnknowns = chkboxDiscoverUnknowns.Checked;
+            _profile.gather.exGather.DiscoverUnknowns = chkboxDiscoverUnknowns.Checked;
         }
 
         private void cbBoxCordialType_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cbBoxCordialType.SelectedIndex != -1)
             {
-                _order.gather.exGather.CordialType = (Order.CordialType)cbBoxCordialType.SelectedItem;
+                _profile.gather.exGather.CordialType = (Profile.CordialType) cbBoxCordialType.SelectedItem;
                 refreshForm();
             }
+        }
+
+        private void button11_Click_1(object sender, EventArgs e)
+        {
+          
+
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            ShowHotSpotOptions();
+        }
+
+        private void ShowHotSpotOptions()
+        {
+            if (!(listBoxHotSpots.SelectedItem is Profile.HotSpot hotspot)) return;
+            using (var hotspotForm = new HotSpotForm(hotspot))
+            {
+                hotspotForm.ShowDialog();
+            }
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            foreach (var hotspot in _profile.Hotspots)
+            {
+                if (!hotspot.FlyTo.Destinations.Any(dest => dest.Position.Equals(hotspot.Coord)))
+                {
+                    hotspot.FlyTo.Destinations.Add(new Profile.FlyTo.Destination
+                    {
+                        Position = hotspot.Coord
+                    });
+                }
+            }
+        }
+
+        private void listBoxHotSpots_DoubleClick(object sender, EventArgs e)
+        {
+            ShowHotSpotOptions();
         }
     }
 }

@@ -70,6 +70,13 @@
       <DependentUpon>GatherUpForm.cs</DependentUpon>
     </Compile>
     <Compile Include="GatherUp.cs" />
+    <Compile Include="Helpers\CodeIndentor.cs" />
+    <Compile Include="HotSpotForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HotSpotForm.Designer.cs">
+      <DependentUpon>HotSpotForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="InspectXmlForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -89,14 +96,23 @@
     <Compile Include="MultiAetheryteIdDialogue.Designer.cs">
       <DependentUpon>MultiAetheryteIdDialogue.cs</DependentUpon>
     </Compile>
-    <Compile Include="Order.cs" />
-    <Compile Include="OrderParser.cs" />
+    <Compile Include="Order\Parsing\OrderParserTwo.cs" />
+    <Compile Include="Order\Parsing\IOrderParser.cs" />
+    <Compile Include="Order\Parsing\Exceptions\NoParserException.cs" />
+    <Compile Include="Order\Parsing\Exceptions\ParsingException.cs" />
+    <Compile Include="Order\Parsing\ProfileParser.cs" />
+    <Compile Include="Order\Profile.cs" />
+    <Compile Include="Order\Parsing\OrderParserOne.cs" />
+    <Compile Include="Order\ProfileTransformer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="GatherUpForm.resx">
       <DependentUpon>GatherUpForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HotSpotForm.resx">
+      <DependentUpon>HotSpotForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InspectXmlForm.resx">
       <DependentUpon>InspectXmlForm.cs</DependentUpon>
@@ -108,6 +124,7 @@
       <DependentUpon>MultiAetheryteIdDialogue.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

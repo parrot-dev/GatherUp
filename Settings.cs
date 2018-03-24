@@ -59,12 +59,29 @@ namespace GatherUp
 
         }
 
-        public static void CreateSettingsFile()
+        public static bool CreateSettingsFile()
         {
-            if (!File.Exists(PluginManager.PluginDirectory + @"\GatherUp\Settings.xml"))
+            try
             {
-                Log.Bot.print("Settings.xml is missing, creating a new file.", Colors.White);
-                Save(new Profile());
+                if (!Directory.Exists(PluginManager.PluginDirectory + @"\GatherUp"))
+                {
+                    Log.Bot.print("Warning, plugins/GatherUp/ folder does not exist. Plugin might be installed incorrectly");
+                    Log.Bot.print("creating folder plugins/GatherUp/");
+                    Directory.CreateDirectory(PluginManager.PluginDirectory + @"\GatherUp");
+                }
+
+                if (!File.Exists(PluginManager.PluginDirectory + @"\GatherUp\Settings.xml"))
+                {
+                    Log.Bot.print("Settings.xml is missing, creating a new file.", Colors.White);
+                    return Save(new Profile());
+                }
+
+                return true;
+            }
+            catch (Exception err)
+            {
+                Log.Bot.print(err.Message);
+                return false;
             }
         }
 

@@ -44,7 +44,7 @@ namespace GatherUp
                 try
                 {
                     var locationNameList = ff14bot.Managers.WorldManager.AvailableLocations.Where(o => o.AetheryteId == id);
-                    name = (locationNameList.Count() > 0) ? locationNameList.First().Name : "Location name not found";
+                    name = (locationNameList.Count() > 0) ? locationNameList.First().Name : "Location Name not found";
                 }
                 catch (Exception err) {
                     MessageBox.Show(err.InnerException + "\r\n" + err.Message); //debug

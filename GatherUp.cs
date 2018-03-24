@@ -9,7 +9,7 @@ namespace GatherUp
 {
     public class GatherUp : BotPlugin
     {
-        public static readonly Version version = new Version(1, 4, 2);
+        public static readonly Version version = new Version(1, 5, 0);
         public override string Author { get { return "Parrot"; } }
         public override string Description { get { return "Tool for making orderbot gathering profiles"; } }
         public override Version Version { get { return GatherUp.version; } }

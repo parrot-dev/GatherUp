@@ -10,7 +10,7 @@
         /// <summary>
         /// Clean up any resources being used.
         /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        /// <param Name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -69,6 +69,7 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.button12 = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.numRadius = new System.Windows.Forms.NumericUpDown();
             this.tabPage4 = new System.Windows.Forms.TabPage();
@@ -76,6 +77,8 @@
             this.listBoxBlackSpots = new System.Windows.Forms.ListBox();
             this.numRadiusBlackSpot = new System.Windows.Forms.NumericUpDown();
             this.btnAddBlackspot = new System.Windows.Forms.Button();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.button13 = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
             this.button10 = new System.Windows.Forms.Button();
             this.panel5 = new System.Windows.Forms.Panel();
@@ -103,6 +106,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numRadius)).BeginInit();
             this.tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numRadiusBlackSpot)).BeginInit();
+            this.tabPage5.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel5.SuspendLayout();
             this.SuspendLayout();
@@ -461,10 +465,11 @@
             // listBoxHotSpots
             // 
             this.listBoxHotSpots.FormattingEnabled = true;
-            this.listBoxHotSpots.Location = new System.Drawing.Point(0, 43);
+            this.listBoxHotSpots.Location = new System.Drawing.Point(0, 69);
             this.listBoxHotSpots.Name = "listBoxHotSpots";
-            this.listBoxHotSpots.Size = new System.Drawing.Size(286, 160);
+            this.listBoxHotSpots.Size = new System.Drawing.Size(286, 134);
             this.listBoxHotSpots.TabIndex = 11;
+            this.listBoxHotSpots.DoubleClick += new System.EventHandler(this.listBoxHotSpots_DoubleClick);
             this.listBoxHotSpots.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listBox1_KeyDown);
             // 
             // txtboxItemNames
@@ -495,9 +500,9 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(0, 9);
+            this.button3.Location = new System.Drawing.Point(3, 38);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(149, 23);
+            this.button3.Size = new System.Drawing.Size(279, 23);
             this.button3.TabIndex = 17;
             this.button3.Text = "Add current location";
             this.button3.UseVisualStyleBackColor = true;
@@ -515,6 +520,7 @@
             // 
             this.tabControl2.Controls.Add(this.tabPage3);
             this.tabControl2.Controls.Add(this.tabPage4);
+            this.tabControl2.Controls.Add(this.tabPage5);
             this.tabControl2.Location = new System.Drawing.Point(323, 144);
             this.tabControl2.Name = "tabControl2";
             this.tabControl2.Padding = new System.Drawing.Point(3, 3);
@@ -524,6 +530,7 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.button12);
             this.tabPage3.Controls.Add(this.label5);
             this.tabPage3.Controls.Add(this.listBoxHotSpots);
             this.tabPage3.Controls.Add(this.numRadius);
@@ -535,6 +542,16 @@
             this.tabPage3.TabIndex = 0;
             this.tabPage3.Text = "HotSpots";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // button12
+            // 
+            this.button12.Location = new System.Drawing.Point(6, 9);
+            this.button12.Name = "button12";
+            this.button12.Size = new System.Drawing.Size(128, 23);
+            this.button12.TabIndex = 26;
+            this.button12.Text = "Options";
+            this.button12.UseVisualStyleBackColor = true;
+            this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
             // label5
             // 
@@ -610,6 +627,26 @@
             this.btnAddBlackspot.Text = "Add current location";
             this.btnAddBlackspot.UseVisualStyleBackColor = true;
             this.btnAddBlackspot.Click += new System.EventHandler(this.button11_Click);
+            // 
+            // tabPage5
+            // 
+            this.tabPage5.Controls.Add(this.button13);
+            this.tabPage5.Location = new System.Drawing.Point(4, 22);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Size = new System.Drawing.Size(288, 201);
+            this.tabPage5.TabIndex = 2;
+            this.tabPage5.Text = "Misc";
+            this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // button13
+            // 
+            this.button13.Location = new System.Drawing.Point(3, 6);
+            this.button13.Name = "button13";
+            this.button13.Size = new System.Drawing.Size(135, 54);
+            this.button13.TabIndex = 0;
+            this.button13.Text = "Generate flying tags using hotspot position";
+            this.button13.UseVisualStyleBackColor = true;
+            this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
             // panel4
             // 
@@ -710,7 +747,7 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(150, 52);
             this.button8.TabIndex = 23;
-            this.button8.Text = "Set file path";
+            this.button8.Text = "Set save location";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click_1);
             // 
@@ -783,6 +820,7 @@
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numRadiusBlackSpot)).EndInit();
+            this.tabPage5.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             this.panel5.ResumeLayout(false);
@@ -856,5 +894,8 @@
         private System.Windows.Forms.ComboBox cbBoxCordialType;
         private System.Windows.Forms.CheckBox chkboxDiscoverUnknowns;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.Button button12;
+        private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.Button button13;
     }
 }
