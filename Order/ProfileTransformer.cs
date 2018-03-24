@@ -231,7 +231,7 @@ namespace GatherUp.Order
             return new XElement("CodeChunks",
                 Gear.Enabled
                     ? new XElement("CodeChunk", new XAttribute("Name", "GearSetChange"),
-                        new XCData(String.Join("\r\n", IndentCode(gearSetChangeCode, 2))))
+                        new XCData(IndentCode(gearSetChangeCode, 2)))
                     : null,
                 ProfileDisablesMount()
                     ? new XElement("CodeChunk", new XAttribute("Name", "DisableMount"), new XCData(disableMountCode))
@@ -241,7 +241,7 @@ namespace GatherUp.Order
                     : null,
                 ProfileUsesStealth()
                     ? new XElement("CodeChunk", new XAttribute("Name", "ApplyStealth"),
-                        new XCData(String.Join(Environment.NewLine, IndentCode(stealthCode, 2))))
+                        new XCData(IndentCode(stealthCode, 2)))
                     : null);
         }
 
