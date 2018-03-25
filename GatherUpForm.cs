@@ -165,13 +165,24 @@ namespace GatherUp
                 return true;
             }
 
+            if (_profile.gear.Enabled && _profile.gear.GearSet < 1)
+            {
+                errorMsg = "Gearset must be larger than 0";
+                return true;
+            }
+            if (_profile.gear.Enabled && _profile.gear.GearSet > GearsetManager.GearsetLimit)
+            {
+                errorMsg = "invalid Gearset";
+                return true;
+            }
+
             return false;
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
             string errorMsg = string.Empty;
-            if (this.profileHasErrors(out errorMsg))
+            if (profileHasErrors(out errorMsg))
             {
                 MessageBox.Show(errorMsg);
                 return;

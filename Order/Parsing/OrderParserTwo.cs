@@ -343,13 +343,20 @@ namespace GatherUp.Order.Parsing
             var cdata = _document.DescendantNodes().FirstOrDefault(node =>
                 node.NodeType == XmlNodeType.CDATA && node.Parent?.Attribute("Name")?.Value == "GearSetChange");
             if (cdata == null) return gear;
-
-            var match = new Regex(@"ChangeGearset\((\d+)\)").Match(cdata.ToString());
-            if (match.Success && Int32.TryParse(match.Groups[1].Value, out var number))
+            var patterns = new []
             {
-                gear.GearSet = number;
-                gear.Enabled = true;
-                return gear;
+                @"var index = (\d+);", //1.5.2+
+                @"ChangeGearset\((\d+)\)" //1.5.0 - 1.5.1
+            };
+            foreach (var pattern in patterns)
+            {
+                var match = new Regex(pattern).Match(cdata.ToString());
+                if (match.Success && Int32.TryParse(match.Groups[1].Value, out var number))
+                {
+                    gear.GearSet = number;
+                    gear.Enabled = true;
+                    return gear;
+                }
             }
 
             throw new ParsingException("Could not parse gearset");
