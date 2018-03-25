@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
+using ff14bot.Managers;
 using static GatherUp.Helpers.CodeIndentor;
 
 namespace GatherUp.Order
@@ -210,7 +211,7 @@ namespace GatherUp.Order
                 "Logging.Write(\"[Gatherup] Invalid gearset\");",
                 "} else {",
                 "var gear = GearsetManager.GearSets.ElementAt(index-1);",
-                "if (!gear.Equals(GearsetManager.ActiveGearset)) {",
+                "if (GearsetManager.ActiveGearset.Index != gear.Index) {",
                 "do {",
                 "await Buddy.Coroutines.Coroutine.Sleep(1900);", 
                 "} while (Core.Player.IsCasting);", //if bot starts to summon chocobo.
