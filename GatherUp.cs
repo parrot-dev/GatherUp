@@ -9,22 +9,17 @@ namespace GatherUp
 {
     public class GatherUp : BotPlugin
     {
-        public static readonly Version version = new Version(1, 5, 1);
-        public override string Author { get { return "Parrot"; } }
-        public override string Description { get { return "Tool for making orderbot gathering profiles"; } }
-        public override Version Version { get { return GatherUp.version; } }
-        public override string Name
-        {
-            get { return "GatherUp"; }
-        }
-        public override bool WantButton
-        {
-            get { return true; }
-        }
-        public override string ButtonText
-        {
-            get { return "Open"; }
-        }
+        public static readonly Version version = new Version(1, 5, 2);
+        public override string Author => "Parrot";
+        public override string Description => "Tool for making orderbot gathering profiles";
+        public override Version Version => version;
+
+        public override string Name => "GatherUp";
+
+        public override bool WantButton => true;
+
+        public override string ButtonText => "Open";
+
         public override void OnButtonPress()
         {
             Settings.CreateSettingsFile();

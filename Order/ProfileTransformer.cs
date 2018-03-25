@@ -55,7 +55,7 @@ namespace GatherUp.Order
                     hotspot.IsStealth ? GetLogMessageElement("Applying stealth") : null,
                     hotspot.IsStealth ? new XElement("RunCode", new XAttribute("Name", "ApplyStealth")) : null,
                     GetGatherPart(hotspot),
-                    hotspot.DisableMount ? GetLogMessageElement("Enabling mount") : null, 
+                    hotspot.DisableMount ? GetLogMessageElement("Enabling mount") : null,
                     hotspot.DisableMount ? GetEnableMount() : null
                 };
 
@@ -204,14 +204,26 @@ namespace GatherUp.Order
             if (!Gear.Enabled) return null;
             var gearSetChangeCode = new[]
             {
-                $"if (GearsetManager.ActiveGearset.Index != {Gear.GearSet}) {{",
-                $"ff14bot.Managers.GearsetManager.ChangeGearset({Gear.GearSet});",
-                "await Buddy.Coroutines.Coroutine.Sleep(3000);",
+                "",
+                $"var index = {Gear.GearSet};",
+                "if (index > GearsetManager.GearsetLimit || !GearsetManager.GearSets.ElementAt(index-1).InUse) {",
+                "Logging.Write(\"[Gatherup] Invalid gearset\");",
+                "} else {",
+                "var gear = GearsetManager.GearSets.ElementAt(index-1);",
+                "if (!gear.Equals(GearsetManager.ActiveGearset)) {",
+                "do {",
+                "await Buddy.Coroutines.Coroutine.Sleep(1900);", 
+                "} while (Core.Player.IsCasting);", //if bot starts to summon chocobo.
+                "await Buddy.Coroutines.Coroutine.Sleep(1000);",
+                "gear.Activate();",
+                "await Buddy.Coroutines.Coroutine.Sleep(5000);", //More human like, avoid immediate teleport.
                 "}",
-                
+                "}"
             };
-            var stealthCode = new[]
+
+           var stealthCode = new[]
             {
+                "",
                 "var localPlayer = GameObjectManager.LocalPlayer;",
                 "if (!localPlayer.HasAura(\"Stealth\")) {",
                 "SpellData spell;",
