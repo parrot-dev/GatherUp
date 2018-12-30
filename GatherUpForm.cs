@@ -532,6 +532,8 @@ namespace GatherUp
             if (!ff14bot.TreeRoot.IsRunning)
             {
                 MessageBox.Show("Warning\r\nGameobjects might not update properly without a botbase running.");
+                Settings.Current.DisableBotbaseWarning = true;
+                Settings.Save();
             }
         }
 
