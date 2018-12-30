@@ -202,7 +202,6 @@ namespace GatherUp.Order
 
         private XElement GetCodeChunks()
         {
-            if (!Gear.Enabled) return null;
             var gearSetChangeCode = new[]
             {
                 "",

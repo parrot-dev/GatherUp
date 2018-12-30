@@ -16,15 +16,17 @@ namespace GatherUp.Order.Parsing
         /// Parse orderbot xml into an Profile object.
         /// </summary>
         /// <param Name="Path">File path to orderbot profile</param>
+        /// <exception cref="ParsingException"></exception>
         public OrderParserOne(string path)
         {
             try
             {
                 _xRoot = XDocument.Load(path);
+                version = getVersion();
             }
             catch (Exception) {
-                _xRoot = new XDocument(); }
-            version = getVersion();
+                throw new ParsingException();
+            }
         }
 
         private readonly XDocument _xRoot;

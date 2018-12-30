@@ -498,7 +498,7 @@ namespace GatherUp
         {
             if (_profile.gather.Infinite && chkBoxTeleportOnComplete.Checked)
             {
-                MessageBox.Show("Gather quantity hasnt been set, in infinite mode the profile will never finish.");
+                MessageBox.Show(@"Teleport on complete is enabled but the profile is set to gather indefinitely");
             }
 
             _profile.TeleportOnComplete.Enabled = chkBoxTeleportOnComplete.Checked;
@@ -532,6 +532,8 @@ namespace GatherUp
             if (!ff14bot.TreeRoot.IsRunning)
             {
                 MessageBox.Show("Warning\r\nGameobjects might not update properly without a botbase running.");
+                Settings.Current.DisableBotbaseWarning = true;
+                Settings.Save();
             }
         }
 
