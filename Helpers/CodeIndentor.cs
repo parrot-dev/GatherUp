@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using static System.String;
 
 namespace GatherUp.Helpers
@@ -16,8 +13,7 @@ namespace GatherUp.Helpers
             var sb = new StringBuilder();
             foreach (var line in code)
             {
-                sb.Append(GetSpaces(curTabs));
-                sb.Append($"{line}\r\n");
+                sb.AppendLine($"{GetSpaces(curTabs)}{line}");
                 curTabs += line.Count(c => c.Equals('{')) - line.Count(c => c.Equals('}'));
             }
             return sb.ToString().TrimEnd();
