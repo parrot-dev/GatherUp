@@ -44,6 +44,7 @@
             this.button6 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.rBtnHq = new System.Windows.Forms.RadioButton();
             this.panel6 = new System.Windows.Forms.Panel();
             this.label8 = new System.Windows.Forms.Label();
             this.chkboxExGather = new System.Windows.Forms.CheckBox();
@@ -273,6 +274,7 @@
             // panel2
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.rBtnHq);
             this.panel2.Controls.Add(this.panel6);
             this.panel2.Controls.Add(this.button9);
             this.panel2.Controls.Add(this.txtBoxTarget);
@@ -292,6 +294,17 @@
             this.panel2.Size = new System.Drawing.Size(304, 210);
             this.panel2.TabIndex = 10;
             this.panel2.Tag = "";
+            // 
+            // rBtnHq
+            // 
+            this.rBtnHq.AutoSize = true;
+            this.rBtnHq.Location = new System.Drawing.Point(141, 99);
+            this.rBtnHq.Name = "rBtnHq";
+            this.rBtnHq.Size = new System.Drawing.Size(39, 17);
+            this.rBtnHq.TabIndex = 24;
+            this.rBtnHq.Text = "Hq";
+            this.rBtnHq.UseVisualStyleBackColor = true;
+            this.rBtnHq.CheckedChanged += new System.EventHandler(this.rBtnHq_CheckedChanged);
             // 
             // panel6
             // 
@@ -376,18 +389,18 @@
             // 
             // btnListInventory
             // 
-            this.btnListInventory.Location = new System.Drawing.Point(186, 122);
+            this.btnListInventory.Location = new System.Drawing.Point(140, 123);
             this.btnListInventory.Name = "btnListInventory";
-            this.btnListInventory.Size = new System.Drawing.Size(113, 23);
+            this.btnListInventory.Size = new System.Drawing.Size(159, 23);
             this.btnListInventory.TabIndex = 19;
-            this.btnListInventory.Text = "Get from inventory";
+            this.btnListInventory.Text = "Inventory";
             this.btnListInventory.UseVisualStyleBackColor = true;
             this.btnListInventory.Click += new System.EventHandler(this.button8_Click);
             // 
             // lblItemId
             // 
             this.lblItemId.AutoSize = true;
-            this.lblItemId.Location = new System.Drawing.Point(139, 100);
+            this.lblItemId.Location = new System.Drawing.Point(183, 101);
             this.lblItemId.Name = "lblItemId";
             this.lblItemId.Size = new System.Drawing.Size(41, 13);
             this.lblItemId.TabIndex = 18;
@@ -395,9 +408,9 @@
             // 
             // txtboxItemId
             // 
-            this.txtboxItemId.Location = new System.Drawing.Point(186, 98);
+            this.txtboxItemId.Location = new System.Drawing.Point(230, 98);
             this.txtboxItemId.Name = "txtboxItemId";
-            this.txtboxItemId.Size = new System.Drawing.Size(113, 20);
+            this.txtboxItemId.Size = new System.Drawing.Size(69, 20);
             this.txtboxItemId.TabIndex = 17;
             this.txtboxItemId.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
             // 
@@ -476,7 +489,7 @@
             // 
             this.txtboxItemNames.Location = new System.Drawing.Point(70, 8);
             this.txtboxItemNames.Name = "txtboxItemNames";
-            this.txtboxItemNames.Size = new System.Drawing.Size(110, 20);
+            this.txtboxItemNames.Size = new System.Drawing.Size(154, 20);
             this.txtboxItemNames.TabIndex = 15;
             // 
             // button2
@@ -663,11 +676,11 @@
             // 
             // button10
             // 
-            this.button10.Location = new System.Drawing.Point(186, 5);
+            this.button10.Location = new System.Drawing.Point(230, 5);
             this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(113, 23);
+            this.button10.Size = new System.Drawing.Size(69, 23);
             this.button10.TabIndex = 23;
-            this.button10.Text = "Get from inventory";
+            this.button10.Text = "Inventory";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
@@ -865,7 +878,6 @@
         private System.Windows.Forms.CheckBox chkBoxQuantity;
         private System.Windows.Forms.CheckBox chkBoxGearSet;
         private System.Windows.Forms.TextBox txtboxItemId;
-        private System.Windows.Forms.Label lblItemId;
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.TextBox txtBoxTarget;
         private System.Windows.Forms.Label label14;
@@ -897,5 +909,7 @@
         private System.Windows.Forms.Button button12;
         private System.Windows.Forms.TabPage tabPage5;
         private System.Windows.Forms.Button button13;
+        private System.Windows.Forms.RadioButton rBtnHq;
+        private System.Windows.Forms.Label lblItemId;
     }
 }

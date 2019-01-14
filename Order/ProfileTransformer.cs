@@ -186,7 +186,8 @@ namespace GatherUp.Order
         private string GetGatherCondition()
         {
             if (Gather.Infinite) return "True";
-            return $"ItemCount({Gather.ItemId}) < {Gather.Quantity}";
+            var func = Gather.Hq ? "HqItemCount" : "ItemCount";
+            return $"{func}({Gather.ItemId}) < {Gather.Quantity}";
         }
 
         private XElement GetIfElement(string condition)
