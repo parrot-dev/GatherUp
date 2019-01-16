@@ -44,7 +44,6 @@
             this.button6 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.rBtnHq = new System.Windows.Forms.RadioButton();
             this.panel6 = new System.Windows.Forms.Panel();
             this.label8 = new System.Windows.Forms.Label();
             this.chkboxExGather = new System.Windows.Forms.CheckBox();
@@ -94,6 +93,7 @@
             this.btnImportProfile = new System.Windows.Forms.Button();
             this.btnActivate = new System.Windows.Forms.Button();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.chkBoxHq = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -274,7 +274,7 @@
             // panel2
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Controls.Add(this.rBtnHq);
+            this.panel2.Controls.Add(this.chkBoxHq);
             this.panel2.Controls.Add(this.panel6);
             this.panel2.Controls.Add(this.button9);
             this.panel2.Controls.Add(this.txtBoxTarget);
@@ -294,17 +294,6 @@
             this.panel2.Size = new System.Drawing.Size(304, 210);
             this.panel2.TabIndex = 10;
             this.panel2.Tag = "";
-            // 
-            // rBtnHq
-            // 
-            this.rBtnHq.AutoSize = true;
-            this.rBtnHq.Location = new System.Drawing.Point(141, 99);
-            this.rBtnHq.Name = "rBtnHq";
-            this.rBtnHq.Size = new System.Drawing.Size(39, 17);
-            this.rBtnHq.TabIndex = 24;
-            this.rBtnHq.Text = "Hq";
-            this.rBtnHq.UseVisualStyleBackColor = true;
-            this.rBtnHq.CheckedChanged += new System.EventHandler(this.rBtnHq_CheckedChanged);
             // 
             // panel6
             // 
@@ -400,7 +389,7 @@
             // lblItemId
             // 
             this.lblItemId.AutoSize = true;
-            this.lblItemId.Location = new System.Drawing.Point(183, 101);
+            this.lblItemId.Location = new System.Drawing.Point(183, 100);
             this.lblItemId.Name = "lblItemId";
             this.lblItemId.Size = new System.Drawing.Size(41, 13);
             this.lblItemId.TabIndex = 18;
@@ -793,6 +782,17 @@
             this.btnActivate.UseVisualStyleBackColor = true;
             this.btnActivate.Click += new System.EventHandler(this.btnActivate_Click);
             // 
+            // chkBoxHq
+            // 
+            this.chkBoxHq.AutoSize = true;
+            this.chkBoxHq.Location = new System.Drawing.Point(149, 99);
+            this.chkBoxHq.Name = "chkBoxHq";
+            this.chkBoxHq.Size = new System.Drawing.Size(40, 17);
+            this.chkBoxHq.TabIndex = 24;
+            this.chkBoxHq.Text = "Hq";
+            this.chkBoxHq.UseVisualStyleBackColor = true;
+            this.chkBoxHq.CheckedChanged += new System.EventHandler(this.chkBoxHq_CheckedChanged);
+            // 
             // GatherUpForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -909,7 +909,7 @@
         private System.Windows.Forms.Button button12;
         private System.Windows.Forms.TabPage tabPage5;
         private System.Windows.Forms.Button button13;
-        private System.Windows.Forms.RadioButton rBtnHq;
         private System.Windows.Forms.Label lblItemId;
+        private System.Windows.Forms.CheckBox chkBoxHq;
     }
 }
