@@ -67,6 +67,7 @@ namespace GatherUp
             txtboxItemId.Text = _profile.gather.ItemId;
             chkBoxQuantity.Checked = !_profile.gather.Infinite;
             numQuantity.Value = _profile.gather.Quantity;
+            chkBoxHq.Checked = _profile.gather.Hq;
 
             if (_profile.gather.Infinite)
             {
@@ -725,6 +726,11 @@ namespace GatherUp
         private void listBoxHotSpots_DoubleClick(object sender, EventArgs e)
         {
             ShowHotSpotOptions();
+        }
+
+        private void chkBoxHq_CheckedChanged(object sender, EventArgs e)
+        {
+            _profile.gather.Hq = chkBoxHq.Checked;
         }
     }
 }

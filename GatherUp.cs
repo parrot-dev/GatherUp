@@ -1,15 +1,11 @@
 ﻿using ff14bot.AClasses;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GatherUp
 {
     public class GatherUp : BotPlugin
     {
-        public static readonly Version version = new Version(1, 5, 3);
+        public static readonly Version version = new Version(1, 5, 4);
         public override string Author => "Parrot";
         public override string Description => "Tool for making orderbot gathering profiles";
         public override Version Version => version;

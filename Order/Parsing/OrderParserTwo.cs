@@ -271,6 +271,7 @@ namespace GatherUp.Order.Parsing
                 string condition = mainLoop.Attribute("Condition").Value;
                 gather.Infinite = condition.Equals("true", StringComparison.CurrentCultureIgnoreCase);
                 gather.ItemId = GetItemId(condition);
+                gather.Hq = condition.Contains("HqItemCount");
                 gather.Quantity = GetItemQuantity(condition);
                 gather.Target = GetGatherObject();
                 gather.exGather = GetExGather();
