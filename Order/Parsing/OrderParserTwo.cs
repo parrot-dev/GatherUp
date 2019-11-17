@@ -222,7 +222,7 @@ namespace GatherUp.Order.Parsing
             try
             {
                 var gatheringSkillOrder = _document.Root?.Descendants("GatheringSkillOrder").FirstOrDefault();
-                return gatheringSkillOrder?.Elements().Select(e => e.Attribute("SpellName")?.Value).Where(o => o != null).ToList();
+                return gatheringSkillOrder?.Elements().Select(e => e.Attribute("SpellName")?.Value).Where(o => o != null).ToList() ?? new List<string>();
             }
             catch (Exception err)
             {
