@@ -45,6 +45,7 @@ namespace GatherUp.Order
             var order = new XElement("Order", GetGearChangeElement());
             var outerLoop = GetWhileElement(GetGatherCondition());
             outerLoop.Add(GetTeleportElement(_profile.TeleportOnStart));
+            outerLoop.Add(new XElement("RunCode", new XAttribute("Name", "ApplySneak")));
             foreach (var hotspot in _profile.Hotspots)
             {
                 var elements = new List<XElement>
@@ -52,9 +53,6 @@ namespace GatherUp.Order
                     GetFlyToElement(hotspot.FlyTo),
                     hotspot.DisableMount ? GetLogMessageElement("Disabling mount") : null,
                     hotspot.DisableMount ? GetDisableMount() : null,
-                    hotspot.IsStealth ? new XElement("Dismount") : null,
-                    hotspot.IsStealth ? GetLogMessageElement("Applying stealth") : null,
-                    hotspot.IsStealth ? new XElement("RunCode", new XAttribute("Name", "ApplyStealth")) : null,
                     GetGatherPart(hotspot),
                     hotspot.DisableMount ? GetLogMessageElement("Enabling mount") : null,
                     hotspot.DisableMount ? GetEnableMount() : null
@@ -213,7 +211,7 @@ namespace GatherUp.Order
                 "var gear = GearsetManager.GearSets.ElementAt(index-1);",
                 "if (GearsetManager.ActiveGearset.Index != gear.Index) {",
                 "do {",
-                "await Buddy.Coroutines.Coroutine.Sleep(1900);", 
+                "await Buddy.Coroutines.Coroutine.Sleep(1900);",
                 "} while (Core.Player.IsCasting);", //if bot starts to summon chocobo.
                 "await Buddy.Coroutines.Coroutine.Sleep(1000);",
                 "gear.Activate();",
@@ -222,14 +220,16 @@ namespace GatherUp.Order
                 "}"
             };
 
-           var stealthCode = new[]
+            var sneakCode = new[]
             {
                 "",
                 "var localPlayer = GameObjectManager.LocalPlayer;",
-                "if (!localPlayer.HasAura(\"Stealth\")) {",
+                "if (!localPlayer.HasAura(\"Sneak\")) {",
                 "SpellData spell;",
-                "if (ActionManager.CurrentActions.TryGetValue(\"Stealth\", out spell)) {",
+                "if (ActionManager.CurrentActions.TryGetValue(\"Sneak\", out spell)) {",
                 "if (ActionManager.CanCast(spell, localPlayer)) {",
+                "Logging.Write(\"[Gatherup] Applying Sneak\");",
+                "await Buddy.Coroutines.Coroutine.Sleep(3000);", //temp, teleport load issue.
                 "ActionManager.DoAction(spell, localPlayer);",
                 "}",
                 "}",
@@ -250,22 +250,15 @@ namespace GatherUp.Order
                 ProfileDisablesMount()
                     ? new XElement("CodeChunk", new XAttribute("Name", "EnableMount"), new XCData(enableMountCode))
                     : null,
-                ProfileUsesStealth()
-                    ? new XElement("CodeChunk", new XAttribute("Name", "ApplyStealth"),
-                        new XCData(IndentCode(stealthCode, 2)))
-                    : null);
+                new XElement("CodeChunk", new XAttribute("Name", "ApplySneak"),
+                        new XCData(IndentCode(sneakCode, 2)))
+                    );
         }
 
         private bool ProfileDisablesMount()
         {
             return _profile.Hotspots.Any(hs => hs.DisableMount);
         }
-
-        private bool ProfileUsesStealth()
-        {
-            return _profile.Hotspots.Any(hs => hs.IsStealth);
-        }
-
 
         private XElement GetWhileElement(string condition)
         {

@@ -28,29 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.chkboxStealth = new System.Windows.Forms.CheckBox();
             this.chkboxDisableMount = new System.Windows.Forms.CheckBox();
             this.listboxFlyingDest = new System.Windows.Forms.ListBox();
             this.btnAddFlyingDest = new System.Windows.Forms.Button();
             this.chkboxLand = new System.Windows.Forms.CheckBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
-            // 
-            // chkboxStealth
-            // 
-            this.chkboxStealth.AutoSize = true;
-            this.chkboxStealth.Location = new System.Drawing.Point(12, 12);
-            this.chkboxStealth.Name = "chkboxStealth";
-            this.chkboxStealth.Size = new System.Drawing.Size(59, 17);
-            this.chkboxStealth.TabIndex = 0;
-            this.chkboxStealth.Text = "Stealth";
-            this.chkboxStealth.UseVisualStyleBackColor = true;
-            this.chkboxStealth.CheckedChanged += new System.EventHandler(this.chkboxStealth_CheckedChanged);
             // 
             // chkboxDisableMount
             // 
             this.chkboxDisableMount.AutoSize = true;
-            this.chkboxDisableMount.Location = new System.Drawing.Point(101, 12);
+            this.chkboxDisableMount.Location = new System.Drawing.Point(128, 8);
             this.chkboxDisableMount.Name = "chkboxDisableMount";
             this.chkboxDisableMount.Size = new System.Drawing.Size(93, 17);
             this.chkboxDisableMount.TabIndex = 1;
@@ -70,9 +57,9 @@
             // 
             // btnAddFlyingDest
             // 
-            this.btnAddFlyingDest.Location = new System.Drawing.Point(101, 35);
+            this.btnAddFlyingDest.Location = new System.Drawing.Point(12, 31);
             this.btnAddFlyingDest.Name = "btnAddFlyingDest";
-            this.btnAddFlyingDest.Size = new System.Drawing.Size(123, 23);
+            this.btnAddFlyingDest.Size = new System.Drawing.Size(212, 23);
             this.btnAddFlyingDest.TabIndex = 5;
             this.btnAddFlyingDest.Text = "Add flying destination";
             this.btnAddFlyingDest.UseVisualStyleBackColor = true;
@@ -81,7 +68,7 @@
             // chkboxLand
             // 
             this.chkboxLand.AutoSize = true;
-            this.chkboxLand.Location = new System.Drawing.Point(12, 35);
+            this.chkboxLand.Location = new System.Drawing.Point(12, 8);
             this.chkboxLand.Name = "chkboxLand";
             this.chkboxLand.Size = new System.Drawing.Size(50, 17);
             this.chkboxLand.TabIndex = 7;
@@ -89,43 +76,26 @@
             this.chkboxLand.UseVisualStyleBackColor = true;
             this.chkboxLand.CheckedChanged += new System.EventHandler(this.chkboxLand_CheckedChanged);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label1.Location = new System.Drawing.Point(200, 12);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(15, 15);
-            this.label1.TabIndex = 8;
-            this.label1.Text = "?";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
-            // 
             // HotSpotForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(233, 169);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.chkboxLand);
             this.Controls.Add(this.btnAddFlyingDest);
             this.Controls.Add(this.listboxFlyingDest);
             this.Controls.Add(this.chkboxDisableMount);
-            this.Controls.Add(this.chkboxStealth);
             this.Name = "HotSpotForm";
             this.Text = "HotSpotForm";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.HotSpotForm_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.CheckBox chkboxStealth;
         private System.Windows.Forms.CheckBox chkboxDisableMount;
         private System.Windows.Forms.ListBox listboxFlyingDest;
         private System.Windows.Forms.Button btnAddFlyingDest;
         private System.Windows.Forms.CheckBox chkboxLand;
-        private System.Windows.Forms.Label label1;
     }
 }
