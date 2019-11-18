@@ -345,7 +345,7 @@ namespace GatherUp
                     e.Handled = true;
                 }
 
-                if (e.KeyCode == Keys.Down)
+                if (e.KeyCode == Keys.Down && System.Windows.Input.Keyboard.IsKeyDown(System.Windows.Input.Key.LeftCtrl))
                 {
                     if (index != _profile.Hotspots.Count() - 1)
                     {
@@ -356,7 +356,7 @@ namespace GatherUp
                     }
                 }
 
-                if (e.KeyCode == Keys.Up)
+                if (e.KeyCode == Keys.Up && System.Windows.Input.Keyboard.IsKeyDown(System.Windows.Input.Key.LeftCtrl))
                 {
                     if (index > 0)
                     {
