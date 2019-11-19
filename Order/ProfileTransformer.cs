@@ -206,7 +206,7 @@ namespace GatherUp.Order
                 "",
                 $"var index = {Gear.GearSet};",
                 "if (index > GearsetManager.GearsetLimit || !GearsetManager.GearSets.ElementAt(index-1).InUse) {",
-                "Logging.Write(\"[Gatherup] Invalid gearset\");",
+                $"Logging.Write(\"Invalid gearset\");",
                 "} else {",
                 "var gear = GearsetManager.GearSets.ElementAt(index-1);",
                 "if (GearsetManager.ActiveGearset.Index != gear.Index) {",
@@ -228,7 +228,7 @@ namespace GatherUp.Order
                 "SpellData spell;",
                 "if (ActionManager.CurrentActions.TryGetValue(\"Sneak\", out spell)) {",
                 "if (ActionManager.CanCast(spell, localPlayer)) {",
-                "Logging.Write(\"[Gatherup] Applying Sneak\");",
+                "Logging.Write(\"Applying Sneak\");",
                 "await Buddy.Coroutines.Coroutine.Sleep(3000);", //temp, teleport load issue.
                 "ActionManager.DoAction(spell, localPlayer);",
                 "}",
