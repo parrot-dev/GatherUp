@@ -206,7 +206,7 @@ namespace GatherUp.Order
                 "",
                 $"var index = {Gear.GearSet};",
                 "if (index > GearsetManager.GearsetLimit || !GearsetManager.GearSets.ElementAt(index-1).InUse) {",
-                $"Logging.Write(\"Invalid gearset\");",
+                "Logging.Write(\"Invalid gearset\");",
                 "} else {",
                 "var gear = GearsetManager.GearSets.ElementAt(index-1);",
                 "if (GearsetManager.ActiveGearset.Index != gear.Index) {",

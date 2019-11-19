@@ -1,100 +1,41 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Windows.Media;
-using System.Xml.Serialization;
-using ff14bot.Managers;
+﻿using System.IO;
+using System.ComponentModel;
+using ff14bot.Helpers;
+using Newtonsoft.Json;
 
 namespace GatherUp
 {
-    public class Settings
+    class Settings : JsonSettings
     {
-        public static Profile Current = new Profile();
+        public Settings() : base(Path.Combine(GetSettingsFilePath("GatherUp", "Settings.json")))
+        { }
 
-        public static bool Save()
+        private static Settings _settings;
+
+        public static Settings Current
         {
-            return Save(Current);
-        }
-
-        public static bool Save(Profile profile)
-        {
-            try
+            get
             {
-                XmlSerializer serializer = new XmlSerializer(typeof(Profile));
-                TextWriter textWriter = new StreamWriter(PluginManager.PluginDirectory + @"\GatherUp\Settings.xml");
-                serializer.Serialize(textWriter, profile);
-                textWriter.Close();
-            }
-            catch (Exception e)
-            {
-                Log.Bot.print("Error while saving :\n" + e.Message);
-                return false;
-            }
-            Log.Bot.print("Saved settings.", Colors.White);
-            return true;
-        }
-
-        public static bool Load()
-        {
-            try
-            {
-                XmlSerializer deserializer = new XmlSerializer(typeof(Profile));
-                TextReader textReader = new StreamReader(PluginManager.PluginDirectory + @"\GatherUp\Settings.xml");
-                Current = (Profile)deserializer.Deserialize(textReader);
-                textReader.Close();
-            }
-            catch (Exception)
-            {
-                Log.Bot.print("Failed to load settings");
-                Current = new Profile();                
-                return false;
-            }
-
-            Log.Bot.print("Settings loaded", Colors.White);
-            return true;
-
-        }
-
-        public static bool CreateSettingsFile()
-        {
-            try
-            {
-                if (!Directory.Exists(PluginManager.PluginDirectory + @"\GatherUp"))
+                if (_settings == null)
                 {
-                    Log.Bot.print("Warning, plugins/GatherUp/ folder does not exist. Plugin might be installed incorrectly");
-                    Log.Bot.print("creating folder plugins/GatherUp/");
-                    Directory.CreateDirectory(PluginManager.PluginDirectory + @"\GatherUp");
+                    _settings = new Settings();
                 }
-
-                if (!File.Exists(PluginManager.PluginDirectory + @"\GatherUp\Settings.xml"))
-                {
-                    Log.Bot.print("Settings.xml is missing, creating a new file.", Colors.White);
-                    return Save(new Profile());
-                }
-
-                return true;
+                return _settings;
             }
-            catch (Exception err)
-            {
-                Log.Bot.print(err.Message);
-                return false;
-            }
+            private set { }
         }
 
-        public class Profile
-        {
-            public bool DisableBotbaseWarning;
-            public string SavePath;
 
-            public Profile()
-            {
-                DisableBotbaseWarning = false;
-                SavePath = PluginManager.PluginDirectory + @"\GatherUp\Profiles";
-            }
-        }
+        [DefaultValue("")]
+        public string ProfileDirectory { get; set; }
+
+        [JsonIgnore]
+        public string DataDirectory { get; private set; } = Path.Combine(GetSettingsFilePath("GatherUp", "Data"));
+        [JsonIgnore]
+        public bool DataDirectoryExists => Directory.Exists(DataDirectory);
+        [JsonIgnore]
+        public bool ProfileDirectoryExists => Directory.Exists(ProfileDirectory);
     }
 }
+
+

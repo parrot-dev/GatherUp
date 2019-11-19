@@ -17,15 +17,13 @@ namespace GatherUp
         public override string ButtonText => "Open";
 
         public override void OnButtonPress()
-        {
-            Settings.CreateSettingsFile();
-            Settings.Load();
+        {              
             if (_gatherUpForm == null || _gatherUpForm.IsDisposed || _gatherUpForm.Disposing)
             {
                 _gatherUpForm = new GatherUpForm();
             }
             _gatherUpForm.Show();
-
+           
         }
 
 

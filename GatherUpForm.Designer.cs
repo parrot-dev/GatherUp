@@ -44,6 +44,7 @@
             this.button6 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.chkBoxHq = new System.Windows.Forms.CheckBox();
             this.panel6 = new System.Windows.Forms.Panel();
             this.label8 = new System.Windows.Forms.Label();
             this.chkboxExGather = new System.Windows.Forms.CheckBox();
@@ -93,7 +94,6 @@
             this.btnImportProfile = new System.Windows.Forms.Button();
             this.btnActivate = new System.Windows.Forms.Button();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.chkBoxHq = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -294,6 +294,17 @@
             this.panel2.Size = new System.Drawing.Size(304, 210);
             this.panel2.TabIndex = 10;
             this.panel2.Tag = "";
+            // 
+            // chkBoxHq
+            // 
+            this.chkBoxHq.AutoSize = true;
+            this.chkBoxHq.Location = new System.Drawing.Point(149, 99);
+            this.chkBoxHq.Name = "chkBoxHq";
+            this.chkBoxHq.Size = new System.Drawing.Size(40, 17);
+            this.chkBoxHq.TabIndex = 24;
+            this.chkBoxHq.Text = "Hq";
+            this.chkBoxHq.UseVisualStyleBackColor = true;
+            this.chkBoxHq.CheckedChanged += new System.EventHandler(this.chkBoxHq_CheckedChanged);
             // 
             // panel6
             // 
@@ -749,7 +760,7 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(150, 52);
             this.button8.TabIndex = 23;
-            this.button8.Text = "Set save location";
+            this.button8.Text = "Set profile directory";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click_1);
             // 
@@ -782,17 +793,6 @@
             this.btnActivate.UseVisualStyleBackColor = true;
             this.btnActivate.Click += new System.EventHandler(this.btnActivate_Click);
             // 
-            // chkBoxHq
-            // 
-            this.chkBoxHq.AutoSize = true;
-            this.chkBoxHq.Location = new System.Drawing.Point(149, 99);
-            this.chkBoxHq.Name = "chkBoxHq";
-            this.chkBoxHq.Size = new System.Drawing.Size(40, 17);
-            this.chkBoxHq.TabIndex = 24;
-            this.chkBoxHq.Text = "Hq";
-            this.chkBoxHq.UseVisualStyleBackColor = true;
-            this.chkBoxHq.CheckedChanged += new System.EventHandler(this.chkBoxHq_CheckedChanged);
-            // 
             // GatherUpForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -813,7 +813,6 @@
             this.Controls.Add(this.label9);
             this.Name = "GatherUpForm";
             this.Text = "GatherUp";
-            this.Load += new System.EventHandler(this.GatherUpForm_Load);
             this.panel1.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
