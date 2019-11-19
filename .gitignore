@@ -1,5 +1,6 @@
 obj/
 bin/
+Profiles/*
 .vs/
 settings.xml
 tempProfile.xml
