@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using ff14bot.Enums;
 using ff14bot.Managers;
 using GatherUp.Order.Parsing;
 using GatherUp.Order.Parsing.Exceptions;
@@ -22,14 +24,9 @@ namespace GatherUp
             Text = "GatherUp - " + GatherUp.version.ToString();
             numRadius.Value = new Profile.HotSpot(new Clio.Utilities.Vector3()).Radius;
             numRadiusBlackSpot.Value = 10;
-            lblPath.Text = Settings.Current.SavePath;
+            lblPath.Text = Settings.Current.ProfileDirectory;
 
-            //Gatheringskills 
-            foreach (var spell in DataManager.SpellCache.Values.Where(o =>
-                o.Job == ff14bot.Enums.ClassJobType.Miner || o.Job == ff14bot.Enums.ClassJobType.Botanist))
-            {
-                cbBoxGatheringSkills.Items.Add(spell.Name);
-            }
+            PopulateAvailableSkills(rbGatheringSkillSelectMiner.Checked ? ClassJobType.Miner : ClassJobType.Botanist);
 
             cbBoxGatheringSkills.Sorted = true;
 
@@ -121,6 +118,17 @@ namespace GatherUp
             cbBoxCordialType.Enabled = _profile.gather.exGather.Enabled;
         }
 
+        private void PopulateAvailableSkills(ClassJobType job)
+        {
+            cbBoxGatheringSkills.Items.Clear(); 
+            foreach (var spell in DataManager.SpellCache.Values.Where(o =>
+                o.Job == job))
+            {
+                cbBoxGatheringSkills.Items.Add(spell.Name);
+
+            }
+        }
+
         private void button2_Click(object sender, EventArgs e)
         {
             _profile.Items.Add(txtboxItemNames.Text);
@@ -194,8 +202,16 @@ namespace GatherUp
                 MessageBox.Show("Warning: All blackspots will be omitted.");
             }
 
-            string fullSavePath = Settings.Current.SavePath + string.Format("\\{0}.xml", _profile.Name);
-            if (System.IO.File.Exists(fullSavePath))
+            
+            if (!Settings.Current.ProfileDirectoryExists)
+            {
+                MessageBox.Show("Select a directory where you would like your profiles to be saved.");
+                if (!SelectAndSetProfileDirectory()) return;
+                
+            }
+
+            string profilePath = Path.Combine(Settings.Current.ProfileDirectory, string.Format("{0}.xml", _profile.Name));
+            if (File.Exists(profilePath))
             {
                 var confirmResult = MessageBox.Show(
                     "A file with this Name already exists.\r\nDo you want to overwrite it?",
@@ -206,7 +222,7 @@ namespace GatherUp
             }
 
             var xmlOrder = _profile.ToXml();
-            xmlOrder.Save(fullSavePath);
+            xmlOrder.Save(profilePath);
         }
 
         private void txtboxName_TextChanged(object sender, EventArgs e)
@@ -300,7 +316,7 @@ namespace GatherUp
                     e.Handled = true;
                 }
 
-                if (e.KeyCode == Keys.Down)
+                if (e.KeyCode == Keys.Down && System.Windows.Input.Keyboard.IsKeyDown(System.Windows.Input.Key.LeftCtrl))
                 {
                     if (index != _profile.Items.Count() - 1)
                     {
@@ -311,7 +327,7 @@ namespace GatherUp
                     }
                 }
 
-                if (e.KeyCode == Keys.Up)
+                if (e.KeyCode == Keys.Up && System.Windows.Input.Keyboard.IsKeyDown(System.Windows.Input.Key.LeftCtrl))
                 {
                     if (index > 0)
                     {
@@ -345,7 +361,7 @@ namespace GatherUp
                     e.Handled = true;
                 }
 
-                if (e.KeyCode == Keys.Down)
+                if (e.KeyCode == Keys.Down && System.Windows.Input.Keyboard.IsKeyDown(System.Windows.Input.Key.LeftCtrl))
                 {
                     if (index != _profile.Hotspots.Count() - 1)
                     {
@@ -356,7 +372,7 @@ namespace GatherUp
                     }
                 }
 
-                if (e.KeyCode == Keys.Up)
+                if (e.KeyCode == Keys.Up && System.Windows.Input.Keyboard.IsKeyDown(System.Windows.Input.Key.LeftCtrl))
                 {
                     if (index > 0)
                     {
@@ -392,7 +408,7 @@ namespace GatherUp
                     e.Handled = true;
                 }
 
-                if (e.KeyCode == Keys.Down)
+                if (e.KeyCode == Keys.Down && System.Windows.Input.Keyboard.IsKeyDown(System.Windows.Input.Key.LeftCtrl))
                 {
                     if (index != _profile.Gatherskills.Count() - 1)
                     {
@@ -403,7 +419,7 @@ namespace GatherUp
                     }
                 }
 
-                if (e.KeyCode == Keys.Up)
+                if (e.KeyCode == Keys.Up && System.Windows.Input.Keyboard.IsKeyDown(System.Windows.Input.Key.LeftCtrl))
                 {
                     if (index > 0)
                     {
@@ -515,27 +531,31 @@ namespace GatherUp
 
         private void button8_Click_1(object sender, EventArgs e)
         {
+            SelectAndSetProfileDirectory();
+        }
+
+        private bool SelectDirectory(out string path) {
+            path = null;
             var fd = new FolderBrowserDialog();
             if (fd.ShowDialog() == DialogResult.OK)
             {
-                Settings.Current.SavePath = fd.SelectedPath;
-                Settings.Save();
+                path = fd.SelectedPath;
+                return true;
             }
-
-            lblPath.Text = Settings.Current.SavePath;
+            
+            return false;
         }
 
-        private void GatherUpForm_Load(object sender, EventArgs e)
+        private bool SelectAndSetProfileDirectory()
         {
-            if (Settings.Current.DisableBotbaseWarning)
-                return;
-
-            if (!ff14bot.TreeRoot.IsRunning)
+            if (SelectDirectory(out var path))
             {
-                MessageBox.Show("Warning\r\nGameobjects might not update properly without a botbase running.");
-                Settings.Current.DisableBotbaseWarning = true;
-                Settings.Save();
+                Settings.Current.ProfileDirectory = path;
+                Settings.Current.Save();
+                lblPath.Text = Settings.Current.ProfileDirectory;
+                return true;
             }
+            return false;            
         }
 
         private void button10_Click(object sender, EventArgs e)
@@ -600,7 +620,8 @@ namespace GatherUp
 
         private async void btnActivate_Click(object sender, EventArgs e)
         {
-            var savePath = PluginManager.PluginDirectory + @"\GatherUp\tempProfile.xml";
+            var profilePath = Path.Combine(Settings.Current.TempDirectory, "profile.tmp.xml");
+           
             var errorMsg = string.Empty;
             if (this.profileHasErrors(out errorMsg))
             {
@@ -608,14 +629,14 @@ namespace GatherUp
                 return;
             }
 
-            _profile.ToXml().Save(savePath);
+            _profile.ToXml().Save(profilePath);
 
             if (ff14bot.TreeRoot.IsRunning)
             {
                 await ff14bot.TreeRoot.StopGently("[GatherUp] Preparing to load new profile.");
             }
 
-            ff14bot.NeoProfiles.NeoProfileManager.Load(savePath);
+            ff14bot.NeoProfiles.NeoProfileManager.Load(profilePath);
             if (BotManager.Current.Name != "Order Bot")
             {
                 try
@@ -706,6 +727,7 @@ namespace GatherUp
             using (var hotspotForm = new HotSpotForm(hotspot))
             {
                 hotspotForm.ShowDialog();
+                refreshForm();
             }
         }
 
@@ -731,6 +753,22 @@ namespace GatherUp
         private void chkBoxHq_CheckedChanged(object sender, EventArgs e)
         {
             _profile.gather.Hq = chkBoxHq.Checked;
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void rbGatheringSkillSelectMiner_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbGatheringSkillSelectMiner.Checked)
+            {
+                PopulateAvailableSkills(ClassJobType.Miner);
+            } else
+            {
+                PopulateAvailableSkills(ClassJobType.Botanist);
+            }
         }
     }
 }

@@ -92,7 +92,6 @@ namespace GatherUp.Order
             public Vector3 Coord { get; set; }
             public int Radius { get; set; }
             public FlyTo FlyTo { get; set; }
-            public bool IsStealth { get; set; }
             public bool DisableMount { get; set; }
 
             public HotSpot(Vector3 coord, int radius) : this(coord, radius, new FlyTo())

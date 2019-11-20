@@ -89,7 +89,6 @@ namespace GatherUp.Order.Parsing
                 {
                     var hotSpot = GetBasicHotSpot(gatherElement.Descendants("HotSpot").First());
                     hotSpot.FlyTo = GetFlyTo(gatherElement);
-                    hotSpot.IsStealth = UsesStealth(gatherElement);
                     hotSpot.DisableMount = DisablesMount(gatherElement);
                     retval.Add(hotSpot);
                 }
@@ -103,20 +102,6 @@ namespace GatherUp.Order.Parsing
             throw new ParsingException("Unexpected error while parsing HotSpots");
         }
 
-        private bool UsesStealth(XElement gatherElement)
-        {
-            try
-            {
-                var applyStealthElem = gatherElement.ElementsBeforeSelf().LastOrDefault(elem =>
-                    elem.Attribute("Name")?.Value == "ApplyStealth" || elem.Name == GatherTagName);
-                return applyStealthElem?.Name == "RunCode";
-            }
-            catch (Exception err)
-            {
-                Log.Bot.print(err.Message);
-            }
-            throw new ParsingException("Unexpected error while looking for stealth tag");
-        }
 
         private bool DisablesMount(XElement gatherElement)
         {

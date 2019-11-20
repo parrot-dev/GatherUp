@@ -7,9 +7,9 @@ namespace GatherUp
 {
     public partial class HotSpotForm : Form
     {
-        private readonly HotSpot _hotspot;
+        private readonly Order.Profile.HotSpot _hotspot;
 
-        internal HotSpotForm(HotSpot hotspot)
+        internal HotSpotForm(Order.Profile.HotSpot hotspot)
         {
             InitializeComponent();
             _hotspot = hotspot;
@@ -28,7 +28,7 @@ namespace GatherUp
                 listboxFlyingDest.DataSource = _hotspot.FlyTo.Destinations;
                 listboxFlyingDest.DisplayMember = "Position";
                 chkboxDisableMount.Checked = _hotspot.DisableMount;
-                chkboxStealth.Checked = _hotspot.IsStealth;
+                radiusNumericUpDown.Value = _hotspot.Radius;
             }
             catch (Exception err)
             {
@@ -51,16 +51,6 @@ namespace GatherUp
                 listboxFlyingDest.SelectedItem = item;
                 break;
             }
-        }
-
-        private void chkboxStealth_CheckedChanged(object sender, EventArgs e)
-        {
-            _hotspot.IsStealth = chkboxStealth.Checked;
-        }
-
-        private bool AlwaysLands()
-        {
-            return _hotspot.FlyTo.Destinations.TrueForAll(dest => dest.Land);
         }
         
         private void chkboxLand_CheckedChanged(object sender, EventArgs e)
@@ -95,21 +85,9 @@ namespace GatherUp
             RefreshForm();
         }
 
-        private void HotSpotForm_FormClosing(object sender, FormClosingEventArgs e)
+        private void radiusNumericUpDown_ValueChanged(object sender, EventArgs e)
         {
-            if (_hotspot.IsStealth)
-            {
-                if (!AlwaysLands())
-                {
-                    MessageBox.Show("To avoid problems with stealth, Landing has been enabled in this hotspot");
-                    _hotspot.FlyTo.Destinations.ForEach(dest => dest.Land = true);
-                }
-            }
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("Disables/enables mounting when arriving/leaving a hotspot.\r\nUseful to avoid breaking stealth");
+            _hotspot.Radius = (int)radiusNumericUpDown.Value;
         }
     }
 }

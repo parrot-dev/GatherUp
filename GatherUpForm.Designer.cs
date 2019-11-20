@@ -44,6 +44,7 @@
             this.button6 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.chkBoxHq = new System.Windows.Forms.CheckBox();
             this.panel6 = new System.Windows.Forms.Panel();
             this.label8 = new System.Windows.Forms.Label();
             this.chkboxExGather = new System.Windows.Forms.CheckBox();
@@ -93,7 +94,8 @@
             this.btnImportProfile = new System.Windows.Forms.Button();
             this.btnActivate = new System.Windows.Forms.Button();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.chkBoxHq = new System.Windows.Forms.CheckBox();
+            this.rbGatheringSkillSelectMiner = new System.Windows.Forms.RadioButton();
+            this.rbGatheringSkillSelectBotanist = new System.Windows.Forms.RadioButton();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -294,6 +296,17 @@
             this.panel2.Size = new System.Drawing.Size(304, 210);
             this.panel2.TabIndex = 10;
             this.panel2.Tag = "";
+            // 
+            // chkBoxHq
+            // 
+            this.chkBoxHq.AutoSize = true;
+            this.chkBoxHq.Location = new System.Drawing.Point(149, 99);
+            this.chkBoxHq.Name = "chkBoxHq";
+            this.chkBoxHq.Size = new System.Drawing.Size(40, 17);
+            this.chkBoxHq.TabIndex = 24;
+            this.chkBoxHq.Text = "Hq";
+            this.chkBoxHq.UseVisualStyleBackColor = true;
+            this.chkBoxHq.CheckedChanged += new System.EventHandler(this.chkBoxHq_CheckedChanged);
             // 
             // panel6
             // 
@@ -549,7 +562,7 @@
             // 
             this.button12.Location = new System.Drawing.Point(6, 9);
             this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(128, 23);
+            this.button12.Size = new System.Drawing.Size(136, 23);
             this.button12.TabIndex = 26;
             this.button12.Text = "Options";
             this.button12.UseVisualStyleBackColor = true;
@@ -676,6 +689,8 @@
             // panel5
             // 
             this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel5.Controls.Add(this.rbGatheringSkillSelectBotanist);
+            this.panel5.Controls.Add(this.rbGatheringSkillSelectMiner);
             this.panel5.Controls.Add(this.cbBoxGatheringSkills);
             this.panel5.Controls.Add(this.label3);
             this.panel5.Controls.Add(this.button4);
@@ -706,9 +721,9 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(3, 53);
+            this.button4.Location = new System.Drawing.Point(133, 53);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(296, 23);
+            this.button4.Size = new System.Drawing.Size(166, 23);
             this.button4.TabIndex = 22;
             this.button4.Text = "Add";
             this.button4.UseVisualStyleBackColor = true;
@@ -749,7 +764,7 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(150, 52);
             this.button8.TabIndex = 23;
-            this.button8.Text = "Set save location";
+            this.button8.Text = "Set profile directory";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click_1);
             // 
@@ -782,16 +797,28 @@
             this.btnActivate.UseVisualStyleBackColor = true;
             this.btnActivate.Click += new System.EventHandler(this.btnActivate_Click);
             // 
-            // chkBoxHq
+            // rbGatheringSkillSelectMiner
             // 
-            this.chkBoxHq.AutoSize = true;
-            this.chkBoxHq.Location = new System.Drawing.Point(149, 99);
-            this.chkBoxHq.Name = "chkBoxHq";
-            this.chkBoxHq.Size = new System.Drawing.Size(40, 17);
-            this.chkBoxHq.TabIndex = 24;
-            this.chkBoxHq.Text = "Hq";
-            this.chkBoxHq.UseVisualStyleBackColor = true;
-            this.chkBoxHq.CheckedChanged += new System.EventHandler(this.chkBoxHq_CheckedChanged);
+            this.rbGatheringSkillSelectMiner.AutoSize = true;
+            this.rbGatheringSkillSelectMiner.Checked = true;
+            this.rbGatheringSkillSelectMiner.Location = new System.Drawing.Point(7, 56);
+            this.rbGatheringSkillSelectMiner.Name = "rbGatheringSkillSelectMiner";
+            this.rbGatheringSkillSelectMiner.Size = new System.Drawing.Size(51, 17);
+            this.rbGatheringSkillSelectMiner.TabIndex = 26;
+            this.rbGatheringSkillSelectMiner.TabStop = true;
+            this.rbGatheringSkillSelectMiner.Text = "Miner";
+            this.rbGatheringSkillSelectMiner.UseVisualStyleBackColor = true;
+            this.rbGatheringSkillSelectMiner.CheckedChanged += new System.EventHandler(this.rbGatheringSkillSelectMiner_CheckedChanged);
+            // 
+            // rbGatheringSkillSelectBotanist
+            // 
+            this.rbGatheringSkillSelectBotanist.AutoSize = true;
+            this.rbGatheringSkillSelectBotanist.Location = new System.Drawing.Point(64, 56);
+            this.rbGatheringSkillSelectBotanist.Name = "rbGatheringSkillSelectBotanist";
+            this.rbGatheringSkillSelectBotanist.Size = new System.Drawing.Size(63, 17);
+            this.rbGatheringSkillSelectBotanist.TabIndex = 27;
+            this.rbGatheringSkillSelectBotanist.Text = "Botanist";
+            this.rbGatheringSkillSelectBotanist.UseVisualStyleBackColor = true;
             // 
             // GatherUpForm
             // 
@@ -813,7 +840,6 @@
             this.Controls.Add(this.label9);
             this.Name = "GatherUpForm";
             this.Text = "GatherUp";
-            this.Load += new System.EventHandler(this.GatherUpForm_Load);
             this.panel1.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
@@ -911,5 +937,7 @@
         private System.Windows.Forms.Button button13;
         private System.Windows.Forms.Label lblItemId;
         private System.Windows.Forms.CheckBox chkBoxHq;
+        private System.Windows.Forms.RadioButton rbGatheringSkillSelectBotanist;
+        private System.Windows.Forms.RadioButton rbGatheringSkillSelectMiner;
     }
 }
