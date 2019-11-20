@@ -613,7 +613,7 @@ namespace GatherUp
 
         private async void btnActivate_Click(object sender, EventArgs e)
         {
-            var profilePath = Path.Combine(Settings.Current.DataDirectory, "profile.temp.xml");
+            var profilePath = Path.Combine(Settings.Current.TempDirectory, "profile.tmp.xml");
            
             var errorMsg = string.Empty;
             if (this.profileHasErrors(out errorMsg))
