@@ -5,7 +5,7 @@ namespace GatherUp
 {
     public class GatherUp : BotPlugin
     {
-        public static readonly Version version = new Version(1, 5, 5, 1);
+        public static readonly Version version = new Version(1, 6, 0);
         public override string Author => "Parrot";
         public override string Description => "Tool for making orderbot gathering profiles";
         public override Version Version => version;
@@ -24,12 +24,6 @@ namespace GatherUp
             }
             _gatherUpForm.Show();
            
-        }
-
-
-        public override void OnEnabled()
-        {
-
         }
 
         private GatherUpForm _gatherUpForm;
