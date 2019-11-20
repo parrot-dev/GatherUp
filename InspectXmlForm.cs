@@ -16,7 +16,8 @@ namespace GatherUp
         {
             InitializeComponent();
             textBox1.Text = xml;
-            textBox1.SelectedText = String.Empty;
+            textBox1.Select(0, 0);
+           
         }
     }
 }
