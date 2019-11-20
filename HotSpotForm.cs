@@ -7,9 +7,9 @@ namespace GatherUp
 {
     public partial class HotSpotForm : Form
     {
-        private readonly HotSpot _hotspot;
+        private readonly Order.Profile.HotSpot _hotspot;
 
-        internal HotSpotForm(HotSpot hotspot)
+        internal HotSpotForm(Order.Profile.HotSpot hotspot)
         {
             InitializeComponent();
             _hotspot = hotspot;
@@ -28,6 +28,7 @@ namespace GatherUp
                 listboxFlyingDest.DataSource = _hotspot.FlyTo.Destinations;
                 listboxFlyingDest.DisplayMember = "Position";
                 chkboxDisableMount.Checked = _hotspot.DisableMount;
+                radiusNumericUpDown.Value = _hotspot.Radius;
             }
             catch (Exception err)
             {
@@ -84,5 +85,9 @@ namespace GatherUp
             RefreshForm();
         }
 
+        private void radiusNumericUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            _hotspot.Radius = (int)radiusNumericUpDown.Value;
+        }
     }
 }

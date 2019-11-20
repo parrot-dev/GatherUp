@@ -94,6 +94,8 @@
             this.btnImportProfile = new System.Windows.Forms.Button();
             this.btnActivate = new System.Windows.Forms.Button();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.rbGatheringSkillSelectMiner = new System.Windows.Forms.RadioButton();
+            this.rbGatheringSkillSelectBotanist = new System.Windows.Forms.RadioButton();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -560,7 +562,7 @@
             // 
             this.button12.Location = new System.Drawing.Point(6, 9);
             this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(128, 23);
+            this.button12.Size = new System.Drawing.Size(136, 23);
             this.button12.TabIndex = 26;
             this.button12.Text = "Options";
             this.button12.UseVisualStyleBackColor = true;
@@ -687,6 +689,8 @@
             // panel5
             // 
             this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel5.Controls.Add(this.rbGatheringSkillSelectBotanist);
+            this.panel5.Controls.Add(this.rbGatheringSkillSelectMiner);
             this.panel5.Controls.Add(this.cbBoxGatheringSkills);
             this.panel5.Controls.Add(this.label3);
             this.panel5.Controls.Add(this.button4);
@@ -717,9 +721,9 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(3, 53);
+            this.button4.Location = new System.Drawing.Point(133, 53);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(296, 23);
+            this.button4.Size = new System.Drawing.Size(166, 23);
             this.button4.TabIndex = 22;
             this.button4.Text = "Add";
             this.button4.UseVisualStyleBackColor = true;
@@ -792,6 +796,29 @@
             this.btnActivate.Text = "Activate";
             this.btnActivate.UseVisualStyleBackColor = true;
             this.btnActivate.Click += new System.EventHandler(this.btnActivate_Click);
+            // 
+            // rbGatheringSkillSelectMiner
+            // 
+            this.rbGatheringSkillSelectMiner.AutoSize = true;
+            this.rbGatheringSkillSelectMiner.Checked = true;
+            this.rbGatheringSkillSelectMiner.Location = new System.Drawing.Point(7, 56);
+            this.rbGatheringSkillSelectMiner.Name = "rbGatheringSkillSelectMiner";
+            this.rbGatheringSkillSelectMiner.Size = new System.Drawing.Size(51, 17);
+            this.rbGatheringSkillSelectMiner.TabIndex = 26;
+            this.rbGatheringSkillSelectMiner.TabStop = true;
+            this.rbGatheringSkillSelectMiner.Text = "Miner";
+            this.rbGatheringSkillSelectMiner.UseVisualStyleBackColor = true;
+            this.rbGatheringSkillSelectMiner.CheckedChanged += new System.EventHandler(this.rbGatheringSkillSelectMiner_CheckedChanged);
+            // 
+            // rbGatheringSkillSelectBotanist
+            // 
+            this.rbGatheringSkillSelectBotanist.AutoSize = true;
+            this.rbGatheringSkillSelectBotanist.Location = new System.Drawing.Point(64, 56);
+            this.rbGatheringSkillSelectBotanist.Name = "rbGatheringSkillSelectBotanist";
+            this.rbGatheringSkillSelectBotanist.Size = new System.Drawing.Size(63, 17);
+            this.rbGatheringSkillSelectBotanist.TabIndex = 27;
+            this.rbGatheringSkillSelectBotanist.Text = "Botanist";
+            this.rbGatheringSkillSelectBotanist.UseVisualStyleBackColor = true;
             // 
             // GatherUpForm
             // 
@@ -910,5 +937,7 @@
         private System.Windows.Forms.Button button13;
         private System.Windows.Forms.Label lblItemId;
         private System.Windows.Forms.CheckBox chkBoxHq;
+        private System.Windows.Forms.RadioButton rbGatheringSkillSelectBotanist;
+        private System.Windows.Forms.RadioButton rbGatheringSkillSelectMiner;
     }
 }

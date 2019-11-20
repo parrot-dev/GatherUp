@@ -229,7 +229,7 @@ namespace GatherUp.Order
                 "if (ActionManager.CurrentActions.TryGetValue(\"Sneak\", out spell)) {",
                 "if (ActionManager.CanCast(spell, localPlayer)) {",
                 "Logging.Write(\"Applying Sneak\");",
-                "await Buddy.Coroutines.Coroutine.Sleep(3000);", //temp, teleport load issue.
+                "await Buddy.Coroutines.Coroutine.Sleep(3000);", //teleport load issue.
                 "ActionManager.DoAction(spell, localPlayer);",
                 "}",
                 "}",

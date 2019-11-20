@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using ff14bot.Enums;
 using ff14bot.Managers;
 using GatherUp.Order.Parsing;
 using GatherUp.Order.Parsing.Exceptions;
@@ -25,12 +26,7 @@ namespace GatherUp
             numRadiusBlackSpot.Value = 10;
             lblPath.Text = Settings.Current.ProfileDirectory;
 
-            //Gatheringskills 
-            foreach (var spell in DataManager.SpellCache.Values.Where(o =>
-                o.Job == ff14bot.Enums.ClassJobType.Miner || o.Job == ff14bot.Enums.ClassJobType.Botanist))
-            {
-                cbBoxGatheringSkills.Items.Add(spell.Name);
-            }
+            PopulateAvailableSkills(rbGatheringSkillSelectMiner.Checked ? ClassJobType.Miner : ClassJobType.Botanist);
 
             cbBoxGatheringSkills.Sorted = true;
 
@@ -120,6 +116,17 @@ namespace GatherUp
             chkboxDiscoverUnknowns.Checked = _profile.gather.exGather.DiscoverUnknowns;
             cbBoxCordialType.SelectedItem = _profile.gather.exGather.CordialType;
             cbBoxCordialType.Enabled = _profile.gather.exGather.Enabled;
+        }
+
+        private void PopulateAvailableSkills(ClassJobType job)
+        {
+            cbBoxGatheringSkills.Items.Clear(); 
+            foreach (var spell in DataManager.SpellCache.Values.Where(o =>
+                o.Job == job))
+            {
+                cbBoxGatheringSkills.Items.Add(spell.Name);
+
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -720,6 +727,7 @@ namespace GatherUp
             using (var hotspotForm = new HotSpotForm(hotspot))
             {
                 hotspotForm.ShowDialog();
+                refreshForm();
             }
         }
 
@@ -745,6 +753,22 @@ namespace GatherUp
         private void chkBoxHq_CheckedChanged(object sender, EventArgs e)
         {
             _profile.gather.Hq = chkBoxHq.Checked;
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void rbGatheringSkillSelectMiner_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbGatheringSkillSelectMiner.Checked)
+            {
+                PopulateAvailableSkills(ClassJobType.Miner);
+            } else
+            {
+                PopulateAvailableSkills(ClassJobType.Botanist);
+            }
         }
     }
 }
