@@ -613,12 +613,7 @@ namespace GatherUp
 
         private async void btnActivate_Click(object sender, EventArgs e)
         {
-            if (!Settings.Current.DataDirectoryExists)
-            {
-                Directory.CreateDirectory(Settings.Current.DataDirectory);
-            }
-
-            var profilePath = Path.Combine(Settings.Current.DataDirectory, "tempProfile.xml");
+            var profilePath = Path.Combine(Settings.Current.DataDirectory, "profile.temp.xml");
            
             var errorMsg = string.Empty;
             if (this.profileHasErrors(out errorMsg))

@@ -8,7 +8,12 @@ namespace GatherUp
     class Settings : JsonSettings
     {
         public Settings() : base(Path.Combine(GetSettingsFilePath("GatherUp", "Settings.json")))
-        { }
+        {
+            if (!Directory.Exists(DataDirectory))
+            {
+                Directory.CreateDirectory(DataDirectory);
+            }
+        }
 
         private static Settings _settings;
 
@@ -31,8 +36,7 @@ namespace GatherUp
 
         [JsonIgnore]
         public string DataDirectory { get; private set; } = Path.Combine(GetSettingsFilePath("GatherUp", "Data"));
-        [JsonIgnore]
-        public bool DataDirectoryExists => Directory.Exists(DataDirectory);
+
         [JsonIgnore]
         public bool ProfileDirectoryExists => Directory.Exists(ProfileDirectory);
     }
