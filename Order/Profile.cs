@@ -51,7 +51,7 @@ namespace GatherUp.Order
             {
                 public Vector3 Position { get; set; }
                 public double AllowedVariance { get; set; } = 0.0f;
-                public bool Land { get; set; } = true;
+                public bool Land { get; set; } = false;
 
                 public string GetXYZ()
                 {
