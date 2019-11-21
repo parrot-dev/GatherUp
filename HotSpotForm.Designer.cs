@@ -44,6 +44,7 @@
             this.radiusNumericUpDown.Name = "radiusNumericUpDown";
             this.radiusNumericUpDown.Size = new System.Drawing.Size(93, 20);
             this.radiusNumericUpDown.TabIndex = 15;
+            this.radiusNumericUpDown.ValueChanged += new System.EventHandler(this.radiusNumericUpDown_ValueChanged_1);
             // 
             // listboxFlyingDest
             // 
@@ -55,6 +56,8 @@
             this.listboxFlyingDest.Name = "listboxFlyingDest";
             this.listboxFlyingDest.Size = new System.Drawing.Size(183, 108);
             this.listboxFlyingDest.TabIndex = 11;
+            this.listboxFlyingDest.SelectedValueChanged += new System.EventHandler(this.listboxFlyingDest_SelectedValueChanged_1);
+            this.listboxFlyingDest.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listboxFlyingDest_KeyDown_1);
             // 
             // btnAddFlyingDest
             // 
@@ -66,6 +69,7 @@
             this.btnAddFlyingDest.TabIndex = 12;
             this.btnAddFlyingDest.Text = "Add flying destination";
             this.btnAddFlyingDest.UseVisualStyleBackColor = true;
+            this.btnAddFlyingDest.Click += new System.EventHandler(this.btnAddFlyingDest_Click);
             // 
             // lblRadius
             // 
@@ -86,6 +90,7 @@
             this.chkboxDisableMount.TabIndex = 10;
             this.chkboxDisableMount.Text = "Disable mount";
             this.chkboxDisableMount.UseVisualStyleBackColor = true;
+            this.chkboxDisableMount.CheckedChanged += new System.EventHandler(this.chkboxDisableMount_CheckedChanged_1);
             // 
             // chkboxLand
             // 
@@ -96,6 +101,7 @@
             this.chkboxLand.TabIndex = 13;
             this.chkboxLand.Text = "Land";
             this.chkboxLand.UseVisualStyleBackColor = true;
+            this.chkboxLand.CheckedChanged += new System.EventHandler(this.chkboxLand_CheckedChanged_1);
             // 
             // HotSpotForm
             // 
