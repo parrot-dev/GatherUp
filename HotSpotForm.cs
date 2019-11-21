@@ -37,7 +37,7 @@ namespace GatherUp
         }
 
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnAddFlyingDest_Click(object sender, EventArgs e)
         {
             var position = ff14bot.Core.Player.Location;
             _hotspot.FlyTo.Destinations.Add(new FlyTo.Destination
@@ -52,31 +52,8 @@ namespace GatherUp
                 break;
             }
         }
-        
-        private void chkboxLand_CheckedChanged(object sender, EventArgs e)
-        {
-            var destination = (FlyTo.Destination) listboxFlyingDest.SelectedItem;
-            if (destination == null)
-            {
-                chkboxLand.Checked = false;
-                return;
-            }
 
-            destination.Land = chkboxLand.Checked;
-
-        }
-
-        private void chkboxDisableMount_CheckedChanged(object sender, EventArgs e)
-        {
-            _hotspot.DisableMount = chkboxDisableMount.Checked;
-        }
-
-        private void listboxFlyingDest_SelectedValueChanged(object sender, EventArgs e)
-        {
-            chkboxLand.Checked = ((FlyTo.Destination)listboxFlyingDest.SelectedItem)?.Land ?? false;
-        }
-
-        private void listboxFlyingDest_KeyDown(object sender, KeyEventArgs e)
+        private void listboxFlyingDest_KeyDown_1(object sender, KeyEventArgs e)
         {
             if (listboxFlyingDest.SelectedItem == null) return;
             if (e.KeyCode != Keys.Delete) return;
@@ -85,7 +62,29 @@ namespace GatherUp
             RefreshForm();
         }
 
-        private void radiusNumericUpDown_ValueChanged(object sender, EventArgs e)
+        private void listboxFlyingDest_SelectedValueChanged_1(object sender, EventArgs e)
+        {
+            chkboxLand.Checked = ((FlyTo.Destination)listboxFlyingDest.SelectedItem)?.Land ?? false;
+        }
+
+        private void chkboxDisableMount_CheckedChanged_1(object sender, EventArgs e)
+        {
+            _hotspot.DisableMount = chkboxDisableMount.Checked;
+        }
+
+        private void chkboxLand_CheckedChanged_1(object sender, EventArgs e)
+        {
+            var destination = (FlyTo.Destination)listboxFlyingDest.SelectedItem;
+            if (destination == null)
+            {
+                chkboxLand.Checked = false;
+                return;
+            }
+
+            destination.Land = chkboxLand.Checked;
+        }
+
+        private void radiusNumericUpDown_ValueChanged_1(object sender, EventArgs e)
         {
             _hotspot.Radius = (int)radiusNumericUpDown.Value;
         }
