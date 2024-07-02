@@ -28,845 +28,901 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.cbBoxLocationNameOnStart = new System.Windows.Forms.ComboBox();
-            this.chkboxTeleportOnStart = new System.Windows.Forms.CheckBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.cbBoxLocationNameOnComplete = new System.Windows.Forms.ComboBox();
-            this.chkBoxTeleportOnComplete = new System.Windows.Forms.CheckBox();
-            this.button6 = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.chkBoxHq = new System.Windows.Forms.CheckBox();
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.label8 = new System.Windows.Forms.Label();
-            this.chkboxExGather = new System.Windows.Forms.CheckBox();
-            this.cbBoxCordialType = new System.Windows.Forms.ComboBox();
-            this.chkboxDiscoverUnknowns = new System.Windows.Forms.CheckBox();
-            this.button9 = new System.Windows.Forms.Button();
-            this.txtBoxTarget = new System.Windows.Forms.TextBox();
-            this.label14 = new System.Windows.Forms.Label();
-            this.btnListInventory = new System.Windows.Forms.Button();
-            this.lblItemId = new System.Windows.Forms.Label();
-            this.txtboxItemId = new System.Windows.Forms.TextBox();
-            this.chkBoxQuantity = new System.Windows.Forms.CheckBox();
-            this.chkBoxGearSet = new System.Windows.Forms.CheckBox();
-            this.numQuantity = new System.Windows.Forms.NumericUpDown();
-            this.numGearSet = new System.Windows.Forms.NumericUpDown();
-            this.txtboxName = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.listBoxHotSpots = new System.Windows.Forms.ListBox();
-            this.txtboxItemNames = new System.Windows.Forms.TextBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.listBox2Items = new System.Windows.Forms.ListBox();
-            this.button3 = new System.Windows.Forms.Button();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.tabControl2 = new System.Windows.Forms.TabControl();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.button12 = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
-            this.numRadius = new System.Windows.Forms.NumericUpDown();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.label6 = new System.Windows.Forms.Label();
-            this.listBoxBlackSpots = new System.Windows.Forms.ListBox();
-            this.numRadiusBlackSpot = new System.Windows.Forms.NumericUpDown();
-            this.btnAddBlackspot = new System.Windows.Forms.Button();
-            this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.button13 = new System.Windows.Forms.Button();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.button10 = new System.Windows.Forms.Button();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.cbBoxGatheringSkills = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.button4 = new System.Windows.Forms.Button();
-            this.listBoxGatherSkills = new System.Windows.Forms.ListBox();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
-            this.lblPath = new System.Windows.Forms.Label();
-            this.btnImportProfile = new System.Windows.Forms.Button();
-            this.btnActivate = new System.Windows.Forms.Button();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.rbGatheringSkillSelectMiner = new System.Windows.Forms.RadioButton();
-            this.rbGatheringSkillSelectBotanist = new System.Windows.Forms.RadioButton();
-            this.panel1.SuspendLayout();
-            this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
-            this.panel2.SuspendLayout();
-            this.panel6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numQuantity)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numGearSet)).BeginInit();
-            this.tabControl2.SuspendLayout();
-            this.tabPage3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numRadius)).BeginInit();
-            this.tabPage4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numRadiusBlackSpot)).BeginInit();
-            this.tabPage5.SuspendLayout();
-            this.panel4.SuspendLayout();
-            this.panel5.SuspendLayout();
-            this.SuspendLayout();
+            label1 = new System.Windows.Forms.Label();
+            label4 = new System.Windows.Forms.Label();
+            label7 = new System.Windows.Forms.Label();
+            label9 = new System.Windows.Forms.Label();
+            panel1 = new System.Windows.Forms.Panel();
+            tabControl1 = new System.Windows.Forms.TabControl();
+            tabPage1 = new System.Windows.Forms.TabPage();
+            cbBoxLocationNameOnStart = new System.Windows.Forms.ComboBox();
+            chkboxTeleportOnStart = new System.Windows.Forms.CheckBox();
+            button1 = new System.Windows.Forms.Button();
+            tabPage2 = new System.Windows.Forms.TabPage();
+            cbBoxLocationNameOnComplete = new System.Windows.Forms.ComboBox();
+            chkBoxTeleportOnComplete = new System.Windows.Forms.CheckBox();
+            button6 = new System.Windows.Forms.Button();
+            label2 = new System.Windows.Forms.Label();
+            panel2 = new System.Windows.Forms.Panel();
+            chkBoxHq = new System.Windows.Forms.CheckBox();
+            panel6 = new System.Windows.Forms.Panel();
+            label8 = new System.Windows.Forms.Label();
+            chkboxExGather = new System.Windows.Forms.CheckBox();
+            cbBoxCordialType = new System.Windows.Forms.ComboBox();
+            chkboxDiscoverUnknowns = new System.Windows.Forms.CheckBox();
+            button9 = new System.Windows.Forms.Button();
+            txtBoxTarget = new System.Windows.Forms.TextBox();
+            label14 = new System.Windows.Forms.Label();
+            btnListInventory = new System.Windows.Forms.Button();
+            lblItemId = new System.Windows.Forms.Label();
+            txtboxItemId = new System.Windows.Forms.TextBox();
+            chkBoxQuantity = new System.Windows.Forms.CheckBox();
+            chkBoxGearSet = new System.Windows.Forms.CheckBox();
+            numQuantity = new System.Windows.Forms.NumericUpDown();
+            numGearSet = new System.Windows.Forms.NumericUpDown();
+            txtboxName = new System.Windows.Forms.TextBox();
+            label12 = new System.Windows.Forms.Label();
+            listBoxHotSpots = new System.Windows.Forms.ListBox();
+            txtboxItemNames = new System.Windows.Forms.TextBox();
+            button2 = new System.Windows.Forms.Button();
+            listBox2Items = new System.Windows.Forms.ListBox();
+            button3 = new System.Windows.Forms.Button();
+            panel3 = new System.Windows.Forms.Panel();
+            tabControl2 = new System.Windows.Forms.TabControl();
+            tabPage3 = new System.Windows.Forms.TabPage();
+            button12 = new System.Windows.Forms.Button();
+            label5 = new System.Windows.Forms.Label();
+            numRadius = new System.Windows.Forms.NumericUpDown();
+            tabPage4 = new System.Windows.Forms.TabPage();
+            label6 = new System.Windows.Forms.Label();
+            listBoxBlackSpots = new System.Windows.Forms.ListBox();
+            numRadiusBlackSpot = new System.Windows.Forms.NumericUpDown();
+            btnAddBlackspot = new System.Windows.Forms.Button();
+            tabPage5 = new System.Windows.Forms.TabPage();
+            button13 = new System.Windows.Forms.Button();
+            panel4 = new System.Windows.Forms.Panel();
+            button10 = new System.Windows.Forms.Button();
+            panel5 = new System.Windows.Forms.Panel();
+            rbGatheringSkillSelectBotanist = new System.Windows.Forms.RadioButton();
+            rbGatheringSkillSelectMiner = new System.Windows.Forms.RadioButton();
+            cbBoxGatheringSkills = new System.Windows.Forms.ComboBox();
+            label3 = new System.Windows.Forms.Label();
+            button4 = new System.Windows.Forms.Button();
+            listBoxGatherSkills = new System.Windows.Forms.ListBox();
+            button5 = new System.Windows.Forms.Button();
+            button7 = new System.Windows.Forms.Button();
+            button8 = new System.Windows.Forms.Button();
+            lblPath = new System.Windows.Forms.Label();
+            btnImportProfile = new System.Windows.Forms.Button();
+            btnActivate = new System.Windows.Forms.Button();
+            panel1.SuspendLayout();
+            tabControl1.SuspendLayout();
+            tabPage1.SuspendLayout();
+            tabPage2.SuspendLayout();
+            panel2.SuspendLayout();
+            panel6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)numQuantity).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numGearSet).BeginInit();
+            tabControl2.SuspendLayout();
+            tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)numRadius).BeginInit();
+            tabPage4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)numRadiusBlackSpot).BeginInit();
+            tabPage5.SuspendLayout();
+            panel4.SuspendLayout();
+            panel5.SuspendLayout();
+            SuspendLayout();
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 37);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(38, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Name:";
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(5, 71);
+            label1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(63, 25);
+            label1.TabIndex = 0;
+            label1.Text = "Name:";
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(0, 11);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(64, 13);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "Item names:";
+            label4.AutoSize = true;
+            label4.Location = new System.Drawing.Point(0, 21);
+            label4.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label4.Name = "label4";
+            label4.Size = new System.Drawing.Size(109, 25);
+            label4.TabIndex = 3;
+            label4.Text = "Item names:";
             // 
             // label7
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(5, 24);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(51, 13);
-            this.label7.TabIndex = 6;
-            this.label7.Text = "Location:";
+            label7.AutoSize = true;
+            label7.Location = new System.Drawing.Point(8, 46);
+            label7.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label7.Name = "label7";
+            label7.Size = new System.Drawing.Size(83, 25);
+            label7.TabIndex = 6;
+            label7.Text = "Location:";
             // 
             // label9
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(316, 523);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(59, 13);
-            this.label9.TabIndex = 8;
-            this.label9.Text = "Save path:";
+            label9.AutoSize = true;
+            label9.Location = new System.Drawing.Point(527, 1006);
+            label9.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label9.Name = "label9";
+            label9.Size = new System.Drawing.Size(94, 25);
+            label9.TabIndex = 8;
+            label9.Text = "Save path:";
             // 
             // panel1
             // 
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.tabControl1);
-            this.panel1.Location = new System.Drawing.Point(319, 12);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(304, 114);
-            this.panel1.TabIndex = 9;
+            panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            panel1.Controls.Add(tabControl1);
+            panel1.Location = new System.Drawing.Point(532, 23);
+            panel1.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            panel1.Name = "panel1";
+            panel1.Size = new System.Drawing.Size(505, 217);
+            panel1.TabIndex = 9;
             // 
             // tabControl1
             // 
-            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(3, 3);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(296, 106);
-            this.tabControl1.TabIndex = 0;
+            tabControl1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            tabControl1.Controls.Add(tabPage1);
+            tabControl1.Controls.Add(tabPage2);
+            tabControl1.Location = new System.Drawing.Point(5, 6);
+            tabControl1.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tabControl1.Name = "tabControl1";
+            tabControl1.SelectedIndex = 0;
+            tabControl1.Size = new System.Drawing.Size(493, 204);
+            tabControl1.TabIndex = 0;
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.cbBoxLocationNameOnStart);
-            this.tabPage1.Controls.Add(this.chkboxTeleportOnStart);
-            this.tabPage1.Controls.Add(this.button1);
-            this.tabPage1.Controls.Add(this.label7);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(288, 80);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "On Start";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            tabPage1.Controls.Add(cbBoxLocationNameOnStart);
+            tabPage1.Controls.Add(chkboxTeleportOnStart);
+            tabPage1.Controls.Add(button1);
+            tabPage1.Controls.Add(label7);
+            tabPage1.Location = new System.Drawing.Point(4, 34);
+            tabPage1.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tabPage1.Name = "tabPage1";
+            tabPage1.Padding = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tabPage1.Size = new System.Drawing.Size(485, 166);
+            tabPage1.TabIndex = 0;
+            tabPage1.Text = "On Start";
+            tabPage1.UseVisualStyleBackColor = true;
             // 
             // cbBoxLocationNameOnStart
             // 
-            this.cbBoxLocationNameOnStart.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cbBoxLocationNameOnStart.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cbBoxLocationNameOnStart.FormattingEnabled = true;
-            this.cbBoxLocationNameOnStart.Location = new System.Drawing.Point(91, 20);
-            this.cbBoxLocationNameOnStart.Name = "cbBoxLocationNameOnStart";
-            this.cbBoxLocationNameOnStart.Size = new System.Drawing.Size(192, 21);
-            this.cbBoxLocationNameOnStart.TabIndex = 26;
-            this.cbBoxLocationNameOnStart.SelectedIndexChanged += new System.EventHandler(this.cbBoxLocationNameOnStart_SelectedIndexChanged);
+            cbBoxLocationNameOnStart.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            cbBoxLocationNameOnStart.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            cbBoxLocationNameOnStart.FormattingEnabled = true;
+            cbBoxLocationNameOnStart.Location = new System.Drawing.Point(152, 38);
+            cbBoxLocationNameOnStart.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            cbBoxLocationNameOnStart.Name = "cbBoxLocationNameOnStart";
+            cbBoxLocationNameOnStart.Size = new System.Drawing.Size(317, 33);
+            cbBoxLocationNameOnStart.TabIndex = 26;
+            cbBoxLocationNameOnStart.SelectedIndexChanged += cbBoxLocationNameOnStart_SelectedIndexChanged;
             // 
             // chkboxTeleportOnStart
             // 
-            this.chkboxTeleportOnStart.AutoSize = true;
-            this.chkboxTeleportOnStart.Location = new System.Drawing.Point(5, 5);
-            this.chkboxTeleportOnStart.Name = "chkboxTeleportOnStart";
-            this.chkboxTeleportOnStart.Size = new System.Drawing.Size(65, 17);
-            this.chkboxTeleportOnStart.TabIndex = 12;
-            this.chkboxTeleportOnStart.Text = "Teleport";
-            this.chkboxTeleportOnStart.UseVisualStyleBackColor = true;
-            this.chkboxTeleportOnStart.CheckedChanged += new System.EventHandler(this.chkboxTeleportOnStart_CheckedChanged);
+            chkboxTeleportOnStart.AutoSize = true;
+            chkboxTeleportOnStart.Location = new System.Drawing.Point(8, 10);
+            chkboxTeleportOnStart.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            chkboxTeleportOnStart.Name = "chkboxTeleportOnStart";
+            chkboxTeleportOnStart.Size = new System.Drawing.Size(101, 29);
+            chkboxTeleportOnStart.TabIndex = 12;
+            chkboxTeleportOnStart.Text = "Teleport";
+            chkboxTeleportOnStart.UseVisualStyleBackColor = true;
+            chkboxTeleportOnStart.CheckedChanged += chkboxTeleportOnStart_CheckedChanged;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(9, 51);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(276, 23);
-            this.button1.TabIndex = 11;
-            this.button1.Text = "Get current zone";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            button1.Location = new System.Drawing.Point(15, 98);
+            button1.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            button1.Name = "button1";
+            button1.Size = new System.Drawing.Size(460, 44);
+            button1.TabIndex = 11;
+            button1.Text = "Get current zone";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.cbBoxLocationNameOnComplete);
-            this.tabPage2.Controls.Add(this.chkBoxTeleportOnComplete);
-            this.tabPage2.Controls.Add(this.button6);
-            this.tabPage2.Controls.Add(this.label2);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(288, 80);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "On Complete";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            tabPage2.Controls.Add(cbBoxLocationNameOnComplete);
+            tabPage2.Controls.Add(chkBoxTeleportOnComplete);
+            tabPage2.Controls.Add(button6);
+            tabPage2.Controls.Add(label2);
+            tabPage2.Location = new System.Drawing.Point(4, 34);
+            tabPage2.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tabPage2.Name = "tabPage2";
+            tabPage2.Padding = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tabPage2.Size = new System.Drawing.Size(485, 166);
+            tabPage2.TabIndex = 1;
+            tabPage2.Text = "On Complete";
+            tabPage2.UseVisualStyleBackColor = true;
             // 
             // cbBoxLocationNameOnComplete
             // 
-            this.cbBoxLocationNameOnComplete.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cbBoxLocationNameOnComplete.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cbBoxLocationNameOnComplete.FormattingEnabled = true;
-            this.cbBoxLocationNameOnComplete.Location = new System.Drawing.Point(91, 20);
-            this.cbBoxLocationNameOnComplete.Name = "cbBoxLocationNameOnComplete";
-            this.cbBoxLocationNameOnComplete.Size = new System.Drawing.Size(192, 21);
-            this.cbBoxLocationNameOnComplete.TabIndex = 27;
-            this.cbBoxLocationNameOnComplete.SelectedIndexChanged += new System.EventHandler(this.cbBoxLocationNameOnComplete_SelectedIndexChanged);
+            cbBoxLocationNameOnComplete.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            cbBoxLocationNameOnComplete.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            cbBoxLocationNameOnComplete.FormattingEnabled = true;
+            cbBoxLocationNameOnComplete.Location = new System.Drawing.Point(152, 38);
+            cbBoxLocationNameOnComplete.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            cbBoxLocationNameOnComplete.Name = "cbBoxLocationNameOnComplete";
+            cbBoxLocationNameOnComplete.Size = new System.Drawing.Size(317, 33);
+            cbBoxLocationNameOnComplete.TabIndex = 27;
+            cbBoxLocationNameOnComplete.SelectedIndexChanged += cbBoxLocationNameOnComplete_SelectedIndexChanged;
             // 
             // chkBoxTeleportOnComplete
             // 
-            this.chkBoxTeleportOnComplete.AutoSize = true;
-            this.chkBoxTeleportOnComplete.Location = new System.Drawing.Point(5, 5);
-            this.chkBoxTeleportOnComplete.Name = "chkBoxTeleportOnComplete";
-            this.chkBoxTeleportOnComplete.Size = new System.Drawing.Size(65, 17);
-            this.chkBoxTeleportOnComplete.TabIndex = 20;
-            this.chkBoxTeleportOnComplete.Text = "Teleport";
-            this.chkBoxTeleportOnComplete.UseVisualStyleBackColor = true;
-            this.chkBoxTeleportOnComplete.CheckedChanged += new System.EventHandler(this.chkBoxTeleportOnComplete_CheckedChanged);
+            chkBoxTeleportOnComplete.AutoSize = true;
+            chkBoxTeleportOnComplete.Location = new System.Drawing.Point(8, 10);
+            chkBoxTeleportOnComplete.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            chkBoxTeleportOnComplete.Name = "chkBoxTeleportOnComplete";
+            chkBoxTeleportOnComplete.Size = new System.Drawing.Size(101, 29);
+            chkBoxTeleportOnComplete.TabIndex = 20;
+            chkBoxTeleportOnComplete.Text = "Teleport";
+            chkBoxTeleportOnComplete.UseVisualStyleBackColor = true;
+            chkBoxTeleportOnComplete.CheckedChanged += chkBoxTeleportOnComplete_CheckedChanged;
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(9, 51);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(276, 23);
-            this.button6.TabIndex = 19;
-            this.button6.Text = "Get current zone";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
+            button6.Location = new System.Drawing.Point(15, 98);
+            button6.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            button6.Name = "button6";
+            button6.Size = new System.Drawing.Size(460, 44);
+            button6.TabIndex = 19;
+            button6.Text = "Get current zone";
+            button6.UseVisualStyleBackColor = true;
+            button6.Click += button6_Click;
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(5, 24);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(51, 13);
-            this.label2.TabIndex = 14;
-            this.label2.Text = "Location:";
+            label2.AutoSize = true;
+            label2.Location = new System.Drawing.Point(8, 46);
+            label2.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(83, 25);
+            label2.TabIndex = 14;
+            label2.Text = "Location:";
             // 
             // panel2
             // 
-            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Controls.Add(this.chkBoxHq);
-            this.panel2.Controls.Add(this.panel6);
-            this.panel2.Controls.Add(this.button9);
-            this.panel2.Controls.Add(this.txtBoxTarget);
-            this.panel2.Controls.Add(this.label14);
-            this.panel2.Controls.Add(this.btnListInventory);
-            this.panel2.Controls.Add(this.lblItemId);
-            this.panel2.Controls.Add(this.txtboxItemId);
-            this.panel2.Controls.Add(this.chkBoxQuantity);
-            this.panel2.Controls.Add(this.chkBoxGearSet);
-            this.panel2.Controls.Add(this.numQuantity);
-            this.panel2.Controls.Add(this.numGearSet);
-            this.panel2.Controls.Add(this.txtboxName);
-            this.panel2.Controls.Add(this.label12);
-            this.panel2.Controls.Add(this.label1);
-            this.panel2.Location = new System.Drawing.Point(4, 12);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(304, 210);
-            this.panel2.TabIndex = 10;
-            this.panel2.Tag = "";
+            panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            panel2.Controls.Add(chkBoxHq);
+            panel2.Controls.Add(panel6);
+            panel2.Controls.Add(button9);
+            panel2.Controls.Add(txtBoxTarget);
+            panel2.Controls.Add(label14);
+            panel2.Controls.Add(btnListInventory);
+            panel2.Controls.Add(lblItemId);
+            panel2.Controls.Add(txtboxItemId);
+            panel2.Controls.Add(chkBoxQuantity);
+            panel2.Controls.Add(chkBoxGearSet);
+            panel2.Controls.Add(numQuantity);
+            panel2.Controls.Add(numGearSet);
+            panel2.Controls.Add(txtboxName);
+            panel2.Controls.Add(label12);
+            panel2.Controls.Add(label1);
+            panel2.Location = new System.Drawing.Point(7, 23);
+            panel2.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            panel2.Name = "panel2";
+            panel2.Size = new System.Drawing.Size(505, 402);
+            panel2.TabIndex = 10;
+            panel2.Tag = "";
             // 
             // chkBoxHq
             // 
-            this.chkBoxHq.AutoSize = true;
-            this.chkBoxHq.Location = new System.Drawing.Point(149, 99);
-            this.chkBoxHq.Name = "chkBoxHq";
-            this.chkBoxHq.Size = new System.Drawing.Size(40, 17);
-            this.chkBoxHq.TabIndex = 24;
-            this.chkBoxHq.Text = "Hq";
-            this.chkBoxHq.UseVisualStyleBackColor = true;
-            this.chkBoxHq.CheckedChanged += new System.EventHandler(this.chkBoxHq_CheckedChanged);
+            chkBoxHq.AutoSize = true;
+            chkBoxHq.Location = new System.Drawing.Point(248, 190);
+            chkBoxHq.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            chkBoxHq.Name = "chkBoxHq";
+            chkBoxHq.Size = new System.Drawing.Size(62, 29);
+            chkBoxHq.TabIndex = 24;
+            chkBoxHq.Text = "Hq";
+            chkBoxHq.UseVisualStyleBackColor = true;
+            chkBoxHq.CheckedChanged += chkBoxHq_CheckedChanged;
             // 
             // panel6
             // 
-            this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel6.Controls.Add(this.label8);
-            this.panel6.Controls.Add(this.chkboxExGather);
-            this.panel6.Controls.Add(this.cbBoxCordialType);
-            this.panel6.Controls.Add(this.chkboxDiscoverUnknowns);
-            this.panel6.Location = new System.Drawing.Point(3, 152);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(298, 53);
-            this.panel6.TabIndex = 23;
+            panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            panel6.Controls.Add(label8);
+            panel6.Controls.Add(chkboxExGather);
+            panel6.Controls.Add(cbBoxCordialType);
+            panel6.Controls.Add(chkboxDiscoverUnknowns);
+            panel6.Location = new System.Drawing.Point(5, 292);
+            panel6.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            panel6.Name = "panel6";
+            panel6.Size = new System.Drawing.Size(495, 100);
+            panel6.TabIndex = 23;
             // 
             // label8
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(170, 3);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(64, 13);
-            this.label8.TabIndex = 27;
-            this.label8.Text = "Use Cordial:";
+            label8.AutoSize = true;
+            label8.Location = new System.Drawing.Point(283, 6);
+            label8.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label8.Name = "label8";
+            label8.Size = new System.Drawing.Size(106, 25);
+            label8.TabIndex = 27;
+            label8.Text = "Use Cordial:";
             // 
             // chkboxExGather
             // 
-            this.chkboxExGather.AutoSize = true;
-            this.chkboxExGather.Location = new System.Drawing.Point(3, 3);
-            this.chkboxExGather.Name = "chkboxExGather";
-            this.chkboxExGather.Size = new System.Drawing.Size(114, 17);
-            this.chkboxExGather.TabIndex = 23;
-            this.chkboxExGather.Text = "Use ExGather Tag";
-            this.chkboxExGather.UseVisualStyleBackColor = true;
-            this.chkboxExGather.CheckedChanged += new System.EventHandler(this.chkboxExGather_CheckedChanged);
+            chkboxExGather.AutoSize = true;
+            chkboxExGather.Location = new System.Drawing.Point(5, 6);
+            chkboxExGather.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            chkboxExGather.Name = "chkboxExGather";
+            chkboxExGather.Size = new System.Drawing.Size(173, 29);
+            chkboxExGather.TabIndex = 23;
+            chkboxExGather.Text = "Use ExGather Tag";
+            chkboxExGather.UseVisualStyleBackColor = true;
+            chkboxExGather.CheckedChanged += chkboxExGather_CheckedChanged;
             // 
             // cbBoxCordialType
             // 
-            this.cbBoxCordialType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cbBoxCordialType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cbBoxCordialType.FormattingEnabled = true;
-            this.cbBoxCordialType.Location = new System.Drawing.Point(173, 22);
-            this.cbBoxCordialType.Name = "cbBoxCordialType";
-            this.cbBoxCordialType.Size = new System.Drawing.Size(122, 21);
-            this.cbBoxCordialType.TabIndex = 26;
-            this.cbBoxCordialType.SelectedIndexChanged += new System.EventHandler(this.cbBoxCordialType_SelectedIndexChanged);
+            cbBoxCordialType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            cbBoxCordialType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            cbBoxCordialType.FormattingEnabled = true;
+            cbBoxCordialType.Location = new System.Drawing.Point(288, 42);
+            cbBoxCordialType.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            cbBoxCordialType.Name = "cbBoxCordialType";
+            cbBoxCordialType.Size = new System.Drawing.Size(201, 33);
+            cbBoxCordialType.TabIndex = 26;
+            cbBoxCordialType.SelectedIndexChanged += cbBoxCordialType_SelectedIndexChanged;
             // 
             // chkboxDiscoverUnknowns
             // 
-            this.chkboxDiscoverUnknowns.AutoSize = true;
-            this.chkboxDiscoverUnknowns.Location = new System.Drawing.Point(3, 26);
-            this.chkboxDiscoverUnknowns.Name = "chkboxDiscoverUnknowns";
-            this.chkboxDiscoverUnknowns.Size = new System.Drawing.Size(122, 17);
-            this.chkboxDiscoverUnknowns.TabIndex = 24;
-            this.chkboxDiscoverUnknowns.Text = "Discover Unknowns";
-            this.chkboxDiscoverUnknowns.UseVisualStyleBackColor = true;
-            this.chkboxDiscoverUnknowns.CheckedChanged += new System.EventHandler(this.chkboxDiscoverUnknowns_CheckedChanged);
+            chkboxDiscoverUnknowns.AutoSize = true;
+            chkboxDiscoverUnknowns.Location = new System.Drawing.Point(5, 50);
+            chkboxDiscoverUnknowns.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            chkboxDiscoverUnknowns.Name = "chkboxDiscoverUnknowns";
+            chkboxDiscoverUnknowns.Size = new System.Drawing.Size(194, 29);
+            chkboxDiscoverUnknowns.TabIndex = 24;
+            chkboxDiscoverUnknowns.Text = "Discover Unknowns";
+            chkboxDiscoverUnknowns.UseVisualStyleBackColor = true;
+            chkboxDiscoverUnknowns.CheckedChanged += chkboxDiscoverUnknowns_CheckedChanged;
             // 
             // button9
             // 
-            this.button9.Location = new System.Drawing.Point(186, 67);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(113, 23);
-            this.button9.TabIndex = 22;
-            this.button9.Text = "Current Target";
-            this.button9.UseVisualStyleBackColor = true;
-            this.button9.Click += new System.EventHandler(this.button9_Click);
+            button9.Location = new System.Drawing.Point(310, 129);
+            button9.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            button9.Name = "button9";
+            button9.Size = new System.Drawing.Size(188, 44);
+            button9.TabIndex = 22;
+            button9.Text = "Current Target";
+            button9.UseVisualStyleBackColor = true;
+            button9.Click += button9_Click;
             // 
             // txtBoxTarget
             // 
-            this.txtBoxTarget.Location = new System.Drawing.Point(77, 69);
-            this.txtBoxTarget.Name = "txtBoxTarget";
-            this.txtBoxTarget.Size = new System.Drawing.Size(103, 20);
-            this.txtBoxTarget.TabIndex = 21;
-            this.txtBoxTarget.TextChanged += new System.EventHandler(this.txtBoxTarget_TextChanged);
+            txtBoxTarget.Location = new System.Drawing.Point(128, 133);
+            txtBoxTarget.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            txtBoxTarget.Name = "txtBoxTarget";
+            txtBoxTarget.Size = new System.Drawing.Size(169, 31);
+            txtBoxTarget.TabIndex = 21;
+            txtBoxTarget.TextChanged += txtBoxTarget_TextChanged;
             // 
             // label14
             // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(3, 76);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(68, 13);
-            this.label14.TabIndex = 20;
-            this.label14.Text = "Target node:";
+            label14.AutoSize = true;
+            label14.Location = new System.Drawing.Point(5, 146);
+            label14.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label14.Name = "label14";
+            label14.Size = new System.Drawing.Size(110, 25);
+            label14.TabIndex = 20;
+            label14.Text = "Target node:";
             // 
             // btnListInventory
             // 
-            this.btnListInventory.Location = new System.Drawing.Point(140, 123);
-            this.btnListInventory.Name = "btnListInventory";
-            this.btnListInventory.Size = new System.Drawing.Size(159, 23);
-            this.btnListInventory.TabIndex = 19;
-            this.btnListInventory.Text = "Inventory";
-            this.btnListInventory.UseVisualStyleBackColor = true;
-            this.btnListInventory.Click += new System.EventHandler(this.button8_Click);
+            btnListInventory.Location = new System.Drawing.Point(233, 237);
+            btnListInventory.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            btnListInventory.Name = "btnListInventory";
+            btnListInventory.Size = new System.Drawing.Size(265, 44);
+            btnListInventory.TabIndex = 19;
+            btnListInventory.Text = "Inventory";
+            btnListInventory.UseVisualStyleBackColor = true;
+            btnListInventory.Click += button8_Click;
             // 
             // lblItemId
             // 
-            this.lblItemId.AutoSize = true;
-            this.lblItemId.Location = new System.Drawing.Point(183, 100);
-            this.lblItemId.Name = "lblItemId";
-            this.lblItemId.Size = new System.Drawing.Size(41, 13);
-            this.lblItemId.TabIndex = 18;
-            this.lblItemId.Text = "Item id:";
+            lblItemId.AutoSize = true;
+            lblItemId.Location = new System.Drawing.Point(305, 192);
+            lblItemId.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            lblItemId.Name = "lblItemId";
+            lblItemId.Size = new System.Drawing.Size(72, 25);
+            lblItemId.TabIndex = 18;
+            lblItemId.Text = "Item id:";
             // 
             // txtboxItemId
             // 
-            this.txtboxItemId.Location = new System.Drawing.Point(230, 98);
-            this.txtboxItemId.Name = "txtboxItemId";
-            this.txtboxItemId.Size = new System.Drawing.Size(69, 20);
-            this.txtboxItemId.TabIndex = 17;
-            this.txtboxItemId.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
+            txtboxItemId.Location = new System.Drawing.Point(383, 188);
+            txtboxItemId.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            txtboxItemId.Name = "txtboxItemId";
+            txtboxItemId.Size = new System.Drawing.Size(112, 31);
+            txtboxItemId.TabIndex = 17;
+            txtboxItemId.TextChanged += textBox3_TextChanged;
             // 
             // chkBoxQuantity
             // 
-            this.chkBoxQuantity.AutoSize = true;
-            this.chkBoxQuantity.Location = new System.Drawing.Point(7, 99);
-            this.chkBoxQuantity.Name = "chkBoxQuantity";
-            this.chkBoxQuantity.Size = new System.Drawing.Size(65, 17);
-            this.chkBoxQuantity.TabIndex = 16;
-            this.chkBoxQuantity.Text = "Quantity";
-            this.chkBoxQuantity.UseVisualStyleBackColor = true;
-            this.chkBoxQuantity.CheckedChanged += new System.EventHandler(this.chkBoxQuantity_CheckedChanged);
+            chkBoxQuantity.AutoSize = true;
+            chkBoxQuantity.Location = new System.Drawing.Point(12, 190);
+            chkBoxQuantity.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            chkBoxQuantity.Name = "chkBoxQuantity";
+            chkBoxQuantity.Size = new System.Drawing.Size(106, 29);
+            chkBoxQuantity.TabIndex = 16;
+            chkBoxQuantity.Text = "Quantity";
+            chkBoxQuantity.UseVisualStyleBackColor = true;
+            chkBoxQuantity.CheckedChanged += chkBoxQuantity_CheckedChanged;
             // 
             // chkBoxGearSet
             // 
-            this.chkBoxGearSet.AutoSize = true;
-            this.chkBoxGearSet.Location = new System.Drawing.Point(7, 128);
-            this.chkBoxGearSet.Name = "chkBoxGearSet";
-            this.chkBoxGearSet.Size = new System.Drawing.Size(69, 17);
-            this.chkBoxGearSet.TabIndex = 15;
-            this.chkBoxGearSet.Text = "Gear set:";
-            this.chkBoxGearSet.UseVisualStyleBackColor = true;
-            this.chkBoxGearSet.CheckedChanged += new System.EventHandler(this.chkBoxGearSet_CheckedChanged);
+            chkBoxGearSet.AutoSize = true;
+            chkBoxGearSet.Location = new System.Drawing.Point(12, 246);
+            chkBoxGearSet.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            chkBoxGearSet.Name = "chkBoxGearSet";
+            chkBoxGearSet.Size = new System.Drawing.Size(106, 29);
+            chkBoxGearSet.TabIndex = 15;
+            chkBoxGearSet.Text = "Gear set:";
+            chkBoxGearSet.UseVisualStyleBackColor = true;
+            chkBoxGearSet.CheckedChanged += chkBoxGearSet_CheckedChanged;
             // 
             // numQuantity
             // 
-            this.numQuantity.Location = new System.Drawing.Point(77, 98);
-            this.numQuantity.Maximum = new decimal(new int[] {
-            9999,
-            0,
-            0,
-            0});
-            this.numQuantity.Name = "numQuantity";
-            this.numQuantity.Size = new System.Drawing.Size(56, 20);
-            this.numQuantity.TabIndex = 14;
-            this.numQuantity.ValueChanged += new System.EventHandler(this.numQuantity_ValueChanged);
+            numQuantity.Location = new System.Drawing.Point(128, 188);
+            numQuantity.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            numQuantity.Maximum = new decimal(new int[] { 9999, 0, 0, 0 });
+            numQuantity.Name = "numQuantity";
+            numQuantity.Size = new System.Drawing.Size(93, 31);
+            numQuantity.TabIndex = 14;
+            numQuantity.ValueChanged += numQuantity_ValueChanged;
             // 
             // numGearSet
             // 
-            this.numGearSet.Location = new System.Drawing.Point(78, 127);
-            this.numGearSet.Name = "numGearSet";
-            this.numGearSet.Size = new System.Drawing.Size(56, 20);
-            this.numGearSet.TabIndex = 13;
-            this.numGearSet.ValueChanged += new System.EventHandler(this.numGearSet_ValueChanged);
+            numGearSet.Location = new System.Drawing.Point(130, 244);
+            numGearSet.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            numGearSet.Name = "numGearSet";
+            numGearSet.Size = new System.Drawing.Size(93, 31);
+            numGearSet.TabIndex = 13;
+            numGearSet.ValueChanged += numGearSet_ValueChanged;
             // 
             // txtboxName
             // 
-            this.txtboxName.Location = new System.Drawing.Point(77, 34);
-            this.txtboxName.Name = "txtboxName";
-            this.txtboxName.Size = new System.Drawing.Size(222, 20);
-            this.txtboxName.TabIndex = 12;
-            this.txtboxName.TextChanged += new System.EventHandler(this.txtboxName_TextChanged);
+            txtboxName.Location = new System.Drawing.Point(128, 65);
+            txtboxName.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            txtboxName.Name = "txtboxName";
+            txtboxName.Size = new System.Drawing.Size(367, 31);
+            txtboxName.TabIndex = 12;
+            txtboxName.TextChanged += txtboxName_TextChanged;
             // 
             // label12
             // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(4, 8);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(44, 13);
-            this.label12.TabIndex = 12;
-            this.label12.Text = "General";
+            label12.AutoSize = true;
+            label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, 0);
+            label12.Location = new System.Drawing.Point(7, 15);
+            label12.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label12.Name = "label12";
+            label12.Size = new System.Drawing.Size(68, 20);
+            label12.TabIndex = 12;
+            label12.Text = "General";
             // 
             // listBoxHotSpots
             // 
-            this.listBoxHotSpots.FormattingEnabled = true;
-            this.listBoxHotSpots.Location = new System.Drawing.Point(0, 69);
-            this.listBoxHotSpots.Name = "listBoxHotSpots";
-            this.listBoxHotSpots.Size = new System.Drawing.Size(286, 134);
-            this.listBoxHotSpots.TabIndex = 11;
-            this.listBoxHotSpots.DoubleClick += new System.EventHandler(this.listBoxHotSpots_DoubleClick);
-            this.listBoxHotSpots.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listBox1_KeyDown);
+            listBoxHotSpots.FormattingEnabled = true;
+            listBoxHotSpots.ItemHeight = 25;
+            listBoxHotSpots.Location = new System.Drawing.Point(0, 133);
+            listBoxHotSpots.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            listBoxHotSpots.Name = "listBoxHotSpots";
+            listBoxHotSpots.Size = new System.Drawing.Size(474, 254);
+            listBoxHotSpots.TabIndex = 11;
+            listBoxHotSpots.DoubleClick += listBoxHotSpots_DoubleClick;
+            listBoxHotSpots.KeyDown += listBox1_KeyDown;
             // 
             // txtboxItemNames
             // 
-            this.txtboxItemNames.Location = new System.Drawing.Point(70, 8);
-            this.txtboxItemNames.Name = "txtboxItemNames";
-            this.txtboxItemNames.Size = new System.Drawing.Size(154, 20);
-            this.txtboxItemNames.TabIndex = 15;
+            txtboxItemNames.Location = new System.Drawing.Point(117, 15);
+            txtboxItemNames.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            txtboxItemNames.Name = "txtboxItemNames";
+            txtboxItemNames.Size = new System.Drawing.Size(254, 31);
+            txtboxItemNames.TabIndex = 15;
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(3, 38);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(296, 23);
-            this.button2.TabIndex = 12;
-            this.button2.Text = "Add";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            button2.Location = new System.Drawing.Point(5, 73);
+            button2.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            button2.Name = "button2";
+            button2.Size = new System.Drawing.Size(493, 44);
+            button2.TabIndex = 12;
+            button2.Text = "Add";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // listBox2Items
             // 
-            this.listBox2Items.FormattingEnabled = true;
-            this.listBox2Items.Location = new System.Drawing.Point(3, 72);
-            this.listBox2Items.Name = "listBox2Items";
-            this.listBox2Items.Size = new System.Drawing.Size(296, 69);
-            this.listBox2Items.TabIndex = 16;
-            this.listBox2Items.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listBox2_KeyDown);
+            listBox2Items.FormattingEnabled = true;
+            listBox2Items.ItemHeight = 25;
+            listBox2Items.Location = new System.Drawing.Point(5, 138);
+            listBox2Items.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            listBox2Items.Name = "listBox2Items";
+            listBox2Items.Size = new System.Drawing.Size(491, 129);
+            listBox2Items.TabIndex = 16;
+            listBox2Items.KeyDown += listBox2_KeyDown;
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(3, 38);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(279, 23);
-            this.button3.TabIndex = 17;
-            this.button3.Text = "Add current location";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            button3.Location = new System.Drawing.Point(5, 73);
+            button3.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            button3.Name = "button3";
+            button3.Size = new System.Drawing.Size(465, 44);
+            button3.TabIndex = 17;
+            button3.Text = "Add current location";
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
             // 
             // panel3
             // 
-            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel3.Location = new System.Drawing.Point(319, 140);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(304, 235);
-            this.panel3.TabIndex = 18;
+            panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            panel3.Location = new System.Drawing.Point(532, 269);
+            panel3.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            panel3.Name = "panel3";
+            panel3.Size = new System.Drawing.Size(505, 450);
+            panel3.TabIndex = 18;
             // 
             // tabControl2
             // 
-            this.tabControl2.Controls.Add(this.tabPage3);
-            this.tabControl2.Controls.Add(this.tabPage4);
-            this.tabControl2.Controls.Add(this.tabPage5);
-            this.tabControl2.Location = new System.Drawing.Point(323, 144);
-            this.tabControl2.Name = "tabControl2";
-            this.tabControl2.Padding = new System.Drawing.Point(3, 3);
-            this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(296, 227);
-            this.tabControl2.TabIndex = 0;
+            tabControl2.Controls.Add(tabPage3);
+            tabControl2.Controls.Add(tabPage4);
+            tabControl2.Controls.Add(tabPage5);
+            tabControl2.Location = new System.Drawing.Point(538, 277);
+            tabControl2.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tabControl2.Name = "tabControl2";
+            tabControl2.Padding = new System.Drawing.Point(3, 3);
+            tabControl2.SelectedIndex = 0;
+            tabControl2.Size = new System.Drawing.Size(493, 437);
+            tabControl2.TabIndex = 0;
             // 
             // tabPage3
             // 
-            this.tabPage3.Controls.Add(this.button12);
-            this.tabPage3.Controls.Add(this.label5);
-            this.tabPage3.Controls.Add(this.listBoxHotSpots);
-            this.tabPage3.Controls.Add(this.numRadius);
-            this.tabPage3.Controls.Add(this.button3);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(288, 201);
-            this.tabPage3.TabIndex = 0;
-            this.tabPage3.Text = "HotSpots";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            tabPage3.Controls.Add(button12);
+            tabPage3.Controls.Add(label5);
+            tabPage3.Controls.Add(listBoxHotSpots);
+            tabPage3.Controls.Add(numRadius);
+            tabPage3.Controls.Add(button3);
+            tabPage3.Location = new System.Drawing.Point(4, 34);
+            tabPage3.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tabPage3.Name = "tabPage3";
+            tabPage3.Padding = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tabPage3.Size = new System.Drawing.Size(485, 399);
+            tabPage3.TabIndex = 0;
+            tabPage3.Text = "HotSpots";
+            tabPage3.UseVisualStyleBackColor = true;
             // 
             // button12
             // 
-            this.button12.Location = new System.Drawing.Point(6, 9);
-            this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(136, 23);
-            this.button12.TabIndex = 26;
-            this.button12.Text = "Options";
-            this.button12.UseVisualStyleBackColor = true;
-            this.button12.Click += new System.EventHandler(this.button12_Click);
+            button12.Location = new System.Drawing.Point(10, 17);
+            button12.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            button12.Name = "button12";
+            button12.Size = new System.Drawing.Size(227, 44);
+            button12.TabIndex = 26;
+            button12.Text = "Options";
+            button12.UseVisualStyleBackColor = true;
+            button12.Click += button12_Click;
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(155, 14);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(43, 13);
-            this.label5.TabIndex = 24;
-            this.label5.Text = "Radius:";
+            label5.AutoSize = true;
+            label5.Location = new System.Drawing.Point(258, 27);
+            label5.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label5.Name = "label5";
+            label5.Size = new System.Drawing.Size(69, 25);
+            label5.TabIndex = 24;
+            label5.Text = "Radius:";
             // 
             // numRadius
             // 
-            this.numRadius.Location = new System.Drawing.Point(215, 9);
-            this.numRadius.Maximum = new decimal(new int[] {
-            999,
-            0,
-            0,
-            0});
-            this.numRadius.Name = "numRadius";
-            this.numRadius.Size = new System.Drawing.Size(71, 20);
-            this.numRadius.TabIndex = 23;
+            numRadius.Location = new System.Drawing.Point(358, 17);
+            numRadius.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            numRadius.Maximum = new decimal(new int[] { 999, 0, 0, 0 });
+            numRadius.Name = "numRadius";
+            numRadius.Size = new System.Drawing.Size(118, 31);
+            numRadius.TabIndex = 23;
             // 
             // tabPage4
             // 
-            this.tabPage4.Controls.Add(this.label6);
-            this.tabPage4.Controls.Add(this.listBoxBlackSpots);
-            this.tabPage4.Controls.Add(this.numRadiusBlackSpot);
-            this.tabPage4.Controls.Add(this.btnAddBlackspot);
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(288, 201);
-            this.tabPage4.TabIndex = 1;
-            this.tabPage4.Text = "BlackSpots";
-            this.tabPage4.UseVisualStyleBackColor = true;
+            tabPage4.Controls.Add(label6);
+            tabPage4.Controls.Add(listBoxBlackSpots);
+            tabPage4.Controls.Add(numRadiusBlackSpot);
+            tabPage4.Controls.Add(btnAddBlackspot);
+            tabPage4.Location = new System.Drawing.Point(4, 34);
+            tabPage4.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tabPage4.Name = "tabPage4";
+            tabPage4.Padding = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tabPage4.Size = new System.Drawing.Size(485, 399);
+            tabPage4.TabIndex = 1;
+            tabPage4.Text = "BlackSpots";
+            tabPage4.UseVisualStyleBackColor = true;
             // 
             // label6
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(155, 14);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(43, 13);
-            this.label6.TabIndex = 28;
-            this.label6.Text = "Radius:";
+            label6.AutoSize = true;
+            label6.Location = new System.Drawing.Point(258, 27);
+            label6.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label6.Name = "label6";
+            label6.Size = new System.Drawing.Size(69, 25);
+            label6.TabIndex = 28;
+            label6.Text = "Radius:";
             // 
             // listBoxBlackSpots
             // 
-            this.listBoxBlackSpots.FormattingEnabled = true;
-            this.listBoxBlackSpots.Location = new System.Drawing.Point(0, 43);
-            this.listBoxBlackSpots.Name = "listBoxBlackSpots";
-            this.listBoxBlackSpots.Size = new System.Drawing.Size(286, 160);
-            this.listBoxBlackSpots.TabIndex = 25;
-            this.listBoxBlackSpots.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listBoxBlackSpots_KeyDown);
+            listBoxBlackSpots.FormattingEnabled = true;
+            listBoxBlackSpots.ItemHeight = 25;
+            listBoxBlackSpots.Location = new System.Drawing.Point(0, 83);
+            listBoxBlackSpots.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            listBoxBlackSpots.Name = "listBoxBlackSpots";
+            listBoxBlackSpots.Size = new System.Drawing.Size(474, 304);
+            listBoxBlackSpots.TabIndex = 25;
+            listBoxBlackSpots.KeyDown += listBoxBlackSpots_KeyDown;
             // 
             // numRadiusBlackSpot
             // 
-            this.numRadiusBlackSpot.Location = new System.Drawing.Point(215, 9);
-            this.numRadiusBlackSpot.Maximum = new decimal(new int[] {
-            999,
-            0,
-            0,
-            0});
-            this.numRadiusBlackSpot.Name = "numRadiusBlackSpot";
-            this.numRadiusBlackSpot.Size = new System.Drawing.Size(71, 20);
-            this.numRadiusBlackSpot.TabIndex = 27;
+            numRadiusBlackSpot.Location = new System.Drawing.Point(358, 17);
+            numRadiusBlackSpot.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            numRadiusBlackSpot.Maximum = new decimal(new int[] { 999, 0, 0, 0 });
+            numRadiusBlackSpot.Name = "numRadiusBlackSpot";
+            numRadiusBlackSpot.Size = new System.Drawing.Size(118, 31);
+            numRadiusBlackSpot.TabIndex = 27;
             // 
             // btnAddBlackspot
             // 
-            this.btnAddBlackspot.Location = new System.Drawing.Point(0, 9);
-            this.btnAddBlackspot.Name = "btnAddBlackspot";
-            this.btnAddBlackspot.Size = new System.Drawing.Size(149, 23);
-            this.btnAddBlackspot.TabIndex = 26;
-            this.btnAddBlackspot.Text = "Add current location";
-            this.btnAddBlackspot.UseVisualStyleBackColor = true;
-            this.btnAddBlackspot.Click += new System.EventHandler(this.button11_Click);
+            btnAddBlackspot.Location = new System.Drawing.Point(0, 17);
+            btnAddBlackspot.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            btnAddBlackspot.Name = "btnAddBlackspot";
+            btnAddBlackspot.Size = new System.Drawing.Size(248, 44);
+            btnAddBlackspot.TabIndex = 26;
+            btnAddBlackspot.Text = "Add current location";
+            btnAddBlackspot.UseVisualStyleBackColor = true;
+            btnAddBlackspot.Click += button11_Click;
             // 
             // tabPage5
             // 
-            this.tabPage5.Controls.Add(this.button13);
-            this.tabPage5.Location = new System.Drawing.Point(4, 22);
-            this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Size = new System.Drawing.Size(288, 201);
-            this.tabPage5.TabIndex = 2;
-            this.tabPage5.Text = "Misc";
-            this.tabPage5.UseVisualStyleBackColor = true;
+            tabPage5.Controls.Add(button13);
+            tabPage5.Location = new System.Drawing.Point(4, 34);
+            tabPage5.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            tabPage5.Name = "tabPage5";
+            tabPage5.Size = new System.Drawing.Size(485, 399);
+            tabPage5.TabIndex = 2;
+            tabPage5.Text = "Misc";
+            tabPage5.UseVisualStyleBackColor = true;
             // 
             // button13
             // 
-            this.button13.Location = new System.Drawing.Point(3, 6);
-            this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(135, 54);
-            this.button13.TabIndex = 0;
-            this.button13.Text = "Generate flying tags using hotspot position";
-            this.button13.UseVisualStyleBackColor = true;
-            this.button13.Click += new System.EventHandler(this.button13_Click);
+            button13.Location = new System.Drawing.Point(5, 12);
+            button13.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            button13.Name = "button13";
+            button13.Size = new System.Drawing.Size(225, 104);
+            button13.TabIndex = 0;
+            button13.Text = "Generate flying tags using hotspot position";
+            button13.UseVisualStyleBackColor = true;
+            button13.Click += button13_Click;
             // 
             // panel4
             // 
-            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel4.Controls.Add(this.button10);
-            this.panel4.Controls.Add(this.label4);
-            this.panel4.Controls.Add(this.txtboxItemNames);
-            this.panel4.Controls.Add(this.listBox2Items);
-            this.panel4.Controls.Add(this.button2);
-            this.panel4.Location = new System.Drawing.Point(4, 228);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(304, 148);
-            this.panel4.TabIndex = 19;
+            panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            panel4.Controls.Add(button10);
+            panel4.Controls.Add(label4);
+            panel4.Controls.Add(txtboxItemNames);
+            panel4.Controls.Add(listBox2Items);
+            panel4.Controls.Add(button2);
+            panel4.Location = new System.Drawing.Point(7, 438);
+            panel4.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            panel4.Name = "panel4";
+            panel4.Size = new System.Drawing.Size(505, 283);
+            panel4.TabIndex = 19;
             // 
             // button10
             // 
-            this.button10.Location = new System.Drawing.Point(230, 5);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(69, 23);
-            this.button10.TabIndex = 23;
-            this.button10.Text = "Inventory";
-            this.button10.UseVisualStyleBackColor = true;
-            this.button10.Click += new System.EventHandler(this.button10_Click);
+            button10.Location = new System.Drawing.Point(383, 10);
+            button10.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            button10.Name = "button10";
+            button10.Size = new System.Drawing.Size(115, 44);
+            button10.TabIndex = 23;
+            button10.Text = "Inventory";
+            button10.UseVisualStyleBackColor = true;
+            button10.Click += button10_Click;
             // 
             // panel5
             // 
-            this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel5.Controls.Add(this.rbGatheringSkillSelectBotanist);
-            this.panel5.Controls.Add(this.rbGatheringSkillSelectMiner);
-            this.panel5.Controls.Add(this.cbBoxGatheringSkills);
-            this.panel5.Controls.Add(this.label3);
-            this.panel5.Controls.Add(this.button4);
-            this.panel5.Controls.Add(this.listBoxGatherSkills);
-            this.panel5.Location = new System.Drawing.Point(4, 381);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(304, 154);
-            this.panel5.TabIndex = 20;
-            // 
-            // cbBoxGatheringSkills
-            // 
-            this.cbBoxGatheringSkills.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cbBoxGatheringSkills.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cbBoxGatheringSkills.FormattingEnabled = true;
-            this.cbBoxGatheringSkills.Location = new System.Drawing.Point(7, 29);
-            this.cbBoxGatheringSkills.Name = "cbBoxGatheringSkills";
-            this.cbBoxGatheringSkills.Size = new System.Drawing.Size(292, 21);
-            this.cbBoxGatheringSkills.TabIndex = 25;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 13);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(83, 13);
-            this.label3.TabIndex = 21;
-            this.label3.Text = "Gathering Skills:";
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(133, 53);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(166, 23);
-            this.button4.TabIndex = 22;
-            this.button4.Text = "Add";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
-            // listBoxGatherSkills
-            // 
-            this.listBoxGatherSkills.FormattingEnabled = true;
-            this.listBoxGatherSkills.Location = new System.Drawing.Point(3, 82);
-            this.listBoxGatherSkills.Name = "listBoxGatherSkills";
-            this.listBoxGatherSkills.Size = new System.Drawing.Size(296, 69);
-            this.listBoxGatherSkills.TabIndex = 23;
-            this.listBoxGatherSkills.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listBox3_KeyDown);
-            // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(319, 494);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(301, 26);
-            this.button5.TabIndex = 21;
-            this.button5.Text = "Save";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
-            // 
-            // button7
-            // 
-            this.button7.Location = new System.Drawing.Point(470, 383);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(150, 52);
-            this.button7.TabIndex = 22;
-            this.button7.Text = "Inspect xml";
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
-            // 
-            // button8
-            // 
-            this.button8.Location = new System.Drawing.Point(470, 438);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(150, 52);
-            this.button8.TabIndex = 23;
-            this.button8.Text = "Set profile directory";
-            this.button8.UseVisualStyleBackColor = true;
-            this.button8.Click += new System.EventHandler(this.button8_Click_1);
-            // 
-            // lblPath
-            // 
-            this.lblPath.AutoSize = true;
-            this.lblPath.Location = new System.Drawing.Point(374, 523);
-            this.lblPath.Name = "lblPath";
-            this.lblPath.Size = new System.Drawing.Size(41, 13);
-            this.lblPath.TabIndex = 24;
-            this.lblPath.Text = "label15";
-            // 
-            // btnImportProfile
-            // 
-            this.btnImportProfile.Location = new System.Drawing.Point(319, 383);
-            this.btnImportProfile.Name = "btnImportProfile";
-            this.btnImportProfile.Size = new System.Drawing.Size(150, 52);
-            this.btnImportProfile.TabIndex = 25;
-            this.btnImportProfile.Text = "Import profile";
-            this.btnImportProfile.UseVisualStyleBackColor = true;
-            this.btnImportProfile.Click += new System.EventHandler(this.btnImportProfile_Click);
-            // 
-            // btnActivate
-            // 
-            this.btnActivate.Location = new System.Drawing.Point(319, 438);
-            this.btnActivate.Name = "btnActivate";
-            this.btnActivate.Size = new System.Drawing.Size(150, 52);
-            this.btnActivate.TabIndex = 26;
-            this.btnActivate.Text = "Activate";
-            this.btnActivate.UseVisualStyleBackColor = true;
-            this.btnActivate.Click += new System.EventHandler(this.btnActivate_Click);
-            // 
-            // rbGatheringSkillSelectMiner
-            // 
-            this.rbGatheringSkillSelectMiner.AutoSize = true;
-            this.rbGatheringSkillSelectMiner.Checked = true;
-            this.rbGatheringSkillSelectMiner.Location = new System.Drawing.Point(7, 56);
-            this.rbGatheringSkillSelectMiner.Name = "rbGatheringSkillSelectMiner";
-            this.rbGatheringSkillSelectMiner.Size = new System.Drawing.Size(51, 17);
-            this.rbGatheringSkillSelectMiner.TabIndex = 26;
-            this.rbGatheringSkillSelectMiner.TabStop = true;
-            this.rbGatheringSkillSelectMiner.Text = "Miner";
-            this.rbGatheringSkillSelectMiner.UseVisualStyleBackColor = true;
-            this.rbGatheringSkillSelectMiner.CheckedChanged += new System.EventHandler(this.rbGatheringSkillSelectMiner_CheckedChanged);
+            panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            panel5.Controls.Add(rbGatheringSkillSelectBotanist);
+            panel5.Controls.Add(rbGatheringSkillSelectMiner);
+            panel5.Controls.Add(cbBoxGatheringSkills);
+            panel5.Controls.Add(label3);
+            panel5.Controls.Add(button4);
+            panel5.Controls.Add(listBoxGatherSkills);
+            panel5.Location = new System.Drawing.Point(7, 733);
+            panel5.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            panel5.Name = "panel5";
+            panel5.Size = new System.Drawing.Size(505, 294);
+            panel5.TabIndex = 20;
             // 
             // rbGatheringSkillSelectBotanist
             // 
-            this.rbGatheringSkillSelectBotanist.AutoSize = true;
-            this.rbGatheringSkillSelectBotanist.Location = new System.Drawing.Point(64, 56);
-            this.rbGatheringSkillSelectBotanist.Name = "rbGatheringSkillSelectBotanist";
-            this.rbGatheringSkillSelectBotanist.Size = new System.Drawing.Size(63, 17);
-            this.rbGatheringSkillSelectBotanist.TabIndex = 27;
-            this.rbGatheringSkillSelectBotanist.Text = "Botanist";
-            this.rbGatheringSkillSelectBotanist.UseVisualStyleBackColor = true;
+            rbGatheringSkillSelectBotanist.AutoSize = true;
+            rbGatheringSkillSelectBotanist.Location = new System.Drawing.Point(107, 108);
+            rbGatheringSkillSelectBotanist.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            rbGatheringSkillSelectBotanist.Name = "rbGatheringSkillSelectBotanist";
+            rbGatheringSkillSelectBotanist.Size = new System.Drawing.Size(101, 29);
+            rbGatheringSkillSelectBotanist.TabIndex = 27;
+            rbGatheringSkillSelectBotanist.Text = "Botanist";
+            rbGatheringSkillSelectBotanist.UseVisualStyleBackColor = true;
+            // 
+            // rbGatheringSkillSelectMiner
+            // 
+            rbGatheringSkillSelectMiner.AutoSize = true;
+            rbGatheringSkillSelectMiner.Checked = true;
+            rbGatheringSkillSelectMiner.Location = new System.Drawing.Point(12, 108);
+            rbGatheringSkillSelectMiner.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            rbGatheringSkillSelectMiner.Name = "rbGatheringSkillSelectMiner";
+            rbGatheringSkillSelectMiner.Size = new System.Drawing.Size(82, 29);
+            rbGatheringSkillSelectMiner.TabIndex = 26;
+            rbGatheringSkillSelectMiner.TabStop = true;
+            rbGatheringSkillSelectMiner.Text = "Miner";
+            rbGatheringSkillSelectMiner.UseVisualStyleBackColor = true;
+            rbGatheringSkillSelectMiner.CheckedChanged += rbGatheringSkillSelectMiner_CheckedChanged;
+            // 
+            // cbBoxGatheringSkills
+            // 
+            cbBoxGatheringSkills.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            cbBoxGatheringSkills.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            cbBoxGatheringSkills.FormattingEnabled = true;
+            cbBoxGatheringSkills.Location = new System.Drawing.Point(12, 56);
+            cbBoxGatheringSkills.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            cbBoxGatheringSkills.Name = "cbBoxGatheringSkills";
+            cbBoxGatheringSkills.Size = new System.Drawing.Size(484, 33);
+            cbBoxGatheringSkills.TabIndex = 25;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new System.Drawing.Point(5, 25);
+            label3.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(137, 25);
+            label3.TabIndex = 21;
+            label3.Text = "Gathering Skills:";
+            // 
+            // button4
+            // 
+            button4.Location = new System.Drawing.Point(222, 102);
+            button4.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            button4.Name = "button4";
+            button4.Size = new System.Drawing.Size(277, 44);
+            button4.TabIndex = 22;
+            button4.Text = "Add";
+            button4.UseVisualStyleBackColor = true;
+            button4.Click += button4_Click;
+            // 
+            // listBoxGatherSkills
+            // 
+            listBoxGatherSkills.FormattingEnabled = true;
+            listBoxGatherSkills.ItemHeight = 25;
+            listBoxGatherSkills.Location = new System.Drawing.Point(5, 158);
+            listBoxGatherSkills.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            listBoxGatherSkills.Name = "listBoxGatherSkills";
+            listBoxGatherSkills.Size = new System.Drawing.Size(491, 129);
+            listBoxGatherSkills.TabIndex = 23;
+            listBoxGatherSkills.KeyDown += listBox3_KeyDown;
+            // 
+            // button5
+            // 
+            button5.Location = new System.Drawing.Point(532, 950);
+            button5.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            button5.Name = "button5";
+            button5.Size = new System.Drawing.Size(502, 50);
+            button5.TabIndex = 21;
+            button5.Text = "Save";
+            button5.UseVisualStyleBackColor = true;
+            button5.Click += button5_Click;
+            // 
+            // button7
+            // 
+            button7.Location = new System.Drawing.Point(783, 737);
+            button7.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            button7.Name = "button7";
+            button7.Size = new System.Drawing.Size(250, 100);
+            button7.TabIndex = 22;
+            button7.Text = "Inspect xml";
+            button7.UseVisualStyleBackColor = true;
+            button7.Click += button7_Click;
+            // 
+            // button8
+            // 
+            button8.Location = new System.Drawing.Point(783, 842);
+            button8.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            button8.Name = "button8";
+            button8.Size = new System.Drawing.Size(250, 100);
+            button8.TabIndex = 23;
+            button8.Text = "Set profile directory";
+            button8.UseVisualStyleBackColor = true;
+            button8.Click += button8_Click_1;
+            // 
+            // lblPath
+            // 
+            lblPath.AutoSize = true;
+            lblPath.Location = new System.Drawing.Point(623, 1006);
+            lblPath.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            lblPath.Name = "lblPath";
+            lblPath.Size = new System.Drawing.Size(69, 25);
+            lblPath.TabIndex = 24;
+            lblPath.Text = "label15";
+            // 
+            // btnImportProfile
+            // 
+            btnImportProfile.Location = new System.Drawing.Point(532, 737);
+            btnImportProfile.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            btnImportProfile.Name = "btnImportProfile";
+            btnImportProfile.Size = new System.Drawing.Size(250, 100);
+            btnImportProfile.TabIndex = 25;
+            btnImportProfile.Text = "Import profile";
+            btnImportProfile.UseVisualStyleBackColor = true;
+            btnImportProfile.Click += btnImportProfile_Click;
+            // 
+            // btnActivate
+            // 
+            btnActivate.Location = new System.Drawing.Point(532, 842);
+            btnActivate.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            btnActivate.Name = "btnActivate";
+            btnActivate.Size = new System.Drawing.Size(250, 100);
+            btnActivate.TabIndex = 26;
+            btnActivate.Text = "Activate";
+            btnActivate.UseVisualStyleBackColor = true;
+            btnActivate.Click += btnActivate_Click;
             // 
             // GatherUpForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(629, 545);
-            this.Controls.Add(this.tabControl2);
-            this.Controls.Add(this.btnActivate);
-            this.Controls.Add(this.btnImportProfile);
-            this.Controls.Add(this.lblPath);
-            this.Controls.Add(this.button8);
-            this.Controls.Add(this.button7);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.panel5);
-            this.Controls.Add(this.panel4);
-            this.Controls.Add(this.panel3);
-            this.Controls.Add(this.panel2);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.label9);
-            this.Name = "GatherUpForm";
-            this.Text = "GatherUp";
-            this.panel1.ResumeLayout(false);
-            this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            this.panel6.ResumeLayout(false);
-            this.panel6.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numQuantity)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numGearSet)).EndInit();
-            this.tabControl2.ResumeLayout(false);
-            this.tabPage3.ResumeLayout(false);
-            this.tabPage3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numRadius)).EndInit();
-            this.tabPage4.ResumeLayout(false);
-            this.tabPage4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numRadiusBlackSpot)).EndInit();
-            this.tabPage5.ResumeLayout(false);
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
-            this.panel5.ResumeLayout(false);
-            this.panel5.PerformLayout();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(1048, 1048);
+            Controls.Add(tabControl2);
+            Controls.Add(btnActivate);
+            Controls.Add(btnImportProfile);
+            Controls.Add(lblPath);
+            Controls.Add(button8);
+            Controls.Add(button7);
+            Controls.Add(button5);
+            Controls.Add(panel5);
+            Controls.Add(panel4);
+            Controls.Add(panel3);
+            Controls.Add(panel2);
+            Controls.Add(panel1);
+            Controls.Add(label9);
+            Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
+            Name = "GatherUpForm";
+            Text = "GatherUp";
+            panel1.ResumeLayout(false);
+            tabControl1.ResumeLayout(false);
+            tabPage1.ResumeLayout(false);
+            tabPage1.PerformLayout();
+            tabPage2.ResumeLayout(false);
+            tabPage2.PerformLayout();
+            panel2.ResumeLayout(false);
+            panel2.PerformLayout();
+            panel6.ResumeLayout(false);
+            panel6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)numQuantity).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numGearSet).EndInit();
+            tabControl2.ResumeLayout(false);
+            tabPage3.ResumeLayout(false);
+            tabPage3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)numRadius).EndInit();
+            tabPage4.ResumeLayout(false);
+            tabPage4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)numRadiusBlackSpot).EndInit();
+            tabPage5.ResumeLayout(false);
+            panel4.ResumeLayout(false);
+            panel4.PerformLayout();
+            panel5.ResumeLayout(false);
+            panel5.PerformLayout();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -931,7 +987,6 @@
         private System.Windows.Forms.CheckBox chkboxExGather;
         private System.Windows.Forms.ComboBox cbBoxCordialType;
         private System.Windows.Forms.CheckBox chkboxDiscoverUnknowns;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.Button button12;
         private System.Windows.Forms.TabPage tabPage5;
         private System.Windows.Forms.Button button13;
