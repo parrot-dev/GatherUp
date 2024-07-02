@@ -74,7 +74,7 @@ namespace GatherUp.Order.Parsing
             }
             catch (Exception err)
             {
-                Log.Bot.print(err.Message);
+                Log.Bot.Print(err.Message);
             }
             throw new ParsingException("Unexpected error while parsing BlackSpots");
         }
@@ -97,7 +97,7 @@ namespace GatherUp.Order.Parsing
             }
             catch (Exception err)
             {
-                Log.Bot.print(err.Message);
+                Log.Bot.Print(err.Message);
             }
             throw new ParsingException("Unexpected error while parsing HotSpots");
         }
@@ -113,7 +113,7 @@ namespace GatherUp.Order.Parsing
             }
             catch (Exception err)
             {
-                Log.Bot.print(err.Message);
+                Log.Bot.Print(err.Message);
             }
             throw new ParsingException("Unexpected error while looking for disableMount tag");
         }
@@ -139,7 +139,7 @@ namespace GatherUp.Order.Parsing
             }
             catch (Exception err)
             {
-                Log.Bot.print(err.Message);
+                Log.Bot.Print(err.Message);
             }
             throw new ParsingException("Unexpected error while parsing FlyTo tag");
         }
@@ -175,7 +175,7 @@ namespace GatherUp.Order.Parsing
             }
             catch (Exception err)
             {
-                Log.Bot.print(err.Message);
+                Log.Bot.Print(err.Message);
                 throw new ParsingException("Unexpected error while parsing flying destination");
             }
         }
@@ -196,7 +196,7 @@ namespace GatherUp.Order.Parsing
             }
             catch (Exception err)
             {
-                Log.Bot.print(err.Message);
+                Log.Bot.Print(err.Message);
                 throw new ParsingException("Unexpected error while parsing HotSpot");
             }
         }
@@ -211,7 +211,7 @@ namespace GatherUp.Order.Parsing
             }
             catch (Exception err)
             {
-                Log.Bot.print(err.Message);
+                Log.Bot.Print(err.Message);
             }
             throw new ParsingException("Could not parse GatheringSkills");
         }
@@ -264,7 +264,7 @@ namespace GatherUp.Order.Parsing
             }
             catch (Exception err)
             {
-                Log.Bot.print(err.Message);
+                Log.Bot.Print(err.Message);
             }
             throw new ParsingException("Could not parse gathering conditions");
         }
@@ -284,7 +284,7 @@ namespace GatherUp.Order.Parsing
             }
             catch (Exception err)
             {
-                Log.Bot.print(err.Message);
+                Log.Bot.Print(err.Message);
             }
             throw new ParsingException("Could not parse ExGather element");
         }
@@ -357,7 +357,7 @@ namespace GatherUp.Order.Parsing
             }
             catch (Exception err)
             {
-                Log.Bot.print(err.Message);
+                Log.Bot.Print(err.Message);
                 throw new ParsingException("Could not find any items to gather");
             }
         }
@@ -408,7 +408,7 @@ namespace GatherUp.Order.Parsing
             }
             catch (Exception err)
             {
-                Log.Bot.print(err.Message);
+                Log.Bot.Print(err.Message);
             }
 
             throw new ParsingException("Could not parse teleport");

@@ -81,7 +81,7 @@ namespace GatherUp.Order.Parsing
                     }
                     catch (Exception err)
                     {
-                        Log.Bot.print("getVersion() Failed. Error:\r\n" + err.Message);
+                        Log.Bot.Print("getVersion() Failed. Error:\r\n" + err.Message);
                         return new Version(0, 0, 0);
                     }
                     return retVersion;
