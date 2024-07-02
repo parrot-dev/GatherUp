@@ -8,10 +8,7 @@ Clone directly in plugins directory or put files in plugins/GatherUp/
 Notes:
 
 All generated profiles contain a comment marking it as a gatherup 
-profile and which version was used to generate it. This comment is 
-required for the profile to be correctly imported by the plugin. It is 
-not meant as watermark and can be freely removed if you so choose.
+profile and which version was used to generate it. GatherUp looks
+for this comment when importing a profile to determaine how to parse it.
 
-If a profile has been manually extended removing the whole comment or 
-editing out the verison tag is advised since gatherup will otherwise 
-try to parse it and likely fail.
+Without it importing will not work however you are not required to keep it.

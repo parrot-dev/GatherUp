@@ -645,7 +645,7 @@ namespace GatherUp
                 }
                 catch (Exception err)
                 {
-                    Log.Bot.print("Error while switching botbase: " + err.Message);
+                    Log.Bot.Print("Error while switching botbase: " + err.Message);
                     return;
                 }
             }

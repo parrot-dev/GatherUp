@@ -7,14 +7,14 @@ namespace GatherUp
     {
         public static class Bot
         {
-            public static void print(string input, Color col)
+            public static void Print(string input, Color col)
             {
                 Logging.Write(col, string.Format("[GatherUp] {0}", input));
             }
 
-            public static void print(string input)
+            public static void Print(string input)
             {
-                print(input, Colors.Red);
+                Print(input, Colors.Red);
             }
         }
     }
